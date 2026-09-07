@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kimi Life & Self Care</title>
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* RESET & BASE */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Tajawal', 'Poppins', sans-serif;
+      background: #1A0A0E;
+      color: #FDF5E6;
+      min-height: 100vh;
+    }
+    /* Burgundy Theme */
+    :root {
+      --burgundy-dark: #6A0D1A;
+      --burgundy-mid: #8B1A2B;
+      --burgundy-light: #B2223C;
+      --gold: #D4AF37;
+      --ivory: #FDF5E6;
+      --gray-dark: #2C2C2C;
+      --purple-space: #6A4C9C;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 80px;
+      background: var(--burgundy-dark);
+      height: 100vh;
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+      box-shadow: 2px 0 15px rgba(0,0,0,0.7);
+      z-index: 100;
+    }
+    .sidebar a {
+      color: var(--ivory);
+      font-size: 24px;
+      margin: 15px 0;
+      transition: 0.3s;
+      text-decoration: none;
+      position: relative;
+    }
+    .sidebar a:hover { color: var(--gold); transform: scale(1.1); }
+    .sidebar a.active::after {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: var(--gold);
+      border-radius: 4px;
+    }
+    .main-content {
+      margin-right: 80px;
+      padding: 25px;
+    }
+    /* Cards */
+    .card {
+      background: var(--gray-dark);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 25px;
+      border: 1px solid var(--burgundy-mid);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+    .card-title {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn {
+      background: var(--burgundy-mid);
+      border: none;
+      color: var(--ivory);
+      padding: 8px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: inherit;
+      font-weight: 600;
+    }
+    .btn:hover { background: var(--gold); color: #1A0A0E; transform: scale(1.02); }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--burgundy-light);
+    }
+    .btn-outline:hover { background: var(--burgundy-light); color: var(--ivory); }
+    input, select, textarea {
+      background: #3A2A2E;
+      border: 1px solid var(--burgundy-mid);
+      color: var(--ivory);
+      padding: 10px 15px;
+      border-radius: 12px;
+      width: 100%;
+      margin-bottom: 12px;
+      font-family: inherit;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--gold);
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; }
+    /* Life-Long Table */
+    .lifetime-table-wrap {
+      overflow: auto;
+      max-height: 500px;
+      border-radius: 16px;
+      background: #1F1417;
+    }
+    .lifetime-table {
+      border-collapse: collapse;
+      min-width: 800px;
+      width: 100%;
+    }
+    .lifetime-table th {
+      background: var(--burgundy-dark);
+      color: var(--gold);
+      padding: 12px 8px;
+      border: 1px solid var(--burgundy-mid);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+    .lifetime-table td {
+      padding: 10px 8px;
+      border: 1px solid #4A2A30;
+      text-align: center;
+      min-width: 60px;
+    }
+    .lifetime-table td input {
+      width: 50px;
+      padding: 4px;
+      margin: 0;
+      background: #2A1A1E;
+      border: 1px solid #5A3A40;
+      text-align: center;
+      border-radius: 8px;
+    }
+    .lifetime-table .row-label {
+      background: var(--burgundy-dark);
+      font-weight: 600;
+      color: var(--ivory);
+      min-width: 120px;
+      text-align: right;
+      padding-right: 15px;
+      position: sticky;
+      right: 0;
+    }
+    /* Space Timer */
+    .space-timer {
+      background: radial-gradient(circle at 30% 30%, #2A1A3A, #0A0A1A);
+      border: 1px solid var(--purple-space);
+      border-radius: 60px;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .space-timer::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="1.5" fill="white" opacity="0.6"/><circle cx="70" cy="15" r="2" fill="white" opacity="0.8"/><circle cx="85" cy="70" r="1" fill="white" opacity="0.5"/><circle cx="10" cy="80" r="2.5" fill="white" opacity="0.4"/></svg>');
+      background-size: 200px 200px;
+      animation: twinkle 10s infinite alternate;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    @keyframes twinkle { 0% { opacity: 0.2; } 100% { opacity: 0.6; } }
+    .timer-display {
+      font-size: 4rem;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      color: var(--gold);
+      text-shadow: 0 0 30px var(--purple-space);
+      position: relative;
+      z-index: 2;
+    }
+    /* Chart container */
+    .chart-container {
+      background: #1F1417;
+      border-radius: 20px;
+      padding: 15px;
+      height: 200px;
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar { width: 60px; }
+      .main-content { margin-right: 60px; padding: 15px; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .timer-display { font-size: 2.5rem; }
+    }
+    /* Tabs */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    /* Checklist */
+    .checklist li {
+      list-style: none;
+      padding: 8px 0;
+      border-bottom: 1px solid #3A2A2E;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .checklist input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar" id="sidebar">
+    <a href="#" data-tab="dashboard" class="active"><i class="fas fa-home"></i></a>
+    <a href="#" data-tab="worship"><i class="fas fa-mosque"></i></a>
+    <a href="#" data-tab="lifetracker"><i class="fas fa-infinity"></i></a>
+    <a href="#" data-tab="subjects"><i class="fas fa-book-open"></i></a>
+    <a href="#" data-tab="exams"><i class="fas fa-pencil-alt"></i></a>
+    <a href="#" data-tab="timer"><i class="fas fa-rocket"></i></a>
+    <a href="#" data-tab="selfcare"><i class="fas fa-spa"></i></a>
+    <a href="#" data-tab="tasks"><i class="fas fa-tasks"></i></a>
+    <a href="#" data-tab="reviews"><i class="fas fa-chart-line"></i></a>
+    <a href="#" data-tab="settings"><i class="fas fa-cog"></i></a>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- ================= DASHBOARD ================= -->
+    <div id="dashboard" class="tab-content active">
+      <h1 style="color: var(--gold); margin-bottom: 10px;">🌸 مرحبًا بكِ في Kimi Life</h1>
+      <p style="color: #BFA5A5; margin-bottom: 30px;">اليوم: <span id="todayDate"></span></p>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title"><i class="fas fa-check-circle"></i> مهام اليوم</div>
+          <ul id="todayTasks" class="checklist"></ul>
+        </div>
+        <div class="card">
+          <div class="card-title"><i class="fas fa-star"></i> العبادات اليومية</div>
+          <ul id="todayWorship" class="checklist"></ul>
+        </div>
+      </div>
+      <div class="card space-timer" style="margin-top: 10px;">
+        <div class="card-title" style="justify-content: center;"><i class="fas fa-rocket" style="color: var(--purple-space);"></i> تايمر الفضاء</div>
+        <div class="timer-display" id="quickTimer">25:00</div>
+        <div style="margin-top: 15px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+          <button class="btn" onclick="startQuickTimer()">ابدأ</button>
+          <button class="btn btn-outline" onclick="pauseQuickTimer()">إيقاف مؤقت</button>
+          <button class="btn btn-outline" onclick="resetQuickTimer()">إعادة</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= WORSHIP ================= -->
+    <div id="worship" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fas fa-mosque"></i> عباداتي</div>
+        <div class="grid-3">
+          <div><h4>الصلوات</h4><ul id="prayerList" class="checklist"></ul></div>
+          <div><h4>أذكار الصباح</h4><ul id="morningAdhkar" class="checklist"></ul></div>
+          <div><h4>أذكار المساء</h4><ul id="eveningAdhkar" class="checklist"></ul></div>
+        </div>
+        <div style="margin-top: 20px;">
+          <label>ورد القرآن (صفحات): <input type="number" id="quranPages" value="2" min="0" style="width:80px; display:inline;"></label>
+          <button class="btn" onclick="saveWorship()">حفظ التقدم</button>
+        </div>
+        <div id="worshipStats" style="margin-top: 15px; color: var(--gold);"></div>
+      </div>
+    </div>
+
+    <!-- ================= LIFE-LONG TRACKER ================= -->
+    <div id="lifetracker" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fas fa-infinity"></i> جدول مدى الحياة</div>
+        <div style="margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+          <input type="text" id="newRowName" placeholder="اسم المادة/المهارة الجديدة">
+          <button class="btn" onclick="addLifeRow()">إضافة صف</button>
+          <button class="btn btn-outline" onclick="addLifeColumn()">إضافة عمود (يوم)</button>
+        </div>
+        <div class="lifetime-table-wrap">
+          <table class="lifetime-table" id="lifeTable">
+            <thead id="lifeHead"></thead>
+            <tbody id="lifeBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SUBJECTS ================= -->
+    <div id="subjects" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fas fa-book-open"></i> المواد الدراسية</div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <input type="text" id="subjectName" placeholder="اسم المادة">
+          <button class="btn" onclick="addSubject()">إضافة مادة</button>
+        </div>
+        <ul id="subjectList" class="checklist" style="margin-top: 20px;"></ul>
+      </div>
+    </div>
+
+    <!-- ================= EXAMS ================= -->
+    <div id="exams" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fas fa-pencil-alt"></i> الامتحانات</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; align-items: end;">
+          <input type="text" id="examSubject" placeholder="المادة">
+          <input type="date" id="examDate">
+          <input type="number" id="examTarget" placeholder="الدرجة المستهدفة">
+          <button class="btn" onclick="addExam()">إضافة</button>
+        </div>
+        <ul id="examList" class="checklist" style="margin-top: 20px;"></ul>
+      </div>
+    </div>
+
+    <!-- ================= SPACE TIMER ================= -->
+    <div id="timer" class="tab-content">
+      <div class="card space-timer">
+        <div class="card-title" style="justify-content: center;"><i class="fas fa-rocket" style="color: var(--purple-space);"></i> تايمر الفضاء المتقدم</div>
+        <div class="timer-display" id="fullTimer">25:00</div>
+        <div style="margin-top: 15px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+          <button class="btn" onclick="startFullTimer()">ابدأ</button>
+          <button class="btn btn-outline" onclick="pauseFullTimer()">إيقاف مؤقت</button>
+          <button class="btn btn-outline" onclick="resetFullTimer()">إعادة</button>
+          <select id="timerPreset" onchange="setTimerPreset()" style="width: auto; background: #2A1A2A;">
+            <option value="25">25 دقيقة (دراسة)</option>
+            <option value="5">5 دقائق (استراحة)</option>
+            <option value="10">10 دقائق (عبادة)</option>
+          </select>
+        </div>
+        <div style="margin-top: 15px; color: var(--ivory);">الجلسات اليوم: <span id="sessionCount">0</span></div>
+      </div>
+    </div>
+
+    <!-- ================= SELF-CARE ================= -->
+    <div id="selfcare" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fas fa-spa"></i> العناية اليومية</div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+          <button class="btn" onclick="switchCareTab('skin')">بشرتي</button>
+          <button class="btn" onclick="switchCareTab('hair')">شعري</button>
+          <button class="btn" onclick="switchCareTab('body')">جسمي</button>
+          <button class="btn" onclick="switchCareTab('clothes')">هدومي</button>
+          <button class="btn" onclick="switchCareTab('nails')">أظافري</button>
+          <button class="btn" onclick="switchCareTab('exercise')">تمارين</button>
+        </div>
+        <div id="careContent" class="checklist"></div>
+        <button class="btn" onclick="saveCare()" style="margin-top: 15px;">حفظ العناية</button>
+      </div>
+    </div>
+
+    <!-- ================= TASKS ================= -->
+    <div id="tasks" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fas fa-tasks"></i> المهام</div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <input type="text" id="taskInput" placeholder="مهمة جديدة">
+          <input type="date" id="taskDate">
+          <select id="taskPriority" style="width: auto;">
+            <option value="low">منخفضة</option>
+            <option value="medium" selected>متوسطة</option>
+            <option value="high">عالية</option>
+          </select>
+          <button class="btn" onclick="addTask()">إضافة</button>
+        </div>
+        <ul id="taskList" class="checklist" style="margin-top: 20px;"></ul>
+      </div>
+    </div>
+
+    <!-- ================= REVIEWS ================= -->
+    <div id="reviews" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fas fa-chart-line"></i> الرفيو</div>
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+          <button class="btn" onclick="showReview('weekly')">أسبوعي</button>
+          <button class="btn" onclick="showReview('monthly')">شهري</button>
+          <button class="btn" onclick="showReview('yearly')">سنوي</button>
+        </div>
+        <div class="chart-container">
+          <canvas id="reviewChart"></canvas>
+        </div>
+        <div id="reviewStats" style="margin-top: 15px; color: var(--gold);"></div>
+      </div>
+    </div>
+
+    <!-- ================= SETTINGS ================= -->
+    <div id="settings" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fas fa-cog"></i> الإعدادات</div>
+        <button class="btn btn-outline" onclick="exportData()"><i class="fas fa-file-export"></i> تصدير البيانات</button>
+        <button class="btn btn-outline" onclick="importData()"><i class="fas fa-file-import"></i> استيراد البيانات</button>
+        <button class="btn" style="background: #8B0000;" onclick="if(confirm('هل أنت متأكدة؟')){localStorage.clear(); location.reload();}"><i class="fas fa-trash"></i> إعادة ضبط كل شيء</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ------------------------------------------------
+    // DATA LAYER (localStorage)
+    // ------------------------------------------------
+    const APP_KEY = 'kimiLifeData';
+    function getData() {
+      const raw = localStorage.getItem(APP_KEY);
+      if (!raw) return defaultData();
+      try { return JSON.parse(raw); } catch { return defaultData(); }
+    }
+    function saveData(data) {
+      localStorage.setItem(APP_KEY, JSON.stringify(data));
+    }
+    function defaultData() {
+      return {
+        lifeRows: ['البرمجة', 'اللغة الكورية', 'الفرنسية', 'التصميم'],
+        lifeCols: [], // will generate days dynamically
+        lifeCells: {}, // key: rowIndex_colIndex => value
+        subjects: [],
+        exams: [],
+        tasks: [],
+        worship: {
+          prayers: ['الفجر', 'الظهر', 'العصر', 'المغرب', 'العشاء'],
+          morning: ['اللهم بك أصبحنا', 'أصبحنا وأصبح الملك لله', 'اللهم عافني في بدني'],
+          evening: ['اللهم بك أمسينا', 'أمسينا وأمسى الملك لله', 'اللهم عافني في سمعي'],
+          quranPages: 2,
+          completed: {}
+        },
+        care: {
+          skin: ['غسول لطيف', 'مرطب', 'SPF'],
+          hair: ['شامبو', 'بلسم', 'ماسك أسبوعي'],
+          body: ['ترطيب الجسم', 'شرب 2 لتر ماء'],
+          clothes: ['تنسيق اللوك', 'ترتيب الدولاب'],
+          nails: ['كريم يدين', 'تقليم الأظافر'],
+          exercise: ['تمارين مقاومة', 'مشي 30 دقيقة']
+        },
+        timerSessions: 0,
+        reviewData: { weekly: [], monthly: [], yearly: [] }
+      };
+    }
+
+    // ------------------------------------------------
+    // INIT
+    // ------------------------------------------------
+    let data = getData();
+    let currentTab = 'dashboard';
+    let careTab = 'skin';
+    let quickTimerInterval, fullTimerInterval;
+    let quickSeconds = 1500, fullSeconds = 1500;
+    let quickPaused = false, fullPaused = false;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAll();
+      document.getElementById('todayDate').textContent = new Date().toLocaleDateString('ar-EG', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+      // Navigation
+      document.querySelectorAll('.sidebar a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const tab = link.dataset.tab;
+          switchTab(tab);
+        });
+      });
+      // Preset
+      setTimerPreset();
+    });
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      document.querySelectorAll('.sidebar a').forEach(el => el.classList.remove('active'));
+      document.querySelector(`.sidebar a[data-tab="${tabId}"]`).classList.add('active');
+      currentTab = tabId;
+      if (tabId === 'reviews') renderReview('weekly');
+    }
+
+    // ------------------------------------------------
+    // RENDER ALL
+    // ------------------------------------------------
+    function renderAll() {
+      renderLifeTable();
+      renderSubjects();
+      renderExams();
+      renderTasks();
+      renderWorship();
+      renderCare();
+      renderDashboard();
+    }
+
+    // ---------- DASHBOARD ----------
+    function renderDashboard() {
+      const today = new Date().toDateString();
+      // today tasks
+      const tasks = data.tasks.filter(t => t.date === today && !t.done);
+      const ul = document.getElementById('todayTasks');
+      ul.innerHTML = tasks.map((t,i) => `<li><input type="checkbox" onchange="toggleTask(${i})" ${t.done?'checked':''}> ${t.title} <span style="color:var(--burgundy-light);">${t.priority}</span></li>`).join('') || '<li>لا توجد مهام اليوم 🎉</li>';
+      // worship quick
+      const worshipDone = data.worship.completed[today] || {};
+      const worshipItems = [...data.worship.prayers, ...data.worship.morning, ...data.worship.evening];
+      const doneCount = worshipItems.filter(item => worshipDone[item]).length;
+      document.getElementById('todayWorship').innerHTML = `<li>تم إنجاز ${doneCount} من ${worshipItems.length} عبادة اليوم</li>`;
+    }
+
+    // ---------- LIFE TABLE ----------
+    function renderLifeTable() {
+      const head = document.getElementById('lifeHead');
+      const body = document.getElementById('lifeBody');
+      // Generate columns: last 30 days + next 30 (or dynamic)
+      if (data.lifeCols.length === 0) {
+        for (let i = -30; i <= 30; i++) {
+          const d = new Date();
+          d.setDate(d.getDate() + i);
+          data.lifeCols.push(d.toISOString().slice(0,10));
+        }
+        saveData(data);
+      }
+      let htmlHead = '<th style="min-width:120px;">المادة</th>';
+      data.lifeCols.forEach(col => {
+        const d = new Date(col);
+        htmlHead += `<th>${d.getDate()}/${d.getMonth()+1}</th>`;
+      });
+      head.innerHTML = htmlHead;
+
+      let htmlBody = '';
+      data.lifeRows.forEach((row, rowIdx) => {
+        htmlBody += `<tr><td class="row-label">${row} <button onclick="deleteRow(${rowIdx})" style="background:none;border:none;color:var(--burgundy-light);cursor:pointer;">🗑️</button></td>`;
+        data.lifeCols.forEach((col, colIdx) => {
+          const key = `${rowIdx}_${colIdx}`;
+          const val = data.lifeCells[key] || '';
+          htmlBody += `<td><input type="text" value="${val}" onchange="updateCell(${rowIdx},${colIdx},this.value)"></td>`;
+        });
+        htmlBody += '</tr>';
+      });
+      body.innerHTML = htmlBody;
+    }
+
+    function updateCell(row, col, val) {
+      data.lifeCells[`${row}_${col}`] = val;
+      saveData(data);
+    }
+    function addLifeRow() {
+      const name = document.getElementById('newRowName').value.trim();
+      if (!name) return alert('أدخل اسم المادة');
+      data.lifeRows.push(name);
+      saveData(data);
+      renderLifeTable();
+      document.getElementById('newRowName').value = '';
+    }
+    function deleteRow(idx) {
+      if (!confirm('حذف هذا الصف؟')) return;
+      data.lifeRows.splice(idx, 1);
+      // remove cells
+      for (let key in data.lifeCells) {
+        const [r] = key.split('_').map(Number);
+        if (r === idx) delete data.lifeCells[key];
+        else if (r > idx) {
+          const [row, col] = key.split('_').map(Number);
+          data.lifeCells[`${row-1}_${col}`] = data.lifeCells[key];
+          delete data.lifeCells[key];
+        }
+      }
+      saveData(data);
+      renderLifeTable();
+    }
+    function addLifeColumn() {
+      const d = new Date();
+      d.setDate(d.getDate() + data.lifeCols.length - 30);
+      data.lifeCols.push(d.toISOString().slice(0,10));
+      saveData(data);
+      renderLifeTable();
+    }
+
+    // ---------- SUBJECTS ----------
+    function renderSubjects() {
+      const ul = document.getElementById('subjectList');
+      ul.innerHTML = data.subjects.map((s, i) => `<li>${s.name} <span style="color:var(--gold);">${s.progress||0}%</span> <button onclick="deleteSubject(${i})" style="background:none;border:none;color:var(--burgundy-light);cursor:pointer;">🗑️</button></li>`).join('');
+    }
+    function addSubject() {
+      const name = document.getElementById('subjectName').value.trim();
+      if (!name) return;
+      data.subjects.push({ name, progress: 0, notes: '' });
+      saveData(data);
+      renderSubjects();
+      document.getElementById('subjectName').value = '';
+    }
+    function deleteSubject(idx) {
+      data.subjects.splice(idx, 1);
+      saveData(data);
+      renderSubjects();
+    }
+
+    // ---------- EXAMS ----------
+    function renderExams() {
+      const ul = document.getElementById('examList');
+      ul.innerHTML = data.exams.map((e, i) => `<li>${e.subject} - ${e.date} (هدف: ${e.target}) <button onclick="deleteExam(${i})" style="background:none;border:none;color:var(--burgundy-light);cursor:pointer;">🗑️</button></li>`).join('');
+    }
+    function addExam() {
+      const subject = document.getElementById('examSubject').value.trim();
+      const date = document.getElementById('examDate').value;
+      const target = document.getElementById('examTarget').value;
+      if (!subject || !date) return alert('أدخل المادة والتاريخ');
+      data.exams.push({ subject, date, target: target || '--' });
+      saveData(data);
+      renderExams();
+      document.getElementById('examSubject').value = '';
+      document.getElementById('examDate').value = '';
+      document.getElementById('examTarget').value = '';
+    }
+    function deleteExam(idx) {
+      data.exams.splice(idx, 1);
+      saveData(data);
+      renderExams();
+    }
+
+    // ---------- TASKS ----------
+    function renderTasks() {
+      const ul = document.getElementById('taskList');
+      ul.innerHTML = data.tasks.map((t, i) => `<li><input type="checkbox" onchange="toggleTask(${i})" ${t.done?'checked':''}> ${t.title} <span style="color:var(--burgundy-light);">${t.priority}</span> <span style="color:#888;">${t.date}</span> <button onclick="deleteTask(${i})" style="background:none;border:none;color:var(--burgundy-light);cursor:pointer;">🗑️</button></li>`).join('');
+    }
+    function addTask() {
+      const title = document.getElementById('taskInput').value.trim();
+      const date = document.getElementById('taskDate').value || new Date().toISOString().slice(0,10);
+      const priority = document.getElementById('taskPriority').value;
+      if (!title) return;
+      data.tasks.push({ title, date, priority, done: false });
+      saveData(data);
+      renderTasks();
+      document.getElementById('taskInput').value = '';
+    }
+    function toggleTask(idx) {
+      data.tasks[idx].done = !data.tasks[idx].done;
+      saveData(data);
+      renderTasks();
+      renderDashboard();
+    }
+    function deleteTask(idx) {
+      data.tasks.splice(idx, 1);
+      saveData(data);
+      renderTasks();
+      renderDashboard();
+    }
+
+    // ---------- WORSHIP ----------
+    function renderWorship() {
+      const today = new Date().toDateString();
+      const done = data.worship.completed[today] || {};
+      // prayers
+      const pList = document.getElementById('prayerList');
+      pList.innerHTML = data.worship.prayers.map(p => `<li><input type="checkbox" ${done[p]?'checked':''} onchange="toggleWorship('${p}')"> ${p}</li>`).join('');
+      // morning
+      const mList = document.getElementById('morningAdhkar');
+      mList.innerHTML = data.worship.morning.map(p => `<li><input type="checkbox" ${done[p]?'checked':''} onchange="toggleWorship('${p}')"> ${p}</li>`).join('');
+      // evening
+      const eList = document.getElementById('eveningAdhkar');
+      eList.innerHTML = data.worship.evening.map(p => `<li><input type="checkbox" ${done[p]?'checked':''} onchange="toggleWorship('${p}')"> ${p}</li>`).join('');
+      // stats
+      const total = data.worship.prayers.length + data.worship.morning.length + data.worship.evening.length;
+      const doneCount = Object.values(done).filter(v => v).length;
+      document.getElementById('worshipStats').textContent = `اليوم: ${doneCount} / ${total} عبادة`;
+    }
+    function toggleWorship(item) {
+      const today = new Date().toDateString();
+      if (!data.worship.completed[today]) data.worship.completed[today] = {};
+      data.worship.completed[today][item] = !data.worship.completed[today][item];
+      saveData(data);
+      renderWorship();
+      renderDashboard();
+    }
+    function saveWorship() {
+      const pages = parseInt(document.getElementById('quranPages').value) || 0;
+      data.worship.quranPages = pages;
+      saveData(data);
+      alert('تم حفظ ورد القرآن');
+    }
+
+    // ---------- CARE ----------
+    function renderCare() {
+      const items = data.care[careTab] || [];
+      const container = document.getElementById('careContent');
+      container.innerHTML = items.map((item, i) => `<li><input type="checkbox" onchange="toggleCareItem('${careTab}',${i})"> ${item}</li>`).join('');
+    }
+    function switchCareTab(tab) {
+      careTab = tab;
+      renderCare();
+    }
+    function toggleCareItem(tab, idx) {
+      // just a visual toggle; we can save state if needed
+      // we'll store checked state in a separate key for care
+      if (!data.careChecked) data.careChecked = {};
+      const key = `${tab}_${idx}`;
+      data.careChecked[key] = !data.careChecked[key];
+      saveData(data);
+      renderCare();
+    }
+    function saveCare() {
+      // We can add new items from input if needed
+      alert('تم حفظ العناية (البيانات محفوظة تلقائيًا)');
+    }
+
+    // ---------- TIMERS ----------
+    function setTimerPreset() {
+      const val = parseInt(document.getElementById('timerPreset').value);
+      fullSeconds = val * 60;
+      document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
+      document.getElementById('quickTimer').textContent = formatTime(fullSeconds);
+    }
+    function formatTime(sec) {
+      const m = Math.floor(sec/60);
+      const s = sec % 60;
+      return `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+    }
+    // Quick Timer (Dashboard)
+    function startQuickTimer() {
+      if (quickPaused) { quickPaused = false; return; }
+      if (quickTimerInterval) return;
+      quickTimerInterval = setInterval(() => {
+        if (quickSeconds <= 0) { clearInterval(quickTimerInterval); quickTimerInterval = null; return; }
+        quickSeconds--;
+        document.getElementById('quickTimer').textContent = formatTime(quickSeconds);
+      }, 1000);
+    }
+    function pauseQuickTimer() {
+      quickPaused = true;
+      if (quickTimerInterval) { clearInterval(quickTimerInterval); quickTimerInterval = null; }
+    }
+    function resetQuickTimer() {
+      clearInterval(quickTimerInterval); quickTimerInterval = null;
+      quickSeconds = parseInt(document.getElementById('timerPreset').value) * 60 || 1500;
+      document.getElementById('quickTimer').textContent = formatTime(quickSeconds);
+      quickPaused = false;
+    }
+    // Full Timer (Timer tab)
+    function startFullTimer() {
+      if (fullPaused) { fullPaused = false; return; }
+      if (fullTimerInterval) return;
+      fullTimerInterval = setInterval(() => {
+        if (fullSeconds <= 0) {
+          clearInterval(fullTimerInterval); fullTimerInterval = null;
+          data.timerSessions = (data.timerSessions || 0) + 1;
+          document.getElementById('sessionCount').textContent = data.timerSessions;
+          saveData(data);
+          return;
+        }
+        fullSeconds--;
+        document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
+      }, 1000);
+    }
+    function pauseFullTimer() {
+      fullPaused = true;
+      if (fullTimerInterval) { clearInterval(fullTimerInterval); fullTimerInterval = null; }
+    }
+    function resetFullTimer() {
+      clearInterval(fullTimerInterval); fullTimerInterval = null;
+      fullSeconds = parseInt(document.getElementById('timerPreset').value) * 60 || 1500;
+      document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
+      fullPaused = false;
+    }
+
+    // ---------- REVIEWS (Chart.js) ----------
+    let reviewChart = null;
+    function renderReview(period) {
+      const ctx = document.getElementById('reviewChart').getContext('2d');
+      if (reviewChart) reviewChart.destroy();
+      // Generate dummy data for demo
+      const labels = period === 'weekly' ? ['أحد','اثنين','ثلاثاء','أربعاء','خميس','جمعة','سبت'] :
+                      period === 'monthly' ? ['أسبوع1','أسبوع2','أسبوع3','أسبوع4'] :
+                      ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+      const dataset = labels.map(() => Math.floor(Math.random() * 10) + 1);
+      reviewChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'نسبة الإنجاز',
+            data: dataset,
+            backgroundColor: ['#8B1A2B', '#B2223C', '#D4AF37', '#6A4C9C', '#8B1A2B', '#B2223C', '#D4AF37'],
+            borderColor: '#D4AF37',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: '#FDF5E6' } }
+          },
+          scales: {
+            x: { ticks: { color: '#FDF5E6' } },
+            y: { ticks: { color: '#FDF5E6' }, beginAtZero: true }
+          }
+        }
+      });
+      document.getElementById('reviewStats').textContent = `📊 عرض ${period} - متوسط الإنجاز: ${(dataset.reduce((a,b)=>a+b,0)/dataset.length).toFixed(1)}`;
+    }
+    function showReview(period) { renderReview(period); }
+
+    // ---------- SETTINGS ----------
+    function exportData() {
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `kimi_backup_${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+    }
+    function importData() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'application/json';
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          try {
+            const imported = JSON.parse(ev.target.result);
+            data = imported;
+            saveData(data);
+            location.reload();
+          } catch { alert('خطأ في قراءة الملف'); }
+        };
+        reader.readAsText(file);
+      };
+      input.click();
+    }
+
+    // Make functions global
+    window.addLifeRow = addLifeRow; window.addLifeColumn = addLifeColumn;
+    window.updateCell = updateCell; window.deleteRow = deleteRow;
+    window.addSubject = addSubject; window.deleteSubject = deleteSubject;
+    window.addExam = addExam; window.deleteExam = deleteExam;
+    window.addTask = addTask; window.toggleTask = toggleTask; window.deleteTask = deleteTask;
+    window.toggleWorship = toggleWorship; window.saveWorship = saveWorship;
+    window.switchCareTab = switchCareTab; window.toggleCareItem = toggleCareItem; window.saveCare = saveCare;
+    window.startQuickTimer = startQuickTimer; window.pauseQuickTimer = pauseQuickTimer; window.resetQuickTimer = resetQuickTimer;
+    window.startFullTimer = startFullTimer; window.pauseFullTimer = pauseFullTimer; window.resetFullTimer = resetFullTimer;
+    window.setTimerPreset = setTimerPreset;
+    window.showReview = showReview;
+    window.exportData = exportData; window.importData = importData;
+    window.switchTab = switchTab;
+  </script>
+</body>
+</html>
