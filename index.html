@@ -1,911 +1,1003 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kimi Life & Self Care</title>
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    /* ===== RESET & BASE (Shelf Dark x Neon Pink) ===== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #0A0A0A;
-      color: #FFFFFF;
-      min-height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kimi Life & Self Care</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    :root {
-      --bg-primary: #0A0A0A;
-      --bg-card: #181818;
-      --bg-card-hover: #242424;
-      --neon-pink: #FF2A6D;
-      --neon-purple: #9D4EDD;
-      --text-primary: #FFFFFF;
-      --text-secondary: #A0A0A0;
-      --border-color: #2A2A2A;
-      --glow-pink: 0 0 30px rgba(255, 42, 109, 0.3);
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0A0A0A;
+            color: #FFFFFF;
+            min-height: 100vh;
+        }
 
-    /* ===== SIDEBAR ===== */
-    .sidebar {
-      width: 80px;
-      background: #0A0A0A;
-      height: 100vh;
-      position: fixed;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 20px;
-      border-right: 1px solid var(--border-color);
-      z-index: 100;
-      overflow-y: auto;
-    }
-    .sidebar a {
-      color: #555;
-      font-size: 24px;
-      margin: 12px 0;
-      transition: 0.3s;
-      text-decoration: none;
-      position: relative;
-      padding: 6px 10px;
-    }
-    .sidebar a:hover {
-      color: var(--neon-pink);
-      transform: scale(1.1);
-      text-shadow: 0 0 20px var(--neon-pink);
-    }
-    .sidebar a.active {
-      color: var(--neon-pink);
-    }
-    .sidebar a.active::after {
-      content: '';
-      position: absolute;
-      left: -10px;
-      top: 0;
-      height: 100%;
-      width: 4px;
-      background: var(--neon-pink);
-      border-radius: 4px;
-      box-shadow: 0 0 15px var(--neon-pink);
-    }
+        :root {
+            --bg-primary: #0A0A0A;
+            --bg-card: #181818;
+            --neon-pink: #FF2A6D;
+            --neon-purple: #9D4EDD;
+            --text-secondary: #A0A0A0;
+            --border-color: #2A2A2A;
+        }
 
-    /* ===== MAIN ===== */
-    .main-content {
-      margin-right: 80px;
-      padding: 25px;
-    }
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 80px;
+            background: #0A0A0A;
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            border-right: 1px solid var(--border-color);
+            z-index: 100;
+            overflow-y: auto;
+        }
 
-    /* ===== CARDS ===== */
-    .card {
-      background: var(--bg-card);
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 25px;
-      border: 1px solid var(--border-color);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.8);
-      transition: 0.3s;
-    }
-    .card:hover {
-      border-color: var(--neon-pink);
-      box-shadow: var(--glow-pink);
-    }
-    .card-title {
-      color: var(--neon-pink);
-      font-weight: 700;
-      font-size: 1.4rem;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-shadow: 0 0 20px rgba(255, 42, 109, 0.2);
-    }
+        .sidebar a {
+            color: #555;
+            font-size: 24px;
+            margin: 12px 0;
+            transition: 0.3s;
+            text-decoration: none;
+            position: relative;
+            padding: 6px 10px;
+        }
 
-    /* ===== BUTTONS ===== */
-    .btn {
-      background: transparent;
-      border: 2px solid var(--neon-pink);
-      color: var(--neon-pink);
-      padding: 8px 22px;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: 0.3s;
-      font-family: inherit;
-      font-weight: 700;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 1px;
-    }
-    .btn:hover {
-      background: var(--neon-pink);
-      color: #0A0A0A;
-      box-shadow: 0 0 30px rgba(255, 42, 109, 0.5);
-      transform: scale(1.05);
-    }
-    .btn-outline {
-      border-color: #555;
-      color: #AAA;
-    }
-    .btn-outline:hover {
-      border-color: var(--neon-pink);
-      color: var(--neon-pink);
-      background: transparent;
-      box-shadow: none;
-    }
+        .sidebar a:hover {
+            color: var(--neon-pink);
+            transform: scale(1.1);
+            text-shadow: 0 0 20px var(--neon-pink);
+        }
 
-    /* ===== INPUTS ===== */
-    input, select, textarea {
-      background: #121212;
-      border: 1px solid var(--border-color);
-      color: #FFF;
-      padding: 12px 18px;
-      border-radius: 12px;
-      width: 100%;
-      margin-bottom: 12px;
-      font-family: inherit;
-      transition: 0.3s;
-    }
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: var(--neon-pink);
-      box-shadow: 0 0 20px rgba(255, 42, 109, 0.2);
-    }
+        .sidebar a.active {
+            color: var(--neon-pink);
+        }
 
-    /* ===== GRID ===== */
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; }
+        .sidebar a.active::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--neon-pink);
+            border-radius: 4px;
+            box-shadow: 0 0 15px var(--neon-pink);
+        }
 
-    /* ===== LIFE-LONG TABLE ===== */
-    .lifetime-table-wrap {
-      overflow: auto;
-      max-height: 500px;
-      border-radius: 16px;
-      background: #0D0D0D;
-      border: 1px solid #222;
-    }
-    .lifetime-table {
-      border-collapse: collapse;
-      min-width: 800px;
-      width: 100%;
-    }
-    .lifetime-table th {
-      background: #0A0A0A;
-      color: var(--neon-pink);
-      padding: 12px 8px;
-      border: 1px solid #222;
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      font-weight: 700;
-    }
-    .lifetime-table td {
-      padding: 10px 8px;
-      border: 1px solid #1F1F1F;
-      text-align: center;
-      min-width: 60px;
-      color: #CCC;
-    }
-    .lifetime-table td input {
-      width: 50px;
-      padding: 4px;
-      margin: 0;
-      background: #111;
-      border: 1px solid #333;
-      text-align: center;
-      border-radius: 8px;
-      color: #FFF;
-    }
-    .lifetime-table .row-label {
-      background: #0A0A0A;
-      font-weight: 600;
-      color: var(--neon-pink);
-      min-width: 120px;
-      text-align: right;
-      padding-right: 15px;
-      position: sticky;
-      right: 0;
-    }
+        /* ===== MAIN ===== */
+        .main-content {
+            margin-left: 80px;
+            padding: 25px;
+        }
 
-    /* ===== SPACE TIMER (Neon Pink + Purple) ===== */
-    .space-timer {
-      background: radial-gradient(circle at 30% 20%, #1A0A1A, #050505);
-      border: 1px solid var(--neon-pink);
-      border-radius: 60px;
-      padding: 30px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 0 60px rgba(255, 42, 109, 0.15);
-    }
-    .space-timer::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="2" fill="%23FF2A6D" opacity="0.6"/><circle cx="70" cy="15" r="2.5" fill="%239D4EDD" opacity="0.8"/><circle cx="85" cy="70" r="1.5" fill="%23FF2A6D" opacity="0.5"/><circle cx="10" cy="80" r="3" fill="%239D4EDD" opacity="0.4"/></svg>');
-      background-size: 200px 200px;
-      animation: twinkle 8s infinite alternate;
-      opacity: 0.5;
-      pointer-events: none;
-    }
-    @keyframes twinkle { 0% { opacity: 0.2; } 100% { opacity: 0.8; } }
-    .timer-display {
-      font-size: 4rem;
-      font-weight: 700;
-      font-family: 'Poppins', sans-serif;
-      color: #FFF;
-      text-shadow: 0 0 40px var(--neon-pink), 0 0 80px var(--neon-purple);
-      position: relative;
-      z-index: 2;
-    }
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+            transition: 0.3s;
+        }
 
-    /* ===== CHART ===== */
-    .chart-container {
-      background: #0D0D0D;
-      border-radius: 20px;
-      padding: 15px;
-      height: 200px;
-      border: 1px solid #222;
-    }
+        .card:hover {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 30px rgba(255, 42, 109, 0.3);
+        }
 
-    /* ===== CHECKLIST ===== */
-    .checklist {
-      list-style: none;
-      padding: 0;
-    }
-    .checklist li {
-      padding: 10px 0;
-      border-bottom: 1px solid #1F1F1F;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: #DDD;
-    }
-    .checklist input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      accent-color: var(--neon-pink);
-      filter: drop-shadow(0 0 5px var(--neon-pink));
-      cursor: pointer;
-    }
+        .card-title {
+            color: var(--neon-pink);
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 20px rgba(255, 42, 109, 0.2);
+        }
 
-    /* ===== MISC ===== */
-    h1 { color: #FFF; }
-    h1 span { color: var(--neon-pink); }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    .text-secondary { color: var(--text-secondary); }
+        /* ===== BUTTONS ===== */
+        .btn {
+            background: transparent;
+            border: 2px solid var(--neon-pink);
+            color: var(--neon-pink);
+            padding: 8px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .sidebar { width: 60px; }
-      .main-content { margin-right: 60px; padding: 15px; }
-      .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .timer-display { font-size: 2.5rem; }
-    }
-  </style>
+        .btn:hover {
+            background: var(--neon-pink);
+            color: #0A0A0A;
+            box-shadow: 0 0 30px rgba(255, 42, 109, 0.5);
+            transform: scale(1.05);
+        }
+
+        .btn-outline {
+            border-color: #555;
+            color: #AAA;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            background: transparent;
+            box-shadow: none;
+        }
+
+        /* ===== INPUTS ===== */
+        input,
+        select,
+        textarea {
+            background: #121212;
+            border: 1px solid var(--border-color);
+            color: #FFF;
+            padding: 12px 18px;
+            border-radius: 12px;
+            width: 100%;
+            margin-bottom: 12px;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 20px rgba(255, 42, 109, 0.2);
+        }
+
+        /* ===== GRID ===== */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        /* ===== SPACE TIMER ===== */
+        .space-timer {
+            background: radial-gradient(circle at 30% 20%, #1A0A1A, #050505);
+            border: 1px solid var(--neon-pink);
+            border-radius: 60px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(255, 42, 109, 0.15);
+        }
+
+        .space-timer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="2" fill="%23FF2A6D" opacity="0.6"/><circle cx="70" cy="15" r="2.5" fill="%239D4EDD" opacity="0.8"/><circle cx="85" cy="70" r="1.5" fill="%23FF2A6D" opacity="0.5"/><circle cx="10" cy="80" r="3" fill="%239D4EDD" opacity="0.4"/></svg>');
+            background-size: 200px 200px;
+            animation: twinkle 8s infinite alternate;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0.2;
+            }
+            100% {
+                opacity: 0.8;
+            }
+        }
+
+        .timer-display {
+            font-size: 4rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            color: #FFF;
+            text-shadow: 0 0 40px var(--neon-pink), 0 0 80px var(--neon-purple);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ===== CHECKLIST ===== */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 10px 0;
+            border-bottom: 1px solid #1F1F1F;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #DDD;
+        }
+
+        .checklist input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--neon-pink);
+            filter: drop-shadow(0 0 5px var(--neon-pink));
+            cursor: pointer;
+        }
+
+        /* ===== MISC ===== */
+        h1 {
+            color: #FFF;
+        }
+        h1 span {
+            color: var(--neon-pink);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 60px;
+            }
+            .main-content {
+                margin-left: 60px;
+                padding: 15px;
+            }
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .timer-display {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- ===== SIDEBAR ===== -->
-  <nav class="sidebar" id="sidebar">
-    <a href="#" data-tab="dashboard" class="active"><i class="fas fa-home"></i></a>
-    <a href="#" data-tab="worship"><i class="fas fa-mosque"></i></a>
-    <a href="#" data-tab="lifetracker"><i class="fas fa-infinity"></i></a>
-    <a href="#" data-tab="subjects"><i class="fas fa-book-open"></i></a>
-    <a href="#" data-tab="exams"><i class="fas fa-pencil-alt"></i></a>
-    <a href="#" data-tab="timer"><i class="fas fa-rocket"></i></a>
-    <a href="#" data-tab="selfcare"><i class="fas fa-spa"></i></a>
-    <a href="#" data-tab="tasks"><i class="fas fa-tasks"></i></a>
-    <a href="#" data-tab="reviews"><i class="fas fa-chart-line"></i></a>
-    <a href="#" data-tab="settings"><i class="fas fa-cog"></i></a>
-  </nav>
+    <!-- ===== SIDEBAR ===== -->
+    <nav class="sidebar" id="sidebar">
+        <a href="#" data-tab="dashboard" class="active"><i class="fas fa-home"></i></a>
+        <a href="#" data-tab="worship"><i class="fas fa-mosque"></i></a>
+        <a href="#" data-tab="lifetracker"><i class="fas fa-infinity"></i></a>
+        <a href="#" data-tab="subjects"><i class="fas fa-book-open"></i></a>
+        <a href="#" data-tab="exams"><i class="fas fa-pencil-alt"></i></a>
+        <a href="#" data-tab="timer"><i class="fas fa-rocket"></i></a>
+        <a href="#" data-tab="selfcare"><i class="fas fa-spa"></i></a>
+        <a href="#" data-tab="tasks"><i class="fas fa-tasks"></i></a>
+        <a href="#" data-tab="reviews"><i class="fas fa-chart-line"></i></a>
+        <a href="#" data-tab="settings"><i class="fas fa-cog"></i></a>
+    </nav>
 
-  <!-- ===== MAIN CONTENT ===== -->
-  <div class="main-content">
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-content">
 
-    <!-- ==================== DASHBOARD ==================== -->
-    <div id="dashboard" class="tab-content active">
-      <h1 style="margin-bottom: 10px;">🌸 Welcome to <span>Kimi Life</span></h1>
-      <p class="text-secondary" style="margin-bottom: 30px;">Today: <span id="todayDate"></span></p>
-      <div class="grid-2">
-        <div class="card">
-          <div class="card-title"><i class="fas fa-check-circle"></i> Today's Tasks</div>
-          <ul id="todayTasks" class="checklist"></ul>
+        <!-- ===== DASHBOARD ===== -->
+        <div id="dashboard" class="tab-content active">
+            <h1>🌸 Welcome to <span>Kimi Life</span></h1>
+            <p class="text-secondary" style="margin-bottom: 30px;">Today: <span id="todayDate"></span></p>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-check-circle"></i> Today's Tasks</div>
+                    <ul id="todayTasks" class="checklist"></ul>
+                </div>
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-star"></i> Today's Worship</div>
+                    <ul id="todayWorship" class="checklist"></ul>
+                </div>
+            </div>
+            <div class="card space-timer" style="margin-top: 10px;">
+                <div class="card-title" style="justify-content: center;"><i class="fas fa-rocket" style="color: var(--neon-purple);"></i> Space Timer</div>
+                <div class="timer-display" id="quickTimer">25:00</div>
+                <div style="margin-top: 15px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn" onclick="startQuickTimer()">Start</button>
+                    <button class="btn btn-outline" onclick="pauseQuickTimer()">Pause</button>
+                    <button class="btn btn-outline" onclick="resetQuickTimer()">Reset</button>
+                </div>
+            </div>
         </div>
-        <div class="card">
-          <div class="card-title"><i class="fas fa-star"></i> Today's Worship</div>
-          <ul id="todayWorship" class="checklist"></ul>
+
+        <!-- ===== WORSHIP ===== -->
+        <div id="worship" class="tab-content">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-mosque"></i> My Worship</div>
+                <div class="grid-3">
+                    <div>
+                        <h4 style="color:var(--neon-pink);">Prayers</h4>
+                        <ul id="prayerList" class="checklist"></ul>
+                    </div>
+                    <div>
+                        <h4 style="color:var(--neon-pink);">Morning Dhikr</h4>
+                        <ul id="morningAdhkar" class="checklist"></ul>
+                    </div>
+                    <div>
+                        <h4 style="color:var(--neon-pink);">Evening Dhikr</h4>
+                        <ul id="eveningAdhkar" class="checklist"></ul>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <label style="color:var(--text-secondary);">Quran Daily Reading (Pages):
+                        <input type="number" id="quranPages" value="2" min="0" style="width:80px; display:inline;">
+                    </label>
+                    <button class="btn" onclick="saveWorship()">Save Progress</button>
+                </div>
+                <div id="worshipStats" style="margin-top: 15px; color: var(--neon-pink);"></div>
+            </div>
         </div>
-      </div>
-      <div class="card space-timer" style="margin-top: 10px;">
-        <div class="card-title" style="justify-content: center;"><i class="fas fa-rocket" style="color: var(--neon-purple);"></i> Space Timer</div>
-        <div class="timer-display" id="quickTimer">25:00</div>
-        <div style="margin-top: 15px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-          <button class="btn" onclick="startQuickTimer()">Start</button>
-          <button class="btn btn-outline" onclick="pauseQuickTimer()">Pause</button>
-          <button class="btn btn-outline" onclick="resetQuickTimer()">Reset</button>
+
+        <!-- ===== LIFE-LONG TRACKER ===== -->
+        <div id="lifetracker" class="tab-content">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-infinity"></i> Life-Long Tracker</div>
+                <div style="margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                    <input type="text" id="newRowName" placeholder="New subject/skill name">
+                    <button class="btn" onclick="addLifeRow()">Add Row</button>
+                    <button class="btn btn-outline" onclick="addLifeColumn()">Add Column (Day)</button>
+                </div>
+                <div class="lifetime-table-wrap" style="overflow:auto; max-height:500px; border-radius:16px; background:#0D0D0D; border:1px solid #222;">
+                    <table class="lifetime-table" id="lifeTable" style="border-collapse:collapse; min-width:800px; width:100%;">
+                        <thead id="lifeHead"></thead>
+                        <tbody id="lifeBody"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <!-- ===== SUBJECTS ===== -->
+        <div id="subjects" class="tab-content">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-book-open"></i> My Subjects</div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <input type="text" id="subjectName" placeholder="Subject name">
+                    <button class="btn" onclick="addSubject()">Add Subject</button>
+                </div>
+                <ul id="subjectList" class="checklist" style="margin-top: 20px;"></ul>
+            </div>
+        </div>
+
+        <!-- ===== EXAMS ===== -->
+        <div id="exams" class="tab-content">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-pencil-alt"></i> My Exams</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; align-items: end;">
+                    <input type="text" id="examSubject" placeholder="Subject">
+                    <input type="date" id="examDate">
+                    <input type="number" id="examTarget" placeholder="Target Score">
+                    <button class="btn" onclick="addExam()">Add</button>
+                </div>
+                <ul id="examList" class="checklist" style="margin-top: 20px;"></ul>
+            </div>
+        </div>
+
+        <!-- ===== SPACE TIMER ===== -->
+        <div id="timer" class="tab-content">
+            <div class="card space-timer">
+                <div class="card-title" style="justify-content: center;"><i class="fas fa-rocket" style="color: var(--neon-purple);"></i> Advanced Space Timer</div>
+                <div class="timer-display" id="fullTimer">25:00</div>
+                <div style="margin-top: 15px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn" onclick="startFullTimer()">Start</button>
+                    <button class="btn btn-outline" onclick="pauseFullTimer()">Pause</button>
+                    <button class="btn btn-outline" onclick="resetFullTimer()">Reset</button>
+                    <select id="timerPreset" onchange="setTimerPreset()" style="width: auto; background: #1A1A1A; border-color:#555; color:#FFF; padding:8px 15px; border-radius:12px;">
+                        <option value="25">25 min (Study)</option>
+                        <option value="5">5 min (Break)</option>
+                        <option value="10">10 min (Worship)</option>
+                    </select>
+                </div>
+                <div style="margin-top: 15px; color: var(--text-secondary);">Today's Sessions: <span id="sessionCount" style="color:var(--neon-pink);">0</span></div>
+            </div>
+        </div>
+
+        <!-- ===== SELF-CARE ===== -->
+        <div id="selfcare" class="tab-content">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-spa"></i> Daily Self-Care</div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+                    <button class="btn" onclick="switchCareTab('skin')">Skin</button>
+                    <button class="btn" onclick="switchCareTab('hair')">Hair</button>
+                    <button class="btn" onclick="switchCareTab('body')">Body</button>
+                    <button class="btn" onclick="switchCareTab('clothes')">Clothes</button>
+                    <button class="btn" onclick="switchCareTab('nails')">Nails</button>
+                    <button class="btn" onclick="switchCareTab('exercise')">Exercise</button>
+                </div>
+                <div id="careContent" class="checklist"></div>
+                <button class="btn" onclick="saveCare()" style="margin-top: 15px;">Save Care</button>
+            </div>
+        </div>
+
+        <!-- ===== TASKS ===== -->
+        <div id="tasks" class="tab-content">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-tasks"></i> My Tasks</div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <input type="text" id="taskInput" placeholder="New task">
+                    <input type="date" id="taskDate">
+                    <select id="taskPriority" style="width: auto; background: #121212; border:1px solid #2A2A2A; color:#FFF; padding:12px 18px; border-radius:12px;">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                    <button class="btn" onclick="addTask()">Add</button>
+                </div>
+                <ul id="taskList" class="checklist" style="margin-top: 20px;"></ul>
+            </div>
+        </div>
+
+        <!-- ===== REVIEWS ===== -->
+        <div id="reviews" class="tab-content">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-chart-line"></i> Reviews</div>
+                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <button class="btn" onclick="showReview('weekly')">Weekly</button>
+                    <button class="btn" onclick="showReview('monthly')">Monthly</button>
+                    <button class="btn" onclick="showReview('yearly')">Yearly</button>
+                </div>
+                <div class="chart-container" style="background:#0D0D0D; border-radius:20px; padding:15px; height:200px; border:1px solid #222;">
+                    <canvas id="reviewChart"></canvas>
+                </div>
+                <div id="reviewStats" style="margin-top: 15px; color: var(--neon-pink);"></div>
+            </div>
+        </div>
+
+        <!-- ===== SETTINGS ===== -->
+        <div id="settings" class="tab-content">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-cog"></i> Settings</div>
+                <button class="btn btn-outline" onclick="exportData()"><i class="fas fa-file-export"></i> Export Data</button>
+                <button class="btn btn-outline" onclick="importData()"><i class="fas fa-file-import"></i> Import Data</button>
+                <button class="btn" style="background: #8B0000; border-color:#8B0000;" onclick="if(confirm('Are you sure?')){localStorage.clear(); location.reload();}"><i class="fas fa-trash"></i> Reset Everything</button>
+            </div>
+        </div>
     </div>
 
-    <!-- ==================== WORSHIP ==================== -->
-    <div id="worship" class="tab-content">
-      <div class="card">
-        <div class="card-title"><i class="fas fa-mosque"></i> My Worship</div>
-        <div class="grid-3">
-          <div><h4 style="color:var(--neon-pink);">Prayers</h4><ul id="prayerList" class="checklist"></ul></div>
-          <div><h4 style="color:var(--neon-pink);">Morning Dhikr</h4><ul id="morningAdhkar" class="checklist"></ul></div>
-          <div><h4 style="color:var(--neon-pink);">Evening Dhikr</h4><ul id="eveningAdhkar" class="checklist"></ul></div>
-        </div>
-        <div style="margin-top: 20px;">
-          <label style="color:var(--text-secondary);">Quran Daily Reading (Pages): <input type="number" id="quranPages" value="2" min="0" style="width:80px; display:inline;"></label>
-          <button class="btn" onclick="saveWorship()">Save Progress</button>
-        </div>
-        <div id="worshipStats" style="margin-top: 15px; color: var(--neon-pink);"></div>
-      </div>
-    </div>
+    <script>
+        // ================================================
+        // DATA LAYER (localStorage)
+        // ================================================
+        const APP_KEY = 'kimiLifeData';
 
-    <!-- ==================== LIFE-LONG TRACKER ==================== -->
-    <div id="lifetracker" class="tab-content">
-      <div class="card">
-        <div class="card-title"><i class="fas fa-infinity"></i> Life-Long Tracker</div>
-        <div style="margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
-          <input type="text" id="newRowName" placeholder="New subject/skill name">
-          <button class="btn" onclick="addLifeRow()">Add Row</button>
-          <button class="btn btn-outline" onclick="addLifeColumn()">Add Column (Day)</button>
-        </div>
-        <div class="lifetime-table-wrap">
-          <table class="lifetime-table" id="lifeTable">
-            <thead id="lifeHead"></thead>
-            <tbody id="lifeBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+        function getData() {
+            const raw = localStorage.getItem(APP_KEY);
+            if (!raw) return defaultData();
+            try { return JSON.parse(raw); } catch { return defaultData(); }
+        }
 
-    <!-- ==================== SUBJECTS ==================== -->
-    <div id="subjects" class="tab-content">
-      <div class="card">
-        <div class="card-title"><i class="fas fa-book-open"></i> My Subjects</div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <input type="text" id="subjectName" placeholder="Subject name">
-          <button class="btn" onclick="addSubject()">Add Subject</button>
-        </div>
-        <ul id="subjectList" class="checklist" style="margin-top: 20px;"></ul>
-      </div>
-    </div>
+        function saveData(data) {
+            localStorage.setItem(APP_KEY, JSON.stringify(data));
+        }
 
-    <!-- ==================== EXAMS ==================== -->
-    <div id="exams" class="tab-content">
-      <div class="card">
-        <div class="card-title"><i class="fas fa-pencil-alt"></i> My Exams</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; align-items: end;">
-          <input type="text" id="examSubject" placeholder="Subject">
-          <input type="date" id="examDate">
-          <input type="number" id="examTarget" placeholder="Target Score">
-          <button class="btn" onclick="addExam()">Add</button>
-        </div>
-        <ul id="examList" class="checklist" style="margin-top: 20px;"></ul>
-      </div>
-    </div>
+        function defaultData() {
+            return {
+                lifeRows: ['Programming', 'Korean', 'French', 'Design'],
+                lifeCols: [],
+                lifeCells: {},
+                subjects: [],
+                exams: [],
+                tasks: [],
+                worship: {
+                    prayers: ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'],
+                    morning: ['O Allah, we have entered the morning', 'We have woken up and the kingdom belongs to Allah',
+                        'O Allah, heal my body'
+                    ],
+                    evening: ['O Allah, we have entered the evening', 'We have entered the evening and the kingdom belongs to Allah',
+                        'O Allah, heal my hearing'
+                    ],
+                    quranPages: 2,
+                    completed: {}
+                },
+                care: {
+                    skin: ['Gentle cleanser', 'Moisturizer', 'SPF'],
+                    hair: ['Shampoo', 'Conditioner', 'Weekly mask'],
+                    body: ['Body lotion', 'Drink 2L water'],
+                    clothes: ['Plan outfit', 'Organize wardrobe'],
+                    nails: ['Hand cream', 'Cut nails'],
+                    exercise: ['Resistance training', 'Walk 30 min']
+                },
+                timerSessions: 0,
+                careChecked: {}
+            };
+        }
 
-    <!-- ==================== SPACE TIMER (FULL) ==================== -->
-    <div id="timer" class="tab-content">
-      <div class="card space-timer">
-        <div class="card-title" style="justify-content: center;"><i class="fas fa-rocket" style="color: var(--neon-purple);"></i> Advanced Space Timer</div>
-        <div class="timer-display" id="fullTimer">25:00</div>
-        <div style="margin-top: 15px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-          <button class="btn" onclick="startFullTimer()">Start</button>
-          <button class="btn btn-outline" onclick="pauseFullTimer()">Pause</button>
-          <button class="btn btn-outline" onclick="resetFullTimer()">Reset</button>
-          <select id="timerPreset" onchange="setTimerPreset()" style="width: auto; background: #1A1A1A; border-color:#555;">
-            <option value="25">25 min (Study)</option>
-            <option value="5">5 min (Break)</option>
-            <option value="10">10 min (Worship)</option>
-          </select>
-        </div>
-        <div style="margin-top: 15px; color: var(--text-secondary);">Today's Sessions: <span id="sessionCount" style="color:var(--neon-pink);">0</span></div>
-      </div>
-    </div>
+        // ================================================
+        // INIT
+        // ================================================
+        let data = getData();
+        let currentTab = 'dashboard';
+        let careTab = 'skin';
+        let quickTimerInterval, fullTimerInterval;
+        let quickSeconds = 1500,
+            fullSeconds = 1500;
+        let quickPaused = false,
+            fullPaused = false;
 
-    <!-- ==================== SELF-CARE ==================== -->
-    <div id="selfcare" class="tab-content">
-      <div class="card">
-        <div class="card-title"><i class="fas fa-spa"></i> Daily Self-Care</div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
-          <button class="btn" onclick="switchCareTab('skin')">Skin</button>
-          <button class="btn" onclick="switchCareTab('hair')">Hair</button>
-          <button class="btn" onclick="switchCareTab('body')">Body</button>
-          <button class="btn" onclick="switchCareTab('clothes')">Clothes</button>
-          <button class="btn" onclick="switchCareTab('nails')">Nails</button>
-          <button class="btn" onclick="switchCareTab('exercise')">Exercise</button>
-        </div>
-        <div id="careContent" class="checklist"></div>
-        <button class="btn" onclick="saveCare()" style="margin-top: 15px;">Save Care</button>
-      </div>
-    </div>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAll();
+            document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-US', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
 
-    <!-- ==================== TASKS ==================== -->
-    <div id="tasks" class="tab-content">
-      <div class="card">
-        <div class="card-title"><i class="fas fa-tasks"></i> My Tasks</div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <input type="text" id="taskInput" placeholder="New task">
-          <input type="date" id="taskDate">
-          <select id="taskPriority" style="width: auto;">
-            <option value="low">Low</option>
-            <option value="medium" selected>Medium</option>
-            <option value="high">High</option>
-          </select>
-          <button class="btn" onclick="addTask()">Add</button>
-        </div>
-        <ul id="taskList" class="checklist" style="margin-top: 20px;"></ul>
-      </div>
-    </div>
+            document.querySelectorAll('.sidebar a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tab = link.dataset.tab;
+                    switchTab(tab);
+                });
+            });
 
-    <!-- ==================== REVIEWS ==================== -->
-    <div id="reviews" class="tab-content">
-      <div class="card">
-        <div class="card-title"><i class="fas fa-chart-line"></i> Reviews</div>
-        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-          <button class="btn" onclick="showReview('weekly')">Weekly</button>
-          <button class="btn" onclick="showReview('monthly')">Monthly</button>
-          <button class="btn" onclick="showReview('yearly')">Yearly</button>
-        </div>
-        <div class="chart-container">
-          <canvas id="reviewChart"></canvas>
-        </div>
-        <div id="reviewStats" style="margin-top: 15px; color: var(--neon-pink);"></div>
-      </div>
-    </div>
-
-    <!-- ==================== SETTINGS ==================== -->
-    <div id="settings" class="tab-content">
-      <div class="card">
-        <div class="card-title"><i class="fas fa-cog"></i> Settings</div>
-        <button class="btn btn-outline" onclick="exportData()"><i class="fas fa-file-export"></i> Export Data</button>
-        <button class="btn btn-outline" onclick="importData()"><i class="fas fa-file-import"></i> Import Data</button>
-        <button class="btn" style="background: #8B0000; border-color:#8B0000;" onclick="if(confirm('Are you sure?')){localStorage.clear(); location.reload();}"><i class="fas fa-trash"></i> Reset Everything</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // ------------------------------------------------
-    // DATA LAYER (localStorage)
-    // ------------------------------------------------
-    const APP_KEY = 'kimiLifeData';
-    function getData() {
-      const raw = localStorage.getItem(APP_KEY);
-      if (!raw) return defaultData();
-      try { return JSON.parse(raw); } catch { return defaultData(); }
-    }
-    function saveData(data) {
-      localStorage.setItem(APP_KEY, JSON.stringify(data));
-    }
-    function defaultData() {
-      return {
-        lifeRows: ['Programming', 'Korean', 'French', 'Design'],
-        lifeCols: [],
-        lifeCells: {},
-        subjects: [],
-        exams: [],
-        tasks: [],
-        worship: {
-          prayers: ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'],
-          morning: ['O Allah, we have entered the morning', 'We have woken up and the kingdom belongs to Allah', 'O Allah, heal my body'],
-          evening: ['O Allah, we have entered the evening', 'We have entered the evening and the kingdom belongs to Allah', 'O Allah, heal my hearing'],
-          quranPages: 2,
-          completed: {}
-        },
-        care: {
-          skin: ['Gentle cleanser', 'Moisturizer', 'SPF'],
-          hair: ['Shampoo', 'Conditioner', 'Weekly mask'],
-          body: ['Body lotion', 'Drink 2L water'],
-          clothes: ['Plan outfit', 'Organize wardrobe'],
-          nails: ['Hand cream', 'Cut nails'],
-          exercise: ['Resistance training', 'Walk 30 min']
-        },
-        timerSessions: 0,
-        reviewData: { weekly: [], monthly: [], yearly: [] }
-      };
-    }
-
-    // ------------------------------------------------
-    // INIT
-    // ------------------------------------------------
-    let data = getData();
-    let currentTab = 'dashboard';
-    let careTab = 'skin';
-    let quickTimerInterval, fullTimerInterval;
-    let quickSeconds = 1500, fullSeconds = 1500;
-    let quickPaused = false, fullPaused = false;
-
-    document.addEventListener('DOMContentLoaded', () => {
-      renderAll();
-      document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-US', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
-      // Navigation
-      document.querySelectorAll('.sidebar a').forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const tab = link.dataset.tab;
-          switchTab(tab);
+            setTimerPreset();
         });
-      });
-      setTimerPreset();
-    });
 
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
-      document.querySelectorAll('.sidebar a').forEach(el => el.classList.remove('active'));
-      document.querySelector(`.sidebar a[data-tab="${tabId}"]`).classList.add('active');
-      currentTab = tabId;
-      if (tabId === 'reviews') renderReview('weekly');
-    }
-
-    // ------------------------------------------------
-    // RENDER ALL
-    // ------------------------------------------------
-    function renderAll() {
-      renderLifeTable();
-      renderSubjects();
-      renderExams();
-      renderTasks();
-      renderWorship();
-      renderCare();
-      renderDashboard();
-    }
-
-    // ---------- DASHBOARD ----------
-    function renderDashboard() {
-      const today = new Date().toDateString();
-      const tasks = data.tasks.filter(t => t.date === today && !t.done);
-      const ul = document.getElementById('todayTasks');
-      ul.innerHTML = tasks.map((t,i) => `<li><input type="checkbox" onchange="toggleTask(${i})" ${t.done?'checked':''}> ${t.title} <span style="color:var(--neon-pink);">${t.priority}</span></li>`).join('') || '<li>No tasks for today 🎉</li>';
-      
-      const worshipDone = data.worship.completed[today] || {};
-      const worshipItems = [...data.worship.prayers, ...data.worship.morning, ...data.worship.evening];
-      const doneCount = worshipItems.filter(item => worshipDone[item]).length;
-      document.getElementById('todayWorship').innerHTML = `<li>Completed ${doneCount} out of ${worshipItems.length} worship items today</li>`;
-    }
-
-    // ---------- LIFE TABLE ----------
-    function renderLifeTable() {
-      const head = document.getElementById('lifeHead');
-      const body = document.getElementById('lifeBody');
-      if (data.lifeCols.length === 0) {
-        for (let i = -30; i <= 30; i++) {
-          const d = new Date();
-          d.setDate(d.getDate() + i);
-          data.lifeCols.push(d.toISOString().slice(0,10));
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.querySelectorAll('.sidebar a').forEach(el => el.classList.remove('active'));
+            document.querySelector(`.sidebar a[data-tab="${tabId}"]`).classList.add('active');
+            currentTab = tabId;
+            if (tabId === 'reviews') renderReview('weekly');
         }
-        saveData(data);
-      }
-      let htmlHead = '<th style="min-width:120px;">Subject/Skill</th>';
-      data.lifeCols.forEach(col => {
-        const d = new Date(col);
-        htmlHead += `<th>${d.getDate()}/${d.getMonth()+1}</th>`;
-      });
-      head.innerHTML = htmlHead;
 
-      let htmlBody = '';
-      data.lifeRows.forEach((row, rowIdx) => {
-        htmlBody += `<tr><td class="row-label">${row} <button onclick="deleteRow(${rowIdx})" style="background:none;border:none;color:var(--neon-pink);cursor:pointer;">🗑️</button></td>`;
-        data.lifeCols.forEach((col, colIdx) => {
-          const key = `${rowIdx}_${colIdx}`;
-          const val = data.lifeCells[key] || '';
-          htmlBody += `<td><input type="text" value="${val}" onchange="updateCell(${rowIdx},${colIdx},this.value)"></td>`;
-        });
-        htmlBody += '</tr>';
-      });
-      body.innerHTML = htmlBody;
-    }
-
-    function updateCell(row, col, val) {
-      data.lifeCells[`${row}_${col}`] = val;
-      saveData(data);
-    }
-    function addLifeRow() {
-      const name = document.getElementById('newRowName').value.trim();
-      if (!name) return alert('Enter a subject/skill name');
-      data.lifeRows.push(name);
-      saveData(data);
-      renderLifeTable();
-      document.getElementById('newRowName').value = '';
-    }
-    function deleteRow(idx) {
-      if (!confirm('Delete this row?')) return;
-      data.lifeRows.splice(idx, 1);
-      for (let key in data.lifeCells) {
-        const [r] = key.split('_').map(Number);
-        if (r === idx) delete data.lifeCells[key];
-        else if (r > idx) {
-          const [row, col] = key.split('_').map(Number);
-          data.lifeCells[`${row-1}_${col}`] = data.lifeCells[key];
-          delete data.lifeCells[key];
+        // ================================================
+        // RENDER ALL
+        // ================================================
+        function renderAll() {
+            renderLifeTable();
+            renderSubjects();
+            renderExams();
+            renderTasks();
+            renderWorship();
+            renderCare();
+            renderDashboard();
         }
-      }
-      saveData(data);
-      renderLifeTable();
-    }
-    function addLifeColumn() {
-      const d = new Date();
-      d.setDate(d.getDate() + data.lifeCols.length - 30);
-      data.lifeCols.push(d.toISOString().slice(0,10));
-      saveData(data);
-      renderLifeTable();
-    }
 
-    // ---------- SUBJECTS ----------
-    function renderSubjects() {
-      const ul = document.getElementById('subjectList');
-      ul.innerHTML = data.subjects.map((s, i) => `<li>${s.name} <span style="color:var(--neon-pink);">${s.progress||0}%</span> <button onclick="deleteSubject(${i})" style="background:none;border:none;color:var(--neon-pink);cursor:pointer;">🗑️</button></li>`).join('');
-    }
-    function addSubject() {
-      const name = document.getElementById('subjectName').value.trim();
-      if (!name) return;
-      data.subjects.push({ name, progress: 0, notes: '' });
-      saveData(data);
-      renderSubjects();
-      document.getElementById('subjectName').value = '';
-    }
-    function deleteSubject(idx) {
-      data.subjects.splice(idx, 1);
-      saveData(data);
-      renderSubjects();
-    }
+        // ---------- DASHBOARD ----------
+        function renderDashboard() {
+            const today = new Date().toDateString();
+            const tasks = data.tasks.filter(t => t.date === today && !t.done);
+            const ul = document.getElementById('todayTasks');
+            ul.innerHTML = tasks.map((t, i) =>
+                `<li><input type="checkbox" onchange="toggleTask(${i})" ${t.done?'checked':''}> ${t.title} <span style="color:var(--neon-pink);">${t.priority}</span></li>`
+            ).join('') || '<li>No tasks for today 🎉</li>';
 
-    // ---------- EXAMS ----------
-    function renderExams() {
-      const ul = document.getElementById('examList');
-      ul.innerHTML = data.exams.map((e, i) => `<li>${e.subject} - ${e.date} (Target: ${e.target}) <button onclick="deleteExam(${i})" style="background:none;border:none;color:var(--neon-pink);cursor:pointer;">🗑️</button></li>`).join('');
-    }
-    function addExam() {
-      const subject = document.getElementById('examSubject').value.trim();
-      const date = document.getElementById('examDate').value;
-      const target = document.getElementById('examTarget').value;
-      if (!subject || !date) return alert('Enter subject and date');
-      data.exams.push({ subject, date, target: target || '--' });
-      saveData(data);
-      renderExams();
-      document.getElementById('examSubject').value = '';
-      document.getElementById('examDate').value = '';
-      document.getElementById('examTarget').value = '';
-    }
-    function deleteExam(idx) {
-      data.exams.splice(idx, 1);
-      saveData(data);
-      renderExams();
-    }
-
-    // ---------- TASKS ----------
-    function renderTasks() {
-      const ul = document.getElementById('taskList');
-      ul.innerHTML = data.tasks.map((t, i) => `<li><input type="checkbox" onchange="toggleTask(${i})" ${t.done?'checked':''}> ${t.title} <span style="color:var(--neon-pink);">${t.priority}</span> <span style="color:#888;">${t.date}</span> <button onclick="deleteTask(${i})" style="background:none;border:none;color:var(--neon-pink);cursor:pointer;">🗑️</button></li>`).join('');
-    }
-    function addTask() {
-      const title = document.getElementById('taskInput').value.trim();
-      const date = document.getElementById('taskDate').value || new Date().toISOString().slice(0,10);
-      const priority = document.getElementById('taskPriority').value;
-      if (!title) return;
-      data.tasks.push({ title, date, priority, done: false });
-      saveData(data);
-      renderTasks();
-      document.getElementById('taskInput').value = '';
-    }
-    function toggleTask(idx) {
-      data.tasks[idx].done = !data.tasks[idx].done;
-      saveData(data);
-      renderTasks();
-      renderDashboard();
-    }
-    function deleteTask(idx) {
-      data.tasks.splice(idx, 1);
-      saveData(data);
-      renderTasks();
-      renderDashboard();
-    }
-
-    // ---------- WORSHIP ----------
-    function renderWorship() {
-      const today = new Date().toDateString();
-      const done = data.worship.completed[today] || {};
-      
-      const pList = document.getElementById('prayerList');
-      pList.innerHTML = data.worship.prayers.map(p => `<li><input type="checkbox" ${done[p]?'checked':''} onchange="toggleWorship('${p}')"> ${p}</li>`).join('');
-      
-      const mList = document.getElementById('morningAdhkar');
-      mList.innerHTML = data.worship.morning.map(p => `<li><input type="checkbox" ${done[p]?'checked':''} onchange="toggleWorship('${p}')"> ${p}</li>`).join('');
-      
-      const eList = document.getElementById('eveningAdhkar');
-      eList.innerHTML = data.worship.evening.map(p => `<li><input type="checkbox" ${done[p]?'checked':''} onchange="toggleWorship('${p}')"> ${p}</li>`).join('');
-      
-      const total = data.worship.prayers.length + data.worship.morning.length + data.worship.evening.length;
-      const doneCount = Object.values(done).filter(v => v).length;
-      document.getElementById('worshipStats').textContent = `Today: ${doneCount} / ${total} worship completed`;
-    }
-    function toggleWorship(item) {
-      const today = new Date().toDateString();
-      if (!data.worship.completed[today]) data.worship.completed[today] = {};
-      data.worship.completed[today][item] = !data.worship.completed[today][item];
-      saveData(data);
-      renderWorship();
-      renderDashboard();
-    }
-    function saveWorship() {
-      const pages = parseInt(document.getElementById('quranPages').value) || 0;
-      data.worship.quranPages = pages;
-      saveData(data);
-      alert('Quran reading progress saved!');
-    }
-
-    // ---------- CARE ----------
-    function renderCare() {
-      const items = data.care[careTab] || [];
-      const container = document.getElementById('careContent');
-      container.innerHTML = items.map((item, i) => `<li><input type="checkbox" onchange="toggleCareItem('${careTab}',${i})"> ${item}</li>`).join('');
-    }
-    function switchCareTab(tab) {
-      careTab = tab;
-      renderCare();
-    }
-    function toggleCareItem(tab, idx) {
-      if (!data.careChecked) data.careChecked = {};
-      const key = `${tab}_${idx}`;
-      data.careChecked[key] = !data.careChecked[key];
-      saveData(data);
-      renderCare();
-    }
-    function saveCare() {
-      alert('Care routine saved automatically!');
-    }
-
-    // ---------- TIMERS ----------
-    function setTimerPreset() {
-      const val = parseInt(document.getElementById('timerPreset').value);
-      fullSeconds = val * 60;
-      document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
-      document.getElementById('quickTimer').textContent = formatTime(fullSeconds);
-    }
-    function formatTime(sec) {
-      const m = Math.floor(sec/60);
-      const s = sec % 60;
-      return `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-    }
-    function startQuickTimer() {
-      if (quickPaused) { quickPaused = false; return; }
-      if (quickTimerInterval) return;
-      quickTimerInterval = setInterval(() => {
-        if (quickSeconds <= 0) { clearInterval(quickTimerInterval); quickTimerInterval = null; return; }
-        quickSeconds--;
-        document.getElementById('quickTimer').textContent = formatTime(quickSeconds);
-      }, 1000);
-    }
-    function pauseQuickTimer() {
-      quickPaused = true;
-      if (quickTimerInterval) { clearInterval(quickTimerInterval); quickTimerInterval = null; }
-    }
-    function resetQuickTimer() {
-      clearInterval(quickTimerInterval); quickTimerInterval = null;
-      quickSeconds = parseInt(document.getElementById('timerPreset').value) * 60 || 1500;
-      document.getElementById('quickTimer').textContent = formatTime(quickSeconds);
-      quickPaused = false;
-    }
-    function startFullTimer() {
-      if (fullPaused) { fullPaused = false; return; }
-      if (fullTimerInterval) return;
-      fullTimerInterval = setInterval(() => {
-        if (fullSeconds <= 0) {
-          clearInterval(fullTimerInterval); fullTimerInterval = null;
-          data.timerSessions = (data.timerSessions || 0) + 1;
-          document.getElementById('sessionCount').textContent = data.timerSessions;
-          saveData(data);
-          return;
+            const worshipDone = data.worship.completed[today] || {};
+            const worshipItems = [...data.worship.prayers, ...data.worship.morning, ...data.worship.evening];
+            const doneCount = worshipItems.filter(item => worshipDone[item]).length;
+            document.getElementById('todayWorship').innerHTML =
+                `<li>Completed ${doneCount} out of ${worshipItems.length} worship items today</li>`;
         }
-        fullSeconds--;
-        document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
-      }, 1000);
-    }
-    function pauseFullTimer() {
-      fullPaused = true;
-      if (fullTimerInterval) { clearInterval(fullTimerInterval); fullTimerInterval = null; }
-    }
-    function resetFullTimer() {
-      clearInterval(fullTimerInterval); fullTimerInterval = null;
-      fullSeconds = parseInt(document.getElementById('timerPreset').value) * 60 || 1500;
-      document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
-      fullPaused = false;
-    }
 
-    // ---------- REVIEWS (Chart.js) ----------
-    let reviewChart = null;
-    function renderReview(period) {
-      const ctx = document.getElementById('reviewChart').getContext('2d');
-      if (reviewChart) reviewChart.destroy();
-      
-      const labels = period === 'weekly' ? ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'] :
-                      period === 'monthly' ? ['W1','W2','W3','W4'] :
-                      ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      const dataset = labels.map(() => Math.floor(Math.random() * 10) + 1);
-      
-      reviewChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels,
-          datasets: [{
-            label: 'Achievement Rate',
-            data: dataset,
-            backgroundColor: ['#FF2A6D', '#9D4EDD', '#FF2A6D', '#9D4EDD', '#FF2A6D', '#9D4EDD', '#FF2A6D'],
-            borderColor: '#FF2A6D',
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { labels: { color: '#FFFFFF' } }
-          },
-          scales: {
-            x: { ticks: { color: '#FFFFFF' } },
-            y: { ticks: { color: '#FFFFFF' }, beginAtZero: true }
-          }
+        // ---------- LIFE TABLE ----------
+        function renderLifeTable() {
+            const head = document.getElementById('lifeHead');
+            const body = document.getElementById('lifeBody');
+
+            if (data.lifeCols.length === 0) {
+                for (let i = -30; i <= 30; i++) {
+                    const d = new Date();
+                    d.setDate(d.getDate() + i);
+                    data.lifeCols.push(d.toISOString().slice(0, 10));
+                }
+                saveData(data);
+            }
+
+            let htmlHead = '<th style="min-width:120px; background:#0A0A0A; color:#FF2A6D; padding:12px 8px; border:1px solid #222; position:sticky; top:0; z-index:5; font-weight:700;">Subject/Skill</th>';
+            data.lifeCols.forEach(col => {
+                const d = new Date(col);
+                htmlHead +=
+                    `<th style="background:#0A0A0A; color:#FF2A6D; padding:12px 8px; border:1px solid #222; position:sticky; top:0; z-index:5; font-weight:700;">${d.getDate()}/${d.getMonth()+1}</th>`;
+            });
+            head.innerHTML = htmlHead;
+
+            let htmlBody = '';
+            data.lifeRows.forEach((row, rowIdx) => {
+                htmlBody +=
+                    `<tr><td class="row-label" style="background:#0A0A0A; font-weight:600; color:#FF2A6D; min-width:120px; text-align:right; padding-right:15px; position:sticky; right:0; border:1px solid #1F1F1F;">${row} <button onclick="deleteRow(${rowIdx})" style="background:none;border:none;color:var(--neon-pink);cursor:pointer;">🗑️</button></td>`;
+                data.lifeCols.forEach((col, colIdx) => {
+                    const key = `${rowIdx}_${colIdx}`;
+                    const val = data.lifeCells[key] || '';
+                    htmlBody +=
+                        `<td style="padding:10px 8px; border:1px solid #1F1F1F; text-align:center; min-width:60px; color:#CCC;"><input type="text" value="${val}" onchange="updateCell(${rowIdx},${colIdx},this.value)" style="width:50px; padding:4px; margin:0; background:#111; border:1px solid #333; text-align:center; border-radius:8px; color:#FFF;"></td>`;
+                });
+                htmlBody += '</tr>';
+            });
+            body.innerHTML = htmlBody;
         }
-      });
-      document.getElementById('reviewStats').textContent = `📊 ${period} view - Average: ${(dataset.reduce((a,b)=>a+b,0)/dataset.length).toFixed(1)}`;
-    }
-    function showReview(period) { renderReview(period); }
 
-    // ---------- SETTINGS ----------
-    function exportData() {
-      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `kimi_backup_${new Date().toISOString().slice(0,10)}.json`;
-      a.click();
-    }
-    function importData() {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'application/json';
-      input.onchange = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-          try {
-            const imported = JSON.parse(ev.target.result);
-            data = imported;
+        function updateCell(row, col, val) {
+            data.lifeCells[`${row}_${col}`] = val;
             saveData(data);
-            location.reload();
-          } catch { alert('Error reading file'); }
-        };
-        reader.readAsText(file);
-      };
-      input.click();
-    }
+        }
 
-    // Make functions global
-    window.addLifeRow = addLifeRow; window.addLifeColumn = addLifeColumn;
-    window.updateCell = updateCell; window.deleteRow = deleteRow;
-    window.addSubject = addSubject; window.deleteSubject = deleteSubject;
-    window.addExam = addExam; window.deleteExam = deleteExam;
-    window.addTask = addTask; window.toggleTask = toggleTask; window.deleteTask = deleteTask;
-    window.toggleWorship = toggleWorship; window.saveWorship = saveWorship;
-    window.switchCareTab = switchCareTab; window.toggleCareItem = toggleCareItem; window.saveCare = saveCare;
-    window.startQuickTimer = startQuickTimer; window.pauseQuickTimer = pauseQuickTimer; window.resetQuickTimer = resetQuickTimer;
-    window.startFullTimer = startFullTimer; window.pauseFullTimer = pauseFullTimer; window.resetFullTimer = resetFullTimer;
-    window.setTimerPreset = setTimerPreset;
-    window.showReview = showReview;
-    window.exportData = exportData; window.importData = importData;
-    window.switchTab = switchTab;
-  </script>
+        function addLifeRow() {
+            const name = document.getElementById('newRowName').value.trim();
+            if (!name) return alert('Enter a subject/skill name');
+            data.lifeRows.push(name);
+            saveData(data);
+            renderLifeTable();
+            document.getElementById('newRowName').value = '';
+        }
+
+        function deleteRow(idx) {
+            if (!confirm('Delete this row?')) return;
+            data.lifeRows.splice(idx, 1);
+            for (let key in data.lifeCells) {
+                const [r] = key.split('_').map(Number);
+                if (r === idx) delete data.lifeCells[key];
+                else if (r > idx) {
+                    const [row, col] = key.split('_').map(Number);
+                    data.lifeCells[`${row-1}_${col}`] = data.lifeCells[key];
+                    delete data.lifeCells[key];
+                }
+            }
+            saveData(data);
+            renderLifeTable();
+        }
+
+        function addLifeColumn() {
+            const d = new Date();
+            d.setDate(d.getDate() + data.lifeCols.length - 30);
+            data.lifeCols.push(d.toISOString().slice(0, 10));
+            saveData(data);
+            renderLifeTable();
+        }
+
+        // ---------- SUBJECTS ----------
+        function renderSubjects() {
+            const ul = document.getElementById('subjectList');
+            ul.innerHTML = data.subjects.map((s, i) =>
+                `<li>${s.name} <span style="color:var(--neon-pink);">${s.progress||0}%</span> <button onclick="deleteSubject(${i})" style="background:none;border:none;color:var(--neon-pink);cursor:pointer;">🗑️</button></li>`
+            ).join('');
+        }
+
+        function addSubject() {
+            const name = document.getElementById('subjectName').value.trim();
+            if (!name) return;
+            data.subjects.push({ name, progress: 0, notes: '' });
+            saveData(data);
+            renderSubjects();
+            document.getElementById('subjectName').value = '';
+        }
+
+        function deleteSubject(idx) {
+            data.subjects.splice(idx, 1);
+            saveData(data);
+            renderSubjects();
+        }
+
+        // ---------- EXAMS ----------
+        function renderExams() {
+            const ul = document.getElementById('examList');
+            ul.innerHTML = data.exams.map((e, i) =>
+                `<li>${e.subject} - ${e.date} (Target: ${e.target}) <button onclick="deleteExam(${i})" style="background:none;border:none;color:var(--neon-pink);cursor:pointer;">🗑️</button></li>`
+            ).join('');
+        }
+
+        function addExam() {
+            const subject = document.getElementById('examSubject').value.trim();
+            const date = document.getElementById('examDate').value;
+            const target = document.getElementById('examTarget').value;
+            if (!subject || !date) return alert('Enter subject and date');
+            data.exams.push({ subject, date, target: target || '--' });
+            saveData(data);
+            renderExams();
+            document.getElementById('examSubject').value = '';
+            document.getElementById('examDate').value = '';
+            document.getElementById('examTarget').value = '';
+        }
+
+        function deleteExam(idx) {
+            data.exams.splice(idx, 1);
+            saveData(data);
+            renderExams();
+        }
+
+        // ---------- TASKS ----------
+        function renderTasks() {
+            const ul = document.getElementById('taskList');
+            ul.innerHTML = data.tasks.map((t, i) =>
+                `<li><input type="checkbox" onchange="toggleTask(${i})" ${t.done?'checked':''}> ${t.title} <span style="color:var(--neon-pink);">${t.priority}</span> <span style="color:#888;">${t.date}</span> <button onclick="deleteTask(${i})" style="background:none;border:none;color:var(--neon-pink);cursor:pointer;">🗑️</button></li>`
+            ).join('');
+        }
+
+        function addTask() {
+            const title = document.getElementById('taskInput').value.trim();
+            const date = document.getElementById('taskDate').value || new Date().toISOString().slice(0, 10);
+            const priority = document.getElementById('taskPriority').value;
+            if (!title) return;
+            data.tasks.push({ title, date, priority, done: false });
+            saveData(data);
+            renderTasks();
+            document.getElementById('taskInput').value = '';
+        }
+
+        function toggleTask(idx) {
+            data.tasks[idx].done = !data.tasks[idx].done;
+            saveData(data);
+            renderTasks();
+            renderDashboard();
+        }
+
+        function deleteTask(idx) {
+            data.tasks.splice(idx, 1);
+            saveData(data);
+            renderTasks();
+            renderDashboard();
+        }
+
+        // ---------- WORSHIP ----------
+        function renderWorship() {
+            const today = new Date().toDateString();
+            const done = data.worship.completed[today] || {};
+
+            const pList = document.getElementById('prayerList');
+            pList.innerHTML = data.worship.prayers.map(p =>
+                `<li><input type="checkbox" ${done[p]?'checked':''} onchange="toggleWorship('${p}')"> ${p}</li>`
+            ).join('');
+
+            const mList = document.getElementById('morningAdhkar');
+            mList.innerHTML = data.worship.morning.map(p =>
+                `<li><input type="checkbox" ${done[p]?'checked':''} onchange="toggleWorship('${p}')"> ${p}</li>`
+            ).join('');
+
+            const eList = document.getElementById('eveningAdhkar');
+            eList.innerHTML = data.worship.evening.map(p =>
+                `<li><input type="checkbox" ${done[p]?'checked':''} onchange="toggleWorship('${p}')"> ${p}</li>`
+            ).join('');
+
+            const total = data.worship.prayers.length + data.worship.morning.length + data.worship.evening.length;
+            const doneCount = Object.values(done).filter(v => v).length;
+            document.getElementById('worshipStats').textContent = `Today: ${doneCount} / ${total} worship completed`;
+        }
+
+        function toggleWorship(item) {
+            const today = new Date().toDateString();
+            if (!data.worship.completed[today]) data.worship.completed[today] = {};
+            data.worship.completed[today][item] = !data.worship.completed[today][item];
+            saveData(data);
+            renderWorship();
+            renderDashboard();
+        }
+
+        function saveWorship() {
+            const pages = parseInt(document.getElementById('quranPages').value) || 0;
+            data.worship.quranPages = pages;
+            saveData(data);
+            alert('Quran reading progress saved!');
+        }
+
+        // ---------- CARE ----------
+        function renderCare() {
+            const items = data.care[careTab] || [];
+            const container = document.getElementById('careContent');
+            container.innerHTML = items.map((item, i) =>
+                `<li><input type="checkbox" onchange="toggleCareItem('${careTab}',${i})" ${data.careChecked[careTab+'_'+i]?'checked':''}> ${item}</li>`
+            ).join('');
+        }
+
+        function switchCareTab(tab) {
+            careTab = tab;
+            renderCare();
+        }
+
+        function toggleCareItem(tab, idx) {
+            if (!data.careChecked) data.careChecked = {};
+            const key = `${tab}_${idx}`;
+            data.careChecked[key] = !data.careChecked[key];
+            saveData(data);
+            renderCare();
+        }
+
+        function saveCare() {
+            alert('Care routine saved automatically!');
+        }
+
+        // ---------- TIMERS ----------
+        function setTimerPreset() {
+            const val = parseInt(document.getElementById('timerPreset').value);
+            fullSeconds = val * 60;
+            document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
+            document.getElementById('quickTimer').textContent = formatTime(fullSeconds);
+        }
+
+        function formatTime(sec) {
+            const m = Math.floor(sec / 60);
+            const s = sec % 60;
+            return `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+        }
+
+        function startQuickTimer() {
+            if (quickPaused) { quickPaused = false; return; }
+            if (quickTimerInterval) return;
+            quickTimerInterval = setInterval(() => {
+                if (quickSeconds <= 0) { clearInterval(quickTimerInterval);
+                    quickTimerInterval = null; return; }
+                quickSeconds--;
+                document.getElementById('quickTimer').textContent = formatTime(quickSeconds);
+            }, 1000);
+        }
+
+        function pauseQuickTimer() {
+            quickPaused = true;
+            if (quickTimerInterval) { clearInterval(quickTimerInterval);
+                quickTimerInterval = null; }
+        }
+
+        function resetQuickTimer() {
+            clearInterval(quickTimerInterval);
+            quickTimerInterval = null;
+            quickSeconds = parseInt(document.getElementById('timerPreset').value) * 60 || 1500;
+            document.getElementById('quickTimer').textContent = formatTime(quickSeconds);
+            quickPaused = false;
+        }
+
+        function startFullTimer() {
+            if (fullPaused) { fullPaused = false; return; }
+            if (fullTimerInterval) return;
+            fullTimerInterval = setInterval(() => {
+                if (fullSeconds <= 0) {
+                    clearInterval(fullTimerInterval);
+                    fullTimerInterval = null;
+                    data.timerSessions = (data.timerSessions || 0) + 1;
+                    document.getElementById('sessionCount').textContent = data.timerSessions;
+                    saveData(data);
+                    return;
+                }
+                fullSeconds--;
+                document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
+            }, 1000);
+        }
+
+        function pauseFullTimer() {
+            fullPaused = true;
+            if (fullTimerInterval) { clearInterval(fullTimerInterval);
+                fullTimerInterval = null; }
+        }
+
+        function resetFullTimer() {
+            clearInterval(fullTimerInterval);
+            fullTimerInterval = null;
+            fullSeconds = parseInt(document.getElementById('timerPreset').value) * 60 || 1500;
+            document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
+            fullPaused = false;
+        }
+
+        // ---------- REVIEWS ----------
+        let reviewChart = null;
+
+        function renderReview(period) {
+            const ctx = document.getElementById('reviewChart').getContext('2d');
+            if (reviewChart) reviewChart.destroy();
+
+            const labels = period === 'weekly' ? ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] :
+                period === 'monthly' ? ['W1', 'W2', 'W3', 'W4'] :
+                ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const dataset = labels.map(() => Math.floor(Math.random() * 10) + 1);
+
+            reviewChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels,
+                    datasets: [{
+                        label: 'Achievement Rate',
+                        data: dataset,
+                        backgroundColor: ['#FF2A6D', '#9D4EDD', '#FF2A6D', '#9D4EDD', '#FF2A6D', '#9D4EDD',
+                            '#FF2A6D'
+                        ],
+                        borderColor: '#FF2A6D',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#FFFFFF' } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#FFFFFF' } },
+                        y: { ticks: { color: '#FFFFFF' }, beginAtZero: true }
+                    }
+                }
+            });
+            document.getElementById('reviewStats').textContent =
+                `📊 ${period} view - Average: ${(dataset.reduce((a,b)=>a+b,0)/dataset.length).toFixed(1)}`;
+        }
+
+        function showReview(period) { renderReview(period); }
+
+        // ---------- SETTINGS ----------
+        function exportData() {
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `kimi_backup_${new Date().toISOString().slice(0,10)}.json`;
+            a.click();
+        }
+
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'application/json';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    try {
+                        const imported = JSON.parse(ev.target.result);
+                        data = imported;
+                        saveData(data);
+                        location.reload();
+                    } catch { alert('Error reading file'); }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        // Make functions global
+        window.addLifeRow = addLifeRow;
+        window.addLifeColumn = addLifeColumn;
+        window.updateCell = updateCell;
+        window.deleteRow = deleteRow;
+        window.addSubject = addSubject;
+        window.deleteSubject = deleteSubject;
+        window.addExam = addExam;
+        window.deleteExam = deleteExam;
+        window.addTask = addTask;
+        window.toggleTask = toggleTask;
+        window.deleteTask = deleteTask;
+        window.toggleWorship = toggleWorship;
+        window.saveWorship = saveWorship;
+        window.switchCareTab = switchCareTab;
+        window.toggleCareItem = toggleCareItem;
+        window.saveCare = saveCare;
+        window.startQuickTimer = startQuickTimer;
+        window.pauseQuickTimer = pauseQuickTimer;
+        window.resetQuickTimer = resetQuickTimer;
+        window.startFullTimer = startFullTimer;
+        window.pauseFullTimer = pauseFullTimer;
+        window.resetFullTimer = resetFullTimer;
+        window.setTimerPreset = setTimerPreset;
+        window.showReview = showReview;
+        window.exportData = exportData;
+        window.importData = importData;
+        window.switchTab = switchTab;
+    </script>
+
 </body>
 </html>
