@@ -4,14 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kimi Life & Self Care</title>
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    /* ===== RESET & BASE ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Poppins', sans-serif;
@@ -23,20 +19,16 @@
     :root {
       --bg-primary: #FDF6F0;
       --bg-card: #FFFFFF;
-      --bg-card-hover: #FFF9F7;
       --pink-soft: #F4A7B9;
       --pink-medium: #E8849A;
-      --pink-dark: #D46982;
       --burgundy: #8B1A2B;
       --burgundy-light: #B2223C;
-      --burgundy-glow: #D43A5A;
       --gold-soft: #D4A373;
       --text-primary: #3D2C33;
       --text-secondary: #7A5D66;
       --border-color: #F0E0DF;
       --shadow-soft: 0 8px 30px rgba(139, 26, 43, 0.10);
       --shadow-hover: 0 12px 40px rgba(139, 26, 43, 0.18);
-      --shadow-glow: 0 0 40px rgba(139, 26, 43, 0.08);
     }
 
     /* ===== TOP NAVBAR ===== */
@@ -62,10 +54,7 @@
       align-items: center;
       gap: 10px;
     }
-    .nav-brand i {
-      color: var(--pink-medium);
-      font-size: 1.8rem;
-    }
+    .nav-brand i { color: var(--pink-medium); font-size: 1.8rem; }
     .nav-links {
       display: flex;
       gap: 6px;
@@ -84,30 +73,18 @@
       align-items: center;
       gap: 8px;
     }
-    .nav-links a i {
-      font-size: 1.1rem;
-    }
-    .nav-links a:hover {
-      color: var(--burgundy);
-      background: #FFF5F2;
-    }
+    .nav-links a i { font-size: 1.1rem; }
+    .nav-links a:hover { color: var(--burgundy); background: #FFF5F2; }
     .nav-links a.active {
       color: #FFFFFF;
       background: var(--burgundy);
       box-shadow: 0 4px 15px rgba(139, 26, 43, 0.25);
     }
-    .nav-links a.active i {
-      color: #FFFFFF;
-    }
+    .nav-links a.active i { color: #FFFFFF; }
 
-    /* ===== MAIN ===== */
-    .main-content {
-      padding: 30px 35px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+    .main-content { padding: 30px 35px; max-width: 1400px; margin: 0 auto; }
 
-    /* ===== DASHBOARD STATS ===== */
+    /* ===== STATS ===== */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -125,10 +102,7 @@
       align-items: center;
       gap: 18px;
     }
-    .stat-card:hover {
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-3px);
-    }
+    .stat-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
     .stat-icon {
       width: 55px;
       height: 55px;
@@ -156,10 +130,7 @@
       box-shadow: var(--shadow-soft);
       transition: 0.3s;
     }
-    .card:hover {
-      box-shadow: var(--shadow-hover);
-      border-color: var(--pink-soft);
-    }
+    .card:hover { box-shadow: var(--shadow-hover); border-color: var(--pink-soft); }
     .card-title {
       color: var(--burgundy);
       font-weight: 700;
@@ -169,9 +140,7 @@
       align-items: center;
       gap: 12px;
     }
-    .card-title i {
-      color: var(--pink-medium);
-    }
+    .card-title i { color: var(--pink-medium); }
 
     /* ===== BUTTONS ===== */
     .btn {
@@ -187,33 +156,28 @@
       font-size: 0.85rem;
       letter-spacing: 0.5px;
     }
-    .btn:hover {
-      background: var(--burgundy-light);
-      transform: scale(1.03);
-      box-shadow: 0 6px 20px rgba(139, 26, 43, 0.25);
-    }
+    .btn:hover { background: var(--burgundy-light); transform: scale(1.03); box-shadow: 0 6px 20px rgba(139, 26, 43, 0.25); }
     .btn-outline {
       background: transparent;
       border: 2px solid var(--pink-medium);
       color: var(--burgundy);
     }
-    .btn-outline:hover {
-      background: var(--pink-soft);
-      border-color: var(--pink-medium);
-      color: #FFFFFF;
-      box-shadow: none;
+    .btn-outline:hover { background: var(--pink-soft); border-color: var(--pink-medium); color: #FFFFFF; }
+    .btn-pink { background: var(--pink-medium); color: #FFFFFF; }
+    .btn-pink:hover { background: var(--pink-soft); }
+    .btn-sm { padding: 5px 14px; font-size: 0.75rem; }
+    .btn-edit {
+      background: transparent;
+      border: 2px solid var(--gold-soft);
+      color: var(--gold-soft);
+      padding: 2px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-weight: 600;
+      transition: 0.3s;
     }
-    .btn-pink {
-      background: var(--pink-medium);
-      color: #FFFFFF;
-    }
-    .btn-pink:hover {
-      background: var(--pink-soft);
-    }
-    .btn-sm {
-      padding: 5px 14px;
-      font-size: 0.75rem;
-    }
+    .btn-edit:hover { background: var(--gold-soft); color: #FFFFFF; }
 
     /* ===== INPUTS ===== */
     input, select, textarea {
@@ -232,8 +196,12 @@
       border-color: var(--burgundy-light);
       box-shadow: 0 0 0 4px rgba(178, 34, 60, 0.08);
     }
+    input[type="text"].editable {
+      border: 2px dashed var(--pink-soft);
+      background: #FFF9F7;
+    }
+    input[type="text"].editable:focus { border-color: var(--burgundy); }
 
-    /* ===== GRID ===== */
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
     .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
     .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
@@ -267,7 +235,7 @@
       text-align: center;
       color: var(--text-primary);
     }
-    .data-table td input {
+    .data-table td input[type="text"] {
       width: 55px;
       padding: 6px;
       margin: 0;
@@ -286,21 +254,6 @@
       padding-right: 15px;
       position: sticky;
       right: 0;
-    }
-    .data-table td .done-badge {
-      display: inline-block;
-      padding: 2px 12px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    .data-table td .done-badge.done {
-      background: #D4EDDA;
-      color: #155724;
-    }
-    .data-table td .done-badge.not-done {
-      background: #F8D7DA;
-      color: #721C24;
     }
 
     /* ===== SPACE TIMER ===== */
@@ -331,14 +284,12 @@
     .timer-display {
       font-size: 4rem;
       font-weight: 700;
-      font-family: 'Poppins', sans-serif;
       color: var(--burgundy);
       text-shadow: 0 4px 20px rgba(139, 26, 43, 0.10);
       position: relative;
       z-index: 2;
     }
 
-    /* ===== CHART ===== */
     .chart-container {
       background: #FFFBF9;
       border-radius: 20px;
@@ -347,11 +298,7 @@
       border: 1px solid var(--border-color);
     }
 
-    /* ===== CHECKLIST ===== */
-    .checklist {
-      list-style: none;
-      padding: 0;
-    }
+    .checklist { list-style: none; padding: 0; }
     .checklist li {
       padding: 10px 0;
       border-bottom: 1px solid #F5EAE8;
@@ -359,6 +306,7 @@
       align-items: center;
       gap: 12px;
       color: var(--text-primary);
+      flex-wrap: wrap;
     }
     .checklist input[type="checkbox"] {
       width: 20px;
@@ -367,38 +315,74 @@
       cursor: pointer;
     }
 
-    /* ===== SUBJECT LESSONS ===== */
+    /* ===== WORSHIP EDITABLE ===== */
+    .worship-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      flex-wrap: wrap;
+    }
+    .worship-item input[type="text"] {
+      flex: 1;
+      min-width: 100px;
+      padding: 6px 12px;
+      margin: 0;
+      border: 2px dashed var(--pink-soft);
+      background: #FFF9F7;
+      border-radius: 10px;
+      font-size: 0.9rem;
+    }
+    .worship-item input[type="text"]:focus {
+      border-color: var(--burgundy);
+      outline: none;
+    }
+    .worship-item .worship-check {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--burgundy);
+      cursor: pointer;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .text-secondary { color: var(--text-secondary); }
+
+    /* ===== LESSONS ===== */
     .lesson-item {
       display: flex;
       align-items: center;
       gap: 12px;
       padding: 8px 0;
       border-bottom: 1px solid #F5EAE8;
+      flex-wrap: wrap;
     }
     .lesson-item .lesson-name {
       flex: 1;
+      min-width: 120px;
     }
-    .lesson-item .lesson-status {
+    .lesson-item .lesson-name input[type="text"] {
+      padding: 4px 12px;
+      margin: 0;
+      border: 2px dashed var(--pink-soft);
+      background: #FFF9F7;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      width: 100%;
+    }
+    .lesson-item .lesson-name input[type="text"]:focus {
+      border-color: var(--burgundy);
+      outline: none;
+    }
+    .lesson-status {
       font-size: 0.8rem;
       padding: 2px 12px;
       border-radius: 20px;
       font-weight: 600;
     }
-    .lesson-item .lesson-status.done {
-      background: #D4EDDA;
-      color: #155724;
-    }
-    .lesson-item .lesson-status.not-done {
-      background: #F8D7DA;
-      color: #721C24;
-    }
+    .lesson-status.done { background: #D4EDDA; color: #155724; }
+    .lesson-status.not-done { background: #F8D7DA; color: #721C24; }
 
-    /* ===== TABS ===== */
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    .text-secondary { color: var(--text-secondary); }
-
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .grid-4 { grid-template-columns: repeat(2, 1fr); }
@@ -407,7 +391,6 @@
       .top-nav { padding: 12px 20px; flex-direction: column; align-items: stretch; }
       .nav-links { justify-content: center; gap: 4px; }
       .nav-links a { font-size: 0.8rem; padding: 6px 12px; }
-      .nav-links a i { font-size: 0.9rem; }
       .main-content { padding: 20px; }
       .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
       .stat-card { padding: 15px 18px; }
@@ -427,10 +410,7 @@
 
   <!-- ===== TOP NAVBAR ===== -->
   <nav class="top-nav">
-    <div class="nav-brand">
-      <i class="fas fa-spa"></i>
-      <span>Kimi Life</span>
-    </div>
+    <div class="nav-brand"><i class="fas fa-spa"></i><span>Kimi Life</span></div>
     <div class="nav-links" id="navLinks">
       <a href="#" data-tab="dashboard" class="active"><i class="fas fa-home"></i> Dashboard</a>
       <a href="#" data-tab="worship"><i class="fas fa-mosque"></i> Worship</a>
@@ -450,45 +430,32 @@
 
     <!-- ==================== DASHBOARD ==================== -->
     <div id="dashboard" class="tab-content active">
-      <!-- Stats -->
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-icon pink"><i class="fas fa-check-circle"></i></div>
-          <div class="stat-info">
-            <h3 id="statTasks">0</h3>
-            <p>Tasks Done Today</p>
-          </div>
+          <div class="stat-info"><h3 id="statTasks">0</h3><p>Tasks Done Today</p></div>
         </div>
         <div class="stat-card">
           <div class="stat-icon burgundy"><i class="fas fa-star"></i></div>
-          <div class="stat-info">
-            <h3 id="statWorship">0</h3>
-            <p>Worship Done</p>
-          </div>
+          <div class="stat-info"><h3 id="statWorship">0</h3><p>Worship Done</p></div>
         </div>
         <div class="stat-card">
           <div class="stat-icon gold"><i class="fas fa-clock"></i></div>
-          <div class="stat-info">
-            <h3 id="statSessions">0</h3>
-            <p>Timer Sessions</p>
-          </div>
+          <div class="stat-info"><h3 id="statSessions">0</h3><p>Timer Sessions</p></div>
         </div>
         <div class="stat-card">
           <div class="stat-icon purple"><i class="fas fa-graduation-cap"></i></div>
-          <div class="stat-info">
-            <h3 id="statSubjects">0</h3>
-            <p>Subjects</p>
-          </div>
+          <div class="stat-info"><h3 id="statSubjects">0</h3><p>Subjects</p></div>
         </div>
       </div>
 
-      <!-- Welcome & Date -->
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 25px;">
-        <h1 style="font-size: 2rem; font-weight: 700;">🌸 Welcome back, Kimi!</h1>
-        <p style="font-size: 1.1rem; color: var(--text-secondary); font-weight: 500;"><i class="fas fa-calendar-alt" style="color: var(--pink-medium);"></i> <span id="todayDate"></span></p>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:25px;">
+        <h1 style="font-size:2rem; font-weight:700;">🌸 Welcome back, Kimi!</h1>
+        <p style="font-size:1.1rem; color:var(--text-secondary); font-weight:500;">
+          <i class="fas fa-calendar-alt" style="color:var(--pink-medium);"></i> <span id="todayDate"></span>
+        </p>
       </div>
 
-      <!-- Quick Overview -->
       <div class="grid-2">
         <div class="card">
           <div class="card-title"><i class="fas fa-check-circle"></i> Today's Tasks</div>
@@ -500,40 +467,69 @@
         </div>
       </div>
 
-      <!-- Timer & Quick Actions -->
-      <div class="grid-2" style="margin-top: 5px;">
+      <div class="grid-2" style="margin-top:5px;">
         <div class="card space-timer">
-          <div class="card-title" style="justify-content: center; margin-bottom: 10px;"><i class="fas fa-rocket" style="color: var(--burgundy-light);"></i> Quick Timer</div>
+          <div class="card-title" style="justify-content:center; margin-bottom:10px;"><i class="fas fa-rocket" style="color:var(--burgundy-light);"></i> Quick Timer</div>
           <div class="timer-display" id="quickTimer">25:00</div>
-          <div style="margin-top: 15px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <div style="margin-top:15px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
             <button class="btn" onclick="startQuickTimer()"><i class="fas fa-play"></i> Start</button>
             <button class="btn btn-outline" onclick="pauseQuickTimer()"><i class="fas fa-pause"></i> Pause</button>
             <button class="btn btn-outline" onclick="resetQuickTimer()"><i class="fas fa-redo"></i> Reset</button>
           </div>
         </div>
-        <div class="card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-          <div style="font-size: 3rem; color: var(--pink-medium); margin-bottom: 10px;"><i class="fas fa-heart"></i></div>
-          <h3 style="color: var(--burgundy); font-size: 1.3rem;">Self-Care Reminder</h3>
-          <p class="text-secondary" style="margin: 8px 0 15px;">Don't forget to take care of yourself today 💕</p>
+        <div class="card" style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+          <div style="font-size:3rem; color:var(--pink-medium); margin-bottom:10px;"><i class="fas fa-heart"></i></div>
+          <h3 style="color:var(--burgundy); font-size:1.3rem;">Self-Care Reminder</h3>
+          <p class="text-secondary" style="margin:8px 0 15px;">Don't forget to take care of yourself today 💕</p>
           <button class="btn btn-pink" onclick="switchTab('selfcare')"><i class="fas fa-spa"></i> Open Self-Care</button>
         </div>
       </div>
     </div>
 
-    <!-- ==================== WORSHIP ==================== -->
+    <!-- ==================== WORSHIP (EDITABLE WITH DATES) ==================== -->
     <div id="worship" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-mosque"></i> My Worship</div>
+        
+        <!-- Date Selector -->
+        <div style="display:flex; gap:15px; align-items:center; flex-wrap:wrap; margin-bottom:20px;">
+          <label style="font-weight:600; color:var(--text-secondary);">Select Date:</label>
+          <input type="date" id="worshipDate" style="width:auto; margin:0;" value="">
+          <button class="btn btn-sm" onclick="loadWorshipForDate()">Load</button>
+          <button class="btn btn-pink btn-sm" onclick="saveWorshipForDate()">Save</button>
+        </div>
+
         <div class="grid-3">
-          <div><h4 style="color:var(--burgundy);">Prayers</h4><ul id="prayerList" class="checklist"></ul></div>
-          <div><h4 style="color:var(--burgundy);">Morning Dhikr</h4><ul id="morningAdhkar" class="checklist"></ul></div>
-          <div><h4 style="color:var(--burgundy);">Evening Dhikr</h4><ul id="eveningAdhkar" class="checklist"></ul></div>
+          <div>
+            <h4 style="color:var(--burgundy); display:flex; justify-content:space-between; align-items:center;">
+              Prayers
+              <button class="btn-edit" onclick="addWorshipItem('prayers')"><i class="fas fa-plus"></i> Add</button>
+            </h4>
+            <div id="prayerList" class="checklist"></div>
+          </div>
+          <div>
+            <h4 style="color:var(--burgundy); display:flex; justify-content:space-between; align-items:center;">
+              Morning Dhikr
+              <button class="btn-edit" onclick="addWorshipItem('morning')"><i class="fas fa-plus"></i> Add</button>
+            </h4>
+            <div id="morningAdhkar" class="checklist"></div>
+          </div>
+          <div>
+            <h4 style="color:var(--burgundy); display:flex; justify-content:space-between; align-items:center;">
+              Evening Dhikr
+              <button class="btn-edit" onclick="addWorshipItem('evening')"><i class="fas fa-plus"></i> Add</button>
+            </h4>
+            <div id="eveningAdhkar" class="checklist"></div>
+          </div>
         </div>
-        <div style="margin-top: 20px;">
-          <label style="color:var(--text-secondary);">Quran Daily Reading (Pages): <input type="number" id="quranPages" value="2" min="0" style="width:80px; display:inline;"></label>
-          <button class="btn" onclick="saveWorship()">Save Progress</button>
+
+        <div style="margin-top:20px;">
+          <label style="color:var(--text-secondary);">Quran Daily Reading (Pages): 
+            <input type="number" id="quranPages" value="2" min="0" style="width:80px; display:inline;">
+          </label>
+          <button class="btn" onclick="saveQuranPages()">Save</button>
         </div>
-        <div id="worshipStats" style="margin-top: 15px; color: var(--burgundy); font-weight: 600;"></div>
+        <div id="worshipStats" style="margin-top:15px; color:var(--burgundy); font-weight:600;"></div>
       </div>
     </div>
 
@@ -541,7 +537,7 @@
     <div id="lifetracker" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-infinity"></i> Life-Long Tracker</div>
-        <div style="margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+        <div style="margin-bottom:15px; display:flex; gap:10px; flex-wrap:wrap;">
           <input type="text" id="newRowName" placeholder="New subject/skill name" style="flex:1; min-width:200px;">
           <button class="btn" onclick="addLifeRow()">Add Row</button>
           <button class="btn btn-outline" onclick="addLifeColumn()">Add Column</button>
@@ -555,11 +551,11 @@
       </div>
     </div>
 
-    <!-- ==================== SUBJECTS (with Lessons) ==================== -->
+    <!-- ==================== SUBJECTS ==================== -->
     <div id="subjects" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-book-open"></i> My Subjects & Lessons</div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
           <input type="text" id="subjectName" placeholder="Subject name" style="flex:1; min-width:150px;">
           <button class="btn" onclick="addSubject()">Add Subject</button>
         </div>
@@ -571,40 +567,40 @@
     <div id="exams" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-pencil-alt"></i> My Exams</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; align-items: end;">
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:10px; align-items:end;">
           <input type="text" id="examSubject" placeholder="Subject">
           <input type="date" id="examDate">
           <input type="number" id="examTarget" placeholder="Target Score">
           <button class="btn" onclick="addExam()">Add</button>
         </div>
-        <ul id="examList" class="checklist" style="margin-top: 20px;"></ul>
+        <ul id="examList" class="checklist" style="margin-top:20px;"></ul>
       </div>
     </div>
 
-    <!-- ==================== SPACE TIMER (FULL) ==================== -->
+    <!-- ==================== TIMER ==================== -->
     <div id="timer" class="tab-content">
       <div class="card space-timer">
-        <div class="card-title" style="justify-content: center;"><i class="fas fa-rocket" style="color: var(--burgundy-light);"></i> Advanced Space Timer</div>
+        <div class="card-title" style="justify-content:center;"><i class="fas fa-rocket" style="color:var(--burgundy-light);"></i> Advanced Space Timer</div>
         <div class="timer-display" id="fullTimer">25:00</div>
-        <div style="margin-top: 15px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <div style="margin-top:15px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
           <button class="btn" onclick="startFullTimer()"><i class="fas fa-play"></i> Start</button>
           <button class="btn btn-outline" onclick="pauseFullTimer()"><i class="fas fa-pause"></i> Pause</button>
           <button class="btn btn-outline" onclick="resetFullTimer()"><i class="fas fa-redo"></i> Reset</button>
-          <select id="timerPreset" onchange="setTimerPreset()" style="width: auto; background: #FFFFFF; border-color:var(--border-color);">
+          <select id="timerPreset" onchange="setTimerPreset()" style="width:auto; background:#FFFFFF; border-color:var(--border-color);">
             <option value="25">25 min (Study)</option>
             <option value="5">5 min (Break)</option>
             <option value="10">10 min (Worship)</option>
           </select>
         </div>
-        <div style="margin-top: 15px; color: var(--text-secondary);">Today's Sessions: <span id="sessionCount" style="color:var(--burgundy); font-weight:700;">0</span></div>
+        <div style="margin-top:15px; color:var(--text-secondary);">Today's Sessions: <span id="sessionCount" style="color:var(--burgundy); font-weight:700;">0</span></div>
       </div>
     </div>
 
-    <!-- ==================== SELF-CARE (with Infinite Table) ==================== -->
+    <!-- ==================== SELF-CARE (EDITABLE) ==================== -->
     <div id="selfcare" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-spa"></i> Daily Self-Care</div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
           <button class="btn btn-pink" onclick="switchCareTab('skin')">Skin</button>
           <button class="btn btn-pink" onclick="switchCareTab('hair')">Hair</button>
           <button class="btn btn-pink" onclick="switchCareTab('body')">Body</button>
@@ -612,7 +608,7 @@
           <button class="btn btn-pink" onclick="switchCareTab('nails')">Nails</button>
           <button class="btn btn-pink" onclick="switchCareTab('exercise')">Exercise</button>
         </div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
           <input type="text" id="newCareItem" placeholder="Add new care item" style="flex:1; min-width:150px;">
           <button class="btn" onclick="addCareItem()">Add Item</button>
         </div>
@@ -634,7 +630,7 @@
             <tbody id="careBody"></tbody>
           </table>
         </div>
-        <button class="btn" onclick="saveCare()" style="margin-top: 15px;">Save Care</button>
+        <button class="btn" onclick="saveCare()" style="margin-top:15px;">Save Care</button>
       </div>
     </div>
 
@@ -642,7 +638,7 @@
     <div id="tasks" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-tasks"></i> My Tasks</div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
           <input type="text" id="taskInput" placeholder="New task" style="flex:1; min-width:150px;">
           <input type="date" id="taskDate" style="width:auto;">
           <select id="taskPriority" style="width:auto;">
@@ -652,7 +648,7 @@
           </select>
           <button class="btn" onclick="addTask()">Add</button>
         </div>
-        <ul id="taskList" class="checklist" style="margin-top: 20px;"></ul>
+        <ul id="taskList" class="checklist" style="margin-top:20px;"></ul>
       </div>
     </div>
 
@@ -660,15 +656,13 @@
     <div id="reviews" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-chart-line"></i> Reviews</div>
-        <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+        <div style="display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap;">
           <button class="btn" onclick="showReview('weekly')">Weekly</button>
           <button class="btn btn-outline" onclick="showReview('monthly')">Monthly</button>
           <button class="btn btn-outline" onclick="showReview('yearly')">Yearly</button>
         </div>
-        <div class="chart-container">
-          <canvas id="reviewChart"></canvas>
-        </div>
-        <div id="reviewStats" style="margin-top: 15px; color: var(--burgundy); font-weight: 600;"></div>
+        <div class="chart-container"><canvas id="reviewChart"></canvas></div>
+        <div id="reviewStats" style="margin-top:15px; color:var(--burgundy); font-weight:600;"></div>
       </div>
     </div>
 
@@ -676,10 +670,10 @@
     <div id="settings" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-cog"></i> Settings</div>
-        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+        <div style="display:flex; gap:15px; flex-wrap:wrap;">
           <button class="btn btn-outline" onclick="exportData()"><i class="fas fa-file-export"></i> Export Data</button>
           <button class="btn btn-outline" onclick="importData()"><i class="fas fa-file-import"></i> Import Data</button>
-          <button class="btn" style="background: #8B0000; border-color:#8B0000;" onclick="if(confirm('Are you sure?')){localStorage.clear(); location.reload();}"><i class="fas fa-trash"></i> Reset Everything</button>
+          <button class="btn" style="background:#8B0000; border-color:#8B0000;" onclick="if(confirm('Are you sure?')){localStorage.clear(); location.reload();}"><i class="fas fa-trash"></i> Reset Everything</button>
         </div>
       </div>
     </div>
@@ -687,7 +681,7 @@
 
   <script>
     // ================================================
-    // DATA LAYER (localStorage)
+    // DATA LAYER
     // ================================================
     const APP_KEY = 'kimiLifeData';
     function getData() {
@@ -695,15 +689,14 @@
       if (!raw) return defaultData();
       try { return JSON.parse(raw); } catch { return defaultData(); }
     }
-    function saveData(data) {
-      localStorage.setItem(APP_KEY, JSON.stringify(data));
-    }
+    function saveData(data) { localStorage.setItem(APP_KEY, JSON.stringify(data)); }
+
     function defaultData() {
       return {
         lifeRows: ['Programming', 'Korean', 'French', 'Design'],
         lifeCols: [],
         lifeCells: {},
-        subjects: [], // { name, lessons: [{ name, done }] }
+        subjects: [],
         exams: [],
         tasks: [],
         worship: {
@@ -711,7 +704,7 @@
           morning: ['O Allah, we have entered the morning', 'We have woken up and the kingdom belongs to Allah'],
           evening: ['O Allah, we have entered the evening', 'We have entered the evening and the kingdom belongs to Allah'],
           quranPages: 2,
-          completed: {}
+          dailyRecords: {} // { '2024-01-01': { prayers: ['Fajr': true, ...], morning: [...], evening: [...] } }
         },
         care: {
           skin: ['Gentle cleanser', 'Moisturizer', 'SPF'],
@@ -721,7 +714,7 @@
           nails: ['Hand cream', 'Cut nails'],
           exercise: ['Resistance training', 'Walk 30 min']
         },
-        careTracker: {}, // { skin: { 'Gentle cleanser': { '2024-01-01': true, ... } } }
+        careTracker: {},
         timerSessions: 0,
         reviewData: { weekly: [], monthly: [], yearly: [] }
       };
@@ -736,16 +729,16 @@
     let quickTimerInterval, fullTimerInterval;
     let quickSeconds = 1500, fullSeconds = 1500;
     let quickPaused = false, fullPaused = false;
+    let currentWorshipDate = new Date().toISOString().slice(0,10);
 
     document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('worshipDate').value = currentWorshipDate;
       renderAll();
       updateDate();
-      // Navigation
       document.querySelectorAll('#navLinks a').forEach(link => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
-          const tab = link.dataset.tab;
-          switchTab(tab);
+          switchTab(link.dataset.tab);
         });
       });
       setTimerPreset();
@@ -753,12 +746,7 @@
 
     function updateDate() {
       const now = new Date();
-      document.getElementById('todayDate').textContent = now.toLocaleDateString('en-US', { 
-        weekday: 'long', 
-        day: 'numeric', 
-        month: 'long', 
-        year: 'numeric' 
-      });
+      document.getElementById('todayDate').textContent = now.toLocaleDateString('en-US', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
     }
 
     function switchTab(tabId) {
@@ -770,6 +758,7 @@
       if (tabId === 'reviews') renderReview('weekly');
       if (tabId === 'subjects') renderSubjects();
       if (tabId === 'selfcare') renderCareTable();
+      if (tabId === 'worship') loadWorshipForDate();
       updateStats();
     }
 
@@ -781,18 +770,18 @@
       renderSubjects();
       renderExams();
       renderTasks();
-      renderWorship();
+      loadWorshipForDate();
       renderCareTable();
       renderDashboard();
       updateStats();
     }
 
-    // ---------- STATS ----------
     function updateStats() {
       const today = new Date().toDateString();
       const tasksDone = data.tasks.filter(t => t.date === today && t.done).length;
-      const worshipDone = data.worship.completed[today] || {};
-      const worshipCount = Object.values(worshipDone).filter(v => v).length;
+      const worshipRecords = data.worship.dailyRecords || {};
+      const todayRecord = worshipRecords[currentWorshipDate] || {};
+      const worshipCount = Object.values(todayRecord).flat().filter(v => v === true).length || 0;
       
       document.getElementById('statTasks').textContent = tasksDone;
       document.getElementById('statWorship').textContent = worshipCount;
@@ -800,17 +789,141 @@
       document.getElementById('statSubjects').textContent = data.subjects.length;
     }
 
-    // ---------- DASHBOARD ----------
     function renderDashboard() {
       const today = new Date().toDateString();
       const tasks = data.tasks.filter(t => t.date === today && !t.done);
       const ul = document.getElementById('todayTasks');
       ul.innerHTML = tasks.map((t,i) => `<li><input type="checkbox" onchange="toggleTask(${i})" ${t.done?'checked':''}> ${t.title} <span style="color:var(--pink-medium); font-weight:500;">${t.priority}</span></li>`).join('') || '<li style="color:var(--text-secondary);">✨ No tasks for today</li>';
       
-      const worshipDone = data.worship.completed[today] || {};
-      const worshipItems = [...data.worship.prayers, ...data.worship.morning, ...data.worship.evening];
-      const doneCount = worshipItems.filter(item => worshipDone[item]).length;
-      document.getElementById('todayWorship').innerHTML = `<li>🌟 Completed ${doneCount} out of ${worshipItems.length} worship items today</li>`;
+      const records = data.worship.dailyRecords || {};
+      const todayRecord = records[currentWorshipDate] || {};
+      const allItems = [...(todayRecord.prayers || []), ...(todayRecord.morning || []), ...(todayRecord.evening || [])];
+      const doneCount = allItems.filter(v => v === true).length;
+      document.getElementById('todayWorship').innerHTML = `<li>🌟 Completed ${doneCount} out of ${allItems.length} worship items today</li>`;
+    }
+
+    // ================================================
+    // WORSHIP (EDITABLE WITH DATES)
+    // ================================================
+    function loadWorshipForDate() {
+      const date = document.getElementById('worshipDate').value || currentWorshipDate;
+      currentWorshipDate = date;
+      if (!data.worship.dailyRecords) data.worship.dailyRecords = {};
+      if (!data.worship.dailyRecords[date]) {
+        data.worship.dailyRecords[date] = {
+          prayers: data.worship.prayers.map(p => false),
+          morning: data.worship.morning.map(p => false),
+          evening: data.worship.evening.map(p => false)
+        };
+        saveData(data);
+      }
+      const record = data.worship.dailyRecords[date];
+      
+      renderWorshipList('prayerList', record.prayers, data.worship.prayers, 'prayers');
+      renderWorshipList('morningAdhkar', record.morning, data.worship.morning, 'morning');
+      renderWorshipList('eveningAdhkar', record.evening, data.worship.evening, 'evening');
+      
+      document.getElementById('quranPages').value = data.worship.quranPages || 2;
+      
+      const total = record.prayers.length + record.morning.length + record.evening.length;
+      const done = record.prayers.filter(v => v).length + record.morning.filter(v => v).length + record.evening.filter(v => v).length;
+      document.getElementById('worshipStats').textContent = `📅 ${date} - ${done} / ${total} completed`;
+    }
+
+    function renderWorshipList(containerId, statuses, names, type) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = names.map((name, idx) => `
+        <div class="worship-item">
+          <input type="checkbox" class="worship-check" ${statuses[idx] ? 'checked' : ''} 
+                 onchange="toggleWorshipItem('${type}', ${idx})">
+          <input type="text" value="${name}" onchange="updateWorshipName('${type}', ${idx}, this.value)" 
+                 class="editable" style="flex:1; min-width:80px; padding:4px 10px; margin:0; border:2px dashed var(--pink-soft); background:#FFF9F7; border-radius:10px; font-size:0.9rem;">
+          <button onclick="deleteWorshipItem('${type}', ${idx})" style="background:none; border:none; color:var(--burgundy); cursor:pointer;">🗑️</button>
+        </div>
+      `).join('');
+    }
+
+    function toggleWorshipItem(type, idx) {
+      const date = document.getElementById('worshipDate').value || currentWorshipDate;
+      const record = data.worship.dailyRecords[date];
+      if (type === 'prayers') record.prayers[idx] = !record.prayers[idx];
+      else if (type === 'morning') record.morning[idx] = !record.morning[idx];
+      else if (type === 'evening') record.evening[idx] = !record.evening[idx];
+      saveData(data);
+      loadWorshipForDate();
+      updateStats();
+      renderDashboard();
+    }
+
+    function updateWorshipName(type, idx, newName) {
+      if (type === 'prayers') data.worship.prayers[idx] = newName;
+      else if (type === 'morning') data.worship.morning[idx] = newName;
+      else if (type === 'evening') data.worship.evening[idx] = newName;
+      // Update all daily records to match new name
+      for (let date in data.worship.dailyRecords) {
+        const record = data.worship.dailyRecords[date];
+        if (type === 'prayers' && record.prayers && record.prayers.length > idx) {
+          // We don't rename the status array, just the name list
+        }
+      }
+      saveData(data);
+      loadWorshipForDate();
+    }
+
+    function addWorshipItem(type) {
+      const name = prompt('Enter new worship item name:');
+      if (!name || name.trim() === '') return;
+      if (type === 'prayers') data.worship.prayers.push(name.trim());
+      else if (type === 'morning') data.worship.morning.push(name.trim());
+      else if (type === 'evening') data.worship.evening.push(name.trim());
+      
+      // Add to today's record
+      const date = document.getElementById('worshipDate').value || currentWorshipDate;
+      if (!data.worship.dailyRecords[date]) {
+        data.worship.dailyRecords[date] = {
+          prayers: data.worship.prayers.map(() => false),
+          morning: data.worship.morning.map(() => false),
+          evening: data.worship.evening.map(() => false)
+        };
+      }
+      const record = data.worship.dailyRecords[date];
+      if (type === 'prayers') record.prayers.push(false);
+      else if (type === 'morning') record.morning.push(false);
+      else if (type === 'evening') record.evening.push(false);
+      
+      saveData(data);
+      loadWorshipForDate();
+    }
+
+    function deleteWorshipItem(type, idx) {
+      if (!confirm('Delete this worship item?')) return;
+      if (type === 'prayers') data.worship.prayers.splice(idx, 1);
+      else if (type === 'morning') data.worship.morning.splice(idx, 1);
+      else if (type === 'evening') data.worship.evening.splice(idx, 1);
+      
+      // Remove from all daily records
+      for (let date in data.worship.dailyRecords) {
+        const record = data.worship.dailyRecords[date];
+        if (type === 'prayers' && record.prayers) record.prayers.splice(idx, 1);
+        else if (type === 'morning' && record.morning) record.morning.splice(idx, 1);
+        else if (type === 'evening' && record.evening) record.evening.splice(idx, 1);
+      }
+      saveData(data);
+      loadWorshipForDate();
+    }
+
+    function saveWorshipForDate() {
+      const date = document.getElementById('worshipDate').value || currentWorshipDate;
+      currentWorshipDate = date;
+      saveData(data);
+      alert(`✅ Worship saved for ${date}`);
+    }
+
+    function saveQuranPages() {
+      const pages = parseInt(document.getElementById('quranPages').value) || 0;
+      data.worship.quranPages = pages;
+      saveData(data);
+      alert(`Quran reading saved: ${pages} pages`);
     }
 
     // ================================================
@@ -885,7 +998,7 @@
     }
 
     // ================================================
-    // SUBJECTS (with Lessons)
+    // SUBJECTS
     // ================================================
     function renderSubjects() {
       const container = document.getElementById('subjectListContainer');
@@ -898,30 +1011,44 @@
         html += `
           <div class="card" style="margin-bottom:15px; padding:18px;">
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
-              <h4 style="color:var(--burgundy); font-size:1.1rem;">
-                <i class="fas fa-book" style="color:var(--pink-medium);"></i> ${subject.name}
-              </h4>
+              <div style="display:flex; align-items:center; gap:10px; flex:1;">
+                <i class="fas fa-book" style="color:var(--pink-medium);"></i>
+                <input type="text" value="${subject.name}" onchange="updateSubjectName(${idx}, this.value)" 
+                       style="flex:1; min-width:120px; padding:4px 12px; margin:0; border:2px dashed var(--pink-soft); background:#FFF9F7; border-radius:10px; font-size:1rem; font-weight:600; color:var(--burgundy);">
+              </div>
               <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                <button class="btn btn-pink btn-sm" onclick="addLesson(${idx})"><i class="fas fa-plus"></i> Add Lesson</button>
-                <button class="btn btn-outline btn-sm" onclick="deleteSubject(${idx})"><i class="fas fa-trash"></i> Delete</button>
+                <button class="btn btn-pink btn-sm" onclick="addLesson(${idx})"><i class="fas fa-plus"></i> Lesson</button>
+                <button class="btn btn-outline btn-sm" onclick="deleteSubject(${idx})"><i class="fas fa-trash"></i></button>
               </div>
             </div>
             <div>
               ${subject.lessons && subject.lessons.length > 0 ? subject.lessons.map((lesson, li) => `
                 <div class="lesson-item">
-                  <span class="lesson-name">${lesson.name}</span>
+                  <span class="lesson-name">
+                    <input type="text" value="${lesson.name}" onchange="updateLessonName(${idx}, ${li}, this.value)">
+                  </span>
                   <span class="lesson-status ${lesson.done ? 'done' : 'not-done'}">${lesson.done ? '✅ Done' : '⏳ Not Done'}</span>
                   <button onclick="toggleLesson(${idx}, ${li})" style="background:none;border:2px solid var(--pink-medium);border-radius:20px;padding:2px 12px;cursor:pointer;color:var(--burgundy);font-weight:600;font-size:0.75rem;">
-                    ${lesson.done ? 'Mark Undone' : 'Mark Done'}
+                    ${lesson.done ? 'Undo' : 'Done'}
                   </button>
                   <button onclick="deleteLesson(${idx}, ${li})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button>
                 </div>
-              `).join('') : '<p style="color:var(--text-secondary); font-size:0.9rem;">No lessons yet. Add your first lesson!</p>'}
+              `).join('') : '<p style="color:var(--text-secondary); font-size:0.9rem;">No lessons yet.</p>'}
             </div>
           </div>
         `;
       });
       container.innerHTML = html;
+    }
+
+    function updateSubjectName(idx, newName) {
+      data.subjects[idx].name = newName;
+      saveData(data);
+    }
+
+    function updateLessonName(subjectIdx, lessonIdx, newName) {
+      data.subjects[subjectIdx].lessons[lessonIdx].name = newName;
+      saveData(data);
     }
 
     function addSubject() {
@@ -994,7 +1121,11 @@
     // ================================================
     function renderTasks() {
       const ul = document.getElementById('taskList');
-      ul.innerHTML = data.tasks.map((t, i) => `<li><input type="checkbox" onchange="toggleTask(${i})" ${t.done?'checked':''}> ${t.title} <span style="color:var(--pink-medium); font-weight:500;">${t.priority}</span> <span style="color:var(--text-secondary); font-size:0.85rem;">${t.date}</span> <button onclick="deleteTask(${i})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button></li>`).join('');
+      ul.innerHTML = data.tasks.map((t, i) => `<li><input type="checkbox" onchange="toggleTask(${i})" ${t.done?'checked':''}> <input type="text" value="${t.title}" onchange="updateTaskName(${i}, this.value)" style="flex:1; min-width:100px; padding:4px 10px; margin:0; border:2px dashed var(--pink-soft); background:#FFF9F7; border-radius:10px; font-size:0.9rem;"> <span style="color:var(--pink-medium); font-weight:500;">${t.priority}</span> <span style="color:var(--text-secondary); font-size:0.85rem;">${t.date}</span> <button onclick="deleteTask(${i})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button></li>`).join('');
+    }
+    function updateTaskName(idx, newName) {
+      data.tasks[idx].title = newName;
+      saveData(data);
     }
     function addTask() {
       const title = document.getElementById('taskInput').value.trim();
@@ -1023,50 +1154,12 @@
     }
 
     // ================================================
-    // WORSHIP
-    // ================================================
-    function renderWorship() {
-      const today = new Date().toDateString();
-      const done = data.worship.completed[today] || {};
-      
-      document.getElementById('prayerList').innerHTML = data.worship.prayers.map(p => 
-        `<li><input type="checkbox" ${done[p]?'checked':''} onchange="toggleWorship('${p}')"> ${p}</li>`
-      ).join('');
-      document.getElementById('morningAdhkar').innerHTML = data.worship.morning.map(p => 
-        `<li><input type="checkbox" ${done[p]?'checked':''} onchange="toggleWorship('${p}')"> ${p}</li>`
-      ).join('');
-      document.getElementById('eveningAdhkar').innerHTML = data.worship.evening.map(p => 
-        `<li><input type="checkbox" ${done[p]?'checked':''} onchange="toggleWorship('${p}')"> ${p}</li>`
-      ).join('');
-      
-      const total = data.worship.prayers.length + data.worship.morning.length + data.worship.evening.length;
-      const doneCount = Object.values(done).filter(v => v).length;
-      document.getElementById('worshipStats').textContent = `Today: ${doneCount} / ${total} worship completed`;
-    }
-    function toggleWorship(item) {
-      const today = new Date().toDateString();
-      if (!data.worship.completed[today]) data.worship.completed[today] = {};
-      data.worship.completed[today][item] = !data.worship.completed[today][item];
-      saveData(data);
-      renderWorship();
-      renderDashboard();
-      updateStats();
-    }
-    function saveWorship() {
-      const pages = parseInt(document.getElementById('quranPages').value) || 0;
-      data.worship.quranPages = pages;
-      saveData(data);
-      alert('Quran reading progress saved!');
-    }
-
-    // ================================================
-    // SELF-CARE (Infinite Table)
+    // SELF-CARE (EDITABLE)
     // ================================================
     function renderCareTable() {
       const body = document.getElementById('careBody');
       const items = data.care[careTab] || [];
       
-      // Get last 7 days
       const days = [];
       for (let i = 6; i >= 0; i--) {
         const d = new Date();
@@ -1082,7 +1175,10 @@
       let html = '';
       items.forEach((item, idx) => {
         html += `<tr>`;
-        html += `<td class="row-label">${item}</td>`;
+        html += `<td class="row-label" style="display:flex; align-items:center; gap:8px; justify-content:flex-end;">
+          <input type="text" value="${item}" onchange="updateCareItemName('${careTab}', ${idx}, this.value)" 
+                 style="flex:1; min-width:80px; padding:4px 10px; margin:0; border:2px dashed var(--pink-soft); background:#FFF9F7; border-radius:10px; font-size:0.9rem; text-align:right;">
+        </td>`;
         days.forEach(day => {
           const key = `${careTab}_${item}_${day}`;
           const checked = data.careTracker && data.careTracker[careTab] && data.careTracker[careTab][item] && data.careTracker[careTab][item][day] ? true : false;
@@ -1092,6 +1188,17 @@
         html += `</tr>`;
       });
       body.innerHTML = html;
+    }
+
+    function updateCareItemName(tab, idx, newName) {
+      const oldName = data.care[tab][idx];
+      data.care[tab][idx] = newName;
+      if (data.careTracker && data.careTracker[tab] && data.careTracker[tab][oldName]) {
+        data.careTracker[tab][newName] = data.careTracker[tab][oldName];
+        delete data.careTracker[tab][oldName];
+      }
+      saveData(data);
+      renderCareTable();
     }
 
     function toggleCareDay(tab, item, day) {
@@ -1108,7 +1215,6 @@
       if (!name) return alert('Enter a care item name');
       if (!data.care[careTab]) data.care[careTab] = [];
       data.care[careTab].push(name);
-      // Initialize tracker
       if (!data.careTracker) data.careTracker = {};
       if (!data.careTracker[careTab]) data.careTracker[careTab] = {};
       data.careTracker[careTab][name] = {};
@@ -1227,23 +1333,11 @@
           responsive: true,
           maintainAspectRatio: false,
           plugins: {
-            legend: { 
-              labels: { 
-                color: '#3D2C33',
-                font: { weight: '600' }
-              } 
-            }
+            legend: { labels: { color: '#3D2C33', font: { weight: '600' } } }
           },
           scales: {
-            x: { 
-              ticks: { color: '#7A5D66', font: { weight: '500' } },
-              grid: { color: '#F0E0DF' }
-            },
-            y: { 
-              ticks: { color: '#7A5D66' },
-              grid: { color: '#F0E0DF' },
-              beginAtZero: true 
-            }
+            x: { ticks: { color: '#7A5D66', font: { weight: '500' } }, grid: { color: '#F0E0DF' } },
+            y: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' }, beginAtZero: true }
           }
         }
       });
@@ -1286,13 +1380,16 @@
     // ================================================
     window.addLifeRow = addLifeRow; window.addLifeColumn = addLifeColumn;
     window.updateCell = updateCell; window.deleteLifeRow = deleteLifeRow;
-    window.addSubject = addSubject; window.deleteSubject = deleteSubject;
+    window.addSubject = addSubject; window.deleteSubject = deleteSubject; window.updateSubjectName = updateSubjectName;
     window.addLesson = addLesson; window.toggleLesson = toggleLesson; window.deleteLesson = deleteLesson;
+    window.updateLessonName = updateLessonName;
     window.addExam = addExam; window.deleteExam = deleteExam;
-    window.addTask = addTask; window.toggleTask = toggleTask; window.deleteTask = deleteTask;
-    window.toggleWorship = toggleWorship; window.saveWorship = saveWorship;
+    window.addTask = addTask; window.toggleTask = toggleTask; window.deleteTask = deleteTask; window.updateTaskName = updateTaskName;
+    window.toggleWorshipItem = toggleWorshipItem; window.updateWorshipName = updateWorshipName;
+    window.addWorshipItem = addWorshipItem; window.deleteWorshipItem = deleteWorshipItem;
+    window.loadWorshipForDate = loadWorshipForDate; window.saveWorshipForDate = saveWorshipForDate; window.saveQuranPages = saveQuranPages;
     window.switchCareTab = switchCareTab; window.addCareItem = addCareItem; window.deleteCareItem = deleteCareItem;
-    window.toggleCareDay = toggleCareDay; window.saveCare = saveCare;
+    window.toggleCareDay = toggleCareDay; window.updateCareItemName = updateCareItemName; window.saveCare = saveCare;
     window.startQuickTimer = startQuickTimer; window.pauseQuickTimer = pauseQuickTimer; window.resetQuickTimer = resetQuickTimer;
     window.startFullTimer = startFullTimer; window.pauseFullTimer = pauseFullTimer; window.resetFullTimer = resetFullTimer;
     window.setTimerPreset = setTimerPreset;
