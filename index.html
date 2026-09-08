@@ -31,7 +31,6 @@
       --shadow-hover: 0 12px 40px rgba(139, 26, 43, 0.18);
     }
 
-    /* ===== TOP NAVBAR ===== */
     .top-nav {
       background: #FFFFFF;
       padding: 12px 35px;
@@ -84,7 +83,6 @@
 
     .main-content { padding: 30px 35px; max-width: 1400px; margin: 0 auto; }
 
-    /* ===== STATS ===== */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -117,10 +115,10 @@
     .stat-icon.burgundy { background: #F5E0E3; color: var(--burgundy); }
     .stat-icon.gold { background: #F5ECE0; color: var(--gold-soft); }
     .stat-icon.purple { background: #EDE4F5; color: #9B6BB7; }
+    .stat-icon.green { background: #E4F5ED; color: #3D9B7B; }
     .stat-info h3 { font-size: 1.8rem; font-weight: 700; color: var(--text-primary); }
     .stat-info p { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
 
-    /* ===== CARDS ===== */
     .card {
       background: var(--bg-card);
       border-radius: 24px;
@@ -142,7 +140,6 @@
     }
     .card-title i { color: var(--pink-medium); }
 
-    /* ===== BUTTONS ===== */
     .btn {
       background: var(--burgundy);
       border: none;
@@ -166,20 +163,11 @@
     .btn-pink { background: var(--pink-medium); color: #FFFFFF; }
     .btn-pink:hover { background: var(--pink-soft); }
     .btn-sm { padding: 5px 14px; font-size: 0.75rem; }
-    .btn-edit {
-      background: transparent;
-      border: 2px solid var(--gold-soft);
-      color: var(--gold-soft);
-      padding: 2px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.7rem;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .btn-edit:hover { background: var(--gold-soft); color: #FFFFFF; }
+    .btn-gold { background: var(--gold-soft); color: #FFFFFF; }
+    .btn-gold:hover { background: #C49A6A; }
+    .btn-green { background: #3D9B7B; color: #FFFFFF; }
+    .btn-green:hover { background: #2D7B5F; }
 
-    /* ===== INPUTS ===== */
     input, select, textarea {
       background: #FFFBF9;
       border: 2px solid var(--border-color);
@@ -196,17 +184,12 @@
       border-color: var(--burgundy-light);
       box-shadow: 0 0 0 4px rgba(178, 34, 60, 0.08);
     }
-    input[type="text"].editable {
-      border: 2px dashed var(--pink-soft);
-      background: #FFF9F7;
-    }
-    input[type="text"].editable:focus { border-color: var(--burgundy); }
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
     .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
     .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    .grid-7 { display: grid; grid-template-columns: repeat(7,1fr); gap: 12px; }
 
-    /* ===== TABLES ===== */
     .table-wrap {
       overflow: auto;
       max-height: 500px;
@@ -235,8 +218,8 @@
       text-align: center;
       color: var(--text-primary);
     }
-    .data-table td input[type="text"] {
-      width: 55px;
+    .data-table td input[type="number"] {
+      width: 70px;
       padding: 6px;
       margin: 0;
       background: #FFFBF9;
@@ -256,7 +239,6 @@
       right: 0;
     }
 
-    /* ===== SPACE TIMER ===== */
     .space-timer {
       background: linear-gradient(135deg, #FFF5F2, #FFE8EC);
       border: 2px solid var(--pink-soft);
@@ -315,7 +297,161 @@
       cursor: pointer;
     }
 
-    /* ===== WORSHIP EDITABLE ===== */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .text-secondary { color: var(--text-secondary); }
+
+    /* ===== WEEKLY PLANNER ===== */
+    .week-day {
+      background: #FFFBF9;
+      border-radius: 16px;
+      padding: 15px;
+      border: 1px solid var(--border-color);
+      min-height: 250px;
+      transition: 0.3s;
+    }
+    .week-day:hover { border-color: var(--pink-soft); box-shadow: var(--shadow-soft); }
+    .week-day .day-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border-color);
+    }
+    .week-day .day-name {
+      font-weight: 700;
+      color: var(--burgundy);
+      font-size: 0.95rem;
+    }
+    .week-day .day-date {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+    .week-day .day-tasks {
+      list-style: none;
+      padding: 0;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .week-day .day-tasks li {
+      padding: 6px 0;
+      border-bottom: 1px solid #F5EAE8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      flex-wrap: wrap;
+    }
+    .week-day .day-tasks li .task-status {
+      font-size: 0.65rem;
+      padding: 1px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+    .week-day .day-tasks li .task-status.todo { background: #F8D7DA; color: #721C24; }
+    .week-day .day-tasks li .task-status.inprogress { background: #FFF3CD; color: #856404; }
+    .week-day .day-tasks li .task-status.done { background: #D4EDDA; color: #155724; }
+    .week-day .add-task-btn {
+      background: none;
+      border: 2px dashed var(--pink-soft);
+      border-radius: 12px;
+      padding: 6px;
+      width: 100%;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 0.75rem;
+      transition: 0.3s;
+      margin-top: 8px;
+    }
+    .week-day .add-task-btn:hover {
+      border-color: var(--burgundy);
+      color: var(--burgundy);
+      background: #FFF5F2;
+    }
+    .week-day .task-actions {
+      display: flex;
+      gap: 4px;
+      margin-right: auto;
+    }
+    .week-day .task-actions button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      transition: 0.3s;
+    }
+    .week-day .task-actions button:hover { color: var(--burgundy); }
+
+    .week-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .week-stat-box {
+      background: #FFF5F2;
+      border-radius: 16px;
+      padding: 15px 20px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+    .week-stat-box h4 {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .week-stat-box .number {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--burgundy);
+    }
+
+    .exam-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .exam-stat-box {
+      background: #FFF5F2;
+      border-radius: 16px;
+      padding: 15px 20px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+    .exam-stat-box h4 {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .exam-stat-box .number {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--burgundy);
+    }
+
+    .exam-table td .score-bar {
+      height: 6px;
+      border-radius: 10px;
+      background: #F0E0DF;
+      margin-top: 4px;
+      overflow: hidden;
+      width: 100%;
+    }
+    .exam-table td .score-bar .fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: 0.5s;
+      background: var(--burgundy);
+    }
+
+    /* Worship editable */
     .worship-item {
       display: flex;
       align-items: center;
@@ -344,11 +480,6 @@
       cursor: pointer;
     }
 
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    .text-secondary { color: var(--text-secondary); }
-
-    /* ===== LESSONS ===== */
     .lesson-item {
       display: flex;
       align-items: center;
@@ -383,9 +514,24 @@
     .lesson-status.done { background: #D4EDDA; color: #155724; }
     .lesson-status.not-done { background: #F8D7DA; color: #721C24; }
 
+    .btn-edit {
+      background: transparent;
+      border: 2px solid var(--gold-soft);
+      color: var(--gold-soft);
+      padding: 2px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn-edit:hover { background: var(--gold-soft); color: #FFFFFF; }
+
     @media (max-width: 1024px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .exam-stats { grid-template-columns: repeat(2, 1fr); }
+      .week-stats { grid-template-columns: repeat(2, 1fr); }
+      .grid-7 { grid-template-columns: repeat(4, 1fr); }
     }
     @media (max-width: 768px) {
       .top-nav { padding: 12px 20px; flex-direction: column; align-items: stretch; }
@@ -397,11 +543,15 @@
       .stat-info h3 { font-size: 1.3rem; }
       .grid-2, .grid-3 { grid-template-columns: 1fr; }
       .grid-4 { grid-template-columns: 1fr 1fr; }
+      .grid-7 { grid-template-columns: repeat(2, 1fr); }
       .timer-display { font-size: 2.5rem; }
+      .exam-stats { grid-template-columns: 1fr; }
+      .week-stats { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       .stats-grid { grid-template-columns: 1fr; }
       .grid-4 { grid-template-columns: 1fr; }
+      .grid-7 { grid-template-columns: 1fr; }
       .nav-links a { font-size: 0.7rem; padding: 4px 10px; }
     }
   </style>
@@ -413,6 +563,7 @@
     <div class="nav-brand"><i class="fas fa-spa"></i><span>Kimi Life</span></div>
     <div class="nav-links" id="navLinks">
       <a href="#" data-tab="dashboard" class="active"><i class="fas fa-home"></i> Dashboard</a>
+      <a href="#" data-tab="weeklyplanner"><i class="fas fa-calendar-week"></i> Planner</a>
       <a href="#" data-tab="worship"><i class="fas fa-mosque"></i> Worship</a>
       <a href="#" data-tab="lifetracker"><i class="fas fa-infinity"></i> Tracker</a>
       <a href="#" data-tab="subjects"><i class="fas fa-book-open"></i> Subjects</a>
@@ -486,12 +637,51 @@
       </div>
     </div>
 
-    <!-- ==================== WORSHIP (EDITABLE WITH DATES) ==================== -->
+    <!-- ==================== WEEKLY PLANNER ==================== -->
+    <div id="weeklyplanner" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fas fa-calendar-week"></i> Weekly Planner</div>
+        
+        <!-- Week Navigation -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; margin-bottom:20px;">
+          <div style="display:flex; gap:10px; align-items:center;">
+            <button class="btn btn-outline btn-sm" onclick="changeWeek(-1)"><i class="fas fa-chevron-left"></i></button>
+            <span id="weekLabel" style="font-weight:600; color:var(--burgundy); font-size:1.1rem;"></span>
+            <button class="btn btn-outline btn-sm" onclick="changeWeek(1)"><i class="fas fa-chevron-right"></i></button>
+            <button class="btn btn-sm btn-pink" onclick="goToCurrentWeek()">Today</button>
+          </div>
+          <button class="btn btn-sm" onclick="addWeekTask()"><i class="fas fa-plus"></i> Add Task</button>
+        </div>
+
+        <!-- Week Stats -->
+        <div class="week-stats">
+          <div class="week-stat-box">
+            <h4>📋 Total Tasks</h4>
+            <div class="number" id="weekTotalTasks">0</div>
+          </div>
+          <div class="week-stat-box">
+            <h4>✅ Completed</h4>
+            <div class="number" id="weekCompletedTasks">0</div>
+          </div>
+          <div class="week-stat-box">
+            <h4>⏳ In Progress</h4>
+            <div class="number" id="weekInProgressTasks">0</div>
+          </div>
+          <div class="week-stat-box">
+            <h4>📈 Completion Rate</h4>
+            <div class="number" id="weekCompletionRate">0%</div>
+          </div>
+        </div>
+
+        <!-- Week Days -->
+        <div class="grid-7" id="weekDaysContainer"></div>
+      </div>
+    </div>
+
+    <!-- ==================== WORSHIP ==================== -->
     <div id="worship" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-mosque"></i> My Worship</div>
-        
-        <!-- Date Selector -->
         <div style="display:flex; gap:15px; align-items:center; flex-wrap:wrap; margin-bottom:20px;">
           <label style="font-weight:600; color:var(--text-secondary);">Select Date:</label>
           <input type="date" id="worshipDate" style="width:auto; margin:0;" value="">
@@ -566,14 +756,53 @@
     <!-- ==================== EXAMS ==================== -->
     <div id="exams" class="tab-content">
       <div class="card">
-        <div class="card-title"><i class="fas fa-pencil-alt"></i> My Exams</div>
-        <div style="display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:10px; align-items:end;">
+        <div class="card-title"><i class="fas fa-pencil-alt"></i> Exam Tracker</div>
+        
+        <div class="exam-stats">
+          <div class="exam-stat-box">
+            <h4>📊 Average Score</h4>
+            <div class="number" id="avgScore">0%</div>
+          </div>
+          <div class="exam-stat-box">
+            <h4>📚 Total Exams</h4>
+            <div class="number" id="totalExams">0</div>
+          </div>
+          <div class="exam-stat-box">
+            <h4>🏆 Best Subject</h4>
+            <div class="number" id="bestSubject" style="font-size:1.2rem;">-</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap:10px; align-items:end; margin-bottom:20px; flex-wrap:wrap;">
           <input type="text" id="examSubject" placeholder="Subject">
+          <input type="number" id="examMaxScore" placeholder="Max Score" step="0.5">
+          <input type="number" id="examMyScore" placeholder="My Score" step="0.5">
           <input type="date" id="examDate">
-          <input type="number" id="examTarget" placeholder="Target Score">
           <button class="btn" onclick="addExam()">Add</button>
         </div>
-        <ul id="examList" class="checklist" style="margin-top:20px;"></ul>
+
+        <div class="table-wrap exam-table">
+          <table class="data-table" id="examTable">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Max Score</th>
+                <th>My Score</th>
+                <th>Percentage</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="examBody"></tbody>
+          </table>
+        </div>
+
+        <div style="margin-top:20px;">
+          <h4 style="color:var(--burgundy); margin-bottom:10px;">📈 Performance by Subject</h4>
+          <div class="chart-container">
+            <canvas id="examChart"></canvas>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -596,7 +825,7 @@
       </div>
     </div>
 
-    <!-- ==================== SELF-CARE (EDITABLE) ==================== -->
+    <!-- ==================== SELF-CARE ==================== -->
     <div id="selfcare" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-spa"></i> Daily Self-Care</div>
@@ -699,12 +928,13 @@
         subjects: [],
         exams: [],
         tasks: [],
+        weeklyPlanner: {}, // { '2024-01-01': [{ id, text, status }] }
         worship: {
           prayers: ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'],
           morning: ['O Allah, we have entered the morning', 'We have woken up and the kingdom belongs to Allah'],
           evening: ['O Allah, we have entered the evening', 'We have entered the evening and the kingdom belongs to Allah'],
           quranPages: 2,
-          dailyRecords: {} // { '2024-01-01': { prayers: ['Fajr': true, ...], morning: [...], evening: [...] } }
+          dailyRecords: {}
         },
         care: {
           skin: ['Gentle cleanser', 'Moisturizer', 'SPF'],
@@ -730,6 +960,9 @@
     let quickSeconds = 1500, fullSeconds = 1500;
     let quickPaused = false, fullPaused = false;
     let currentWorshipDate = new Date().toISOString().slice(0,10);
+    let examChart = null;
+    let currentWeekOffset = 0;
+    let taskIdCounter = 1000;
 
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('worshipDate').value = currentWorshipDate;
@@ -759,6 +992,8 @@
       if (tabId === 'subjects') renderSubjects();
       if (tabId === 'selfcare') renderCareTable();
       if (tabId === 'worship') loadWorshipForDate();
+      if (tabId === 'exams') renderExams();
+      if (tabId === 'weeklyplanner') renderWeeklyPlanner();
       updateStats();
     }
 
@@ -773,6 +1008,7 @@
       loadWorshipForDate();
       renderCareTable();
       renderDashboard();
+      renderWeeklyPlanner();
       updateStats();
     }
 
@@ -803,7 +1039,152 @@
     }
 
     // ================================================
-    // WORSHIP (EDITABLE WITH DATES)
+    // WEEKLY PLANNER
+    // ================================================
+    function getWeekDays(offset) {
+      const now = new Date();
+      const day = now.getDay(); // 0 = Sunday
+      const diff = now.getDate() - day + (offset * 7);
+      const monday = new Date(now);
+      monday.setDate(diff);
+      
+      const days = [];
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        days.push(d);
+      }
+      return days;
+    }
+
+    function renderWeeklyPlanner() {
+      const days = getWeekDays(currentWeekOffset);
+      const container = document.getElementById('weekDaysContainer');
+      
+      // Update label
+      const start = days[0];
+      const end = days[6];
+      document.getElementById('weekLabel').textContent = 
+        `${start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${end.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+      
+      let html = '';
+      const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      
+      days.forEach((date, idx) => {
+        const dateStr = date.toISOString().slice(0,10);
+        const tasks = data.weeklyPlanner[dateStr] || [];
+        const today = new Date().toISOString().slice(0,10);
+        const isToday = dateStr === today;
+        
+        html += `
+          <div class="week-day" style="border-color: ${isToday ? 'var(--burgundy)' : 'var(--border-color)'}; background: ${isToday ? '#FFF5F2' : '#FFFBF9'};">
+            <div class="day-header">
+              <span class="day-name">${dayNames[idx]} ${isToday ? '⭐' : ''}</span>
+              <span class="day-date">${date.getDate()}/${date.getMonth()+1}</span>
+            </div>
+            <ul class="day-tasks" id="dayTasks_${dateStr}">
+              ${tasks.length === 0 ? '<li style="color:var(--text-secondary); font-size:0.75rem;">No tasks</li>' : ''}
+              ${tasks.map((task, taskIdx) => `
+                <li>
+                  <span style="flex:1;">${task.text}</span>
+                  <span class="task-status ${task.status || 'todo'}">${task.status || 'To Do'}</span>
+                  <div class="task-actions">
+                    <button onclick="changeTaskStatus('${dateStr}', ${taskIdx}, 'todo')" title="To Do">📝</button>
+                    <button onclick="changeTaskStatus('${dateStr}', ${taskIdx}, 'inprogress')" title="In Progress">⏳</button>
+                    <button onclick="changeTaskStatus('${dateStr}', ${taskIdx}, 'done')" title="Done">✅</button>
+                    <button onclick="deleteWeekTask('${dateStr}', ${taskIdx})" title="Delete">🗑️</button>
+                  </div>
+                </li>
+              `).join('')}
+            </ul>
+            <button class="add-task-btn" onclick="addTaskToDay('${dateStr}')">
+              <i class="fas fa-plus"></i> Add task
+            </button>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+      
+      updateWeekStats();
+    }
+
+    function updateWeekStats() {
+      const days = getWeekDays(currentWeekOffset);
+      let total = 0, done = 0, inProgress = 0;
+      
+      days.forEach(date => {
+        const dateStr = date.toISOString().slice(0,10);
+        const tasks = data.weeklyPlanner[dateStr] || [];
+        total += tasks.length;
+        tasks.forEach(task => {
+          if (task.status === 'done') done++;
+          else if (task.status === 'inprogress') inProgress++;
+        });
+      });
+      
+      document.getElementById('weekTotalTasks').textContent = total;
+      document.getElementById('weekCompletedTasks').textContent = done;
+      document.getElementById('weekInProgressTasks').textContent = inProgress;
+      document.getElementById('weekCompletionRate').textContent = total > 0 ? Math.round((done/total)*100) + '%' : '0%';
+    }
+
+    function changeWeek(offset) {
+      currentWeekOffset += offset;
+      renderWeeklyPlanner();
+    }
+
+    function goToCurrentWeek() {
+      currentWeekOffset = 0;
+      renderWeeklyPlanner();
+    }
+
+    function addTaskToDay(dateStr) {
+      const text = prompt('Enter task:');
+      if (!text || text.trim() === '') return;
+      if (!data.weeklyPlanner[dateStr]) data.weeklyPlanner[dateStr] = [];
+      data.weeklyPlanner[dateStr].push({ 
+        id: taskIdCounter++, 
+        text: text.trim(), 
+        status: 'todo' 
+      });
+      saveData(data);
+      renderWeeklyPlanner();
+    }
+
+    function addWeekTask() {
+      const dateStr = prompt('Enter date (YYYY-MM-DD) or leave empty for today:', new Date().toISOString().slice(0,10));
+      if (!dateStr) return;
+      const text = prompt('Enter task:');
+      if (!text || text.trim() === '') return;
+      if (!data.weeklyPlanner[dateStr]) data.weeklyPlanner[dateStr] = [];
+      data.weeklyPlanner[dateStr].push({ 
+        id: taskIdCounter++, 
+        text: text.trim(), 
+        status: 'todo' 
+      });
+      saveData(data);
+      renderWeeklyPlanner();
+    }
+
+    function changeTaskStatus(dateStr, taskIdx, newStatus) {
+      if (!data.weeklyPlanner[dateStr]) return;
+      data.weeklyPlanner[dateStr][taskIdx].status = newStatus;
+      saveData(data);
+      renderWeeklyPlanner();
+    }
+
+    function deleteWeekTask(dateStr, taskIdx) {
+      if (!confirm('Delete this task?')) return;
+      data.weeklyPlanner[dateStr].splice(taskIdx, 1);
+      if (data.weeklyPlanner[dateStr].length === 0) {
+        delete data.weeklyPlanner[dateStr];
+      }
+      saveData(data);
+      renderWeeklyPlanner();
+    }
+
+    // ================================================
+    // WORSHIP
     // ================================================
     function loadWorshipForDate() {
       const date = document.getElementById('worshipDate').value || currentWorshipDate;
@@ -859,13 +1240,6 @@
       if (type === 'prayers') data.worship.prayers[idx] = newName;
       else if (type === 'morning') data.worship.morning[idx] = newName;
       else if (type === 'evening') data.worship.evening[idx] = newName;
-      // Update all daily records to match new name
-      for (let date in data.worship.dailyRecords) {
-        const record = data.worship.dailyRecords[date];
-        if (type === 'prayers' && record.prayers && record.prayers.length > idx) {
-          // We don't rename the status array, just the name list
-        }
-      }
       saveData(data);
       loadWorshipForDate();
     }
@@ -877,7 +1251,6 @@
       else if (type === 'morning') data.worship.morning.push(name.trim());
       else if (type === 'evening') data.worship.evening.push(name.trim());
       
-      // Add to today's record
       const date = document.getElementById('worshipDate').value || currentWorshipDate;
       if (!data.worship.dailyRecords[date]) {
         data.worship.dailyRecords[date] = {
@@ -901,7 +1274,6 @@
       else if (type === 'morning') data.worship.morning.splice(idx, 1);
       else if (type === 'evening') data.worship.evening.splice(idx, 1);
       
-      // Remove from all daily records
       for (let date in data.worship.dailyRecords) {
         const record = data.worship.dailyRecords[date];
         if (type === 'prayers' && record.prayers) record.prayers.splice(idx, 1);
@@ -1095,22 +1467,196 @@
     // EXAMS
     // ================================================
     function renderExams() {
-      const ul = document.getElementById('examList');
-      ul.innerHTML = data.exams.map((e, i) => `<li>${e.subject} - ${e.date} <span style="color:var(--pink-medium);">Target: ${e.target}</span> <button onclick="deleteExam(${i})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button></li>`).join('');
+      const body = document.getElementById('examBody');
+      
+      if (data.exams.length === 0) {
+        body.innerHTML = '<tr><td colspan="6" style="color:var(--text-secondary);">No exams yet. Add one above!</td></tr>';
+        updateExamStats();
+        renderExamChart();
+        return;
+      }
+
+      const sorted = [...data.exams].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      let html = '';
+      sorted.forEach((exam) => {
+        const percentage = exam.maxScore > 0 ? ((exam.myScore / exam.maxScore) * 100).toFixed(1) : 0;
+        const color = percentage >= 80 ? '#28A745' : percentage >= 60 ? '#FFC107' : '#DC3545';
+        const originalIdx = data.exams.indexOf(exam);
+        
+        html += `
+          <tr>
+            <td><strong>${exam.subject}</strong></td>
+            <td>${exam.maxScore}</td>
+            <td>${exam.myScore}</td>
+            <td>
+              <span style="font-weight:700; color:${color};">${percentage}%</span>
+              <div class="score-bar"><div class="fill" style="width:${percentage}%; background:${color};"></div></div>
+            </td>
+            <td>${exam.date}</td>
+            <td>
+              <button onclick="editExam(${originalIdx})" style="background:none;border:none;color:var(--gold-soft);cursor:pointer;font-size:1rem;"><i class="fas fa-edit"></i></button>
+              <button onclick="deleteExam(${originalIdx})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;font-size:1rem;">🗑️</button>
+            </td>
+          </tr>
+        `;
+      });
+      body.innerHTML = html;
+
+      updateExamStats();
+      renderExamChart();
     }
+
+    function updateExamStats() {
+      if (data.exams.length === 0) {
+        document.getElementById('avgScore').textContent = '0%';
+        document.getElementById('totalExams').textContent = '0';
+        document.getElementById('bestSubject').textContent = '-';
+        return;
+      }
+
+      let totalPercentage = 0;
+      const subjectScores = {};
+      
+      data.exams.forEach(exam => {
+        const pct = exam.maxScore > 0 ? (exam.myScore / exam.maxScore) * 100 : 0;
+        totalPercentage += pct;
+        if (!subjectScores[exam.subject]) subjectScores[exam.subject] = [];
+        subjectScores[exam.subject].push(pct);
+      });
+
+      const avg = (totalPercentage / data.exams.length).toFixed(1);
+      document.getElementById('avgScore').textContent = avg + '%';
+      document.getElementById('totalExams').textContent = data.exams.length;
+
+      let bestSubject = '-';
+      let bestAvg = -1;
+      for (let sub in subjectScores) {
+        const avgSub = subjectScores[sub].reduce((a,b) => a + b, 0) / subjectScores[sub].length;
+        if (avgSub > bestAvg) {
+          bestAvg = avgSub;
+          bestSubject = sub;
+        }
+      }
+      document.getElementById('bestSubject').textContent = bestSubject + ' (' + bestAvg.toFixed(1) + '%)';
+    }
+
+    function renderExamChart() {
+      const ctx = document.getElementById('examChart').getContext('2d');
+      if (examChart) examChart.destroy();
+
+      if (data.exams.length === 0) {
+        examChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['No Data'],
+            datasets: [{
+              label: 'No exams yet',
+              data: [0],
+              backgroundColor: ['#E8DCDA'],
+              borderColor: '#D4A373',
+              borderWidth: 1,
+              borderRadius: 8
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { labels: { color: '#3D2C33', font: { weight: '600' } } }
+            },
+            scales: {
+              x: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' } },
+              y: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' }, beginAtZero: true, max: 100 }
+            }
+          }
+        });
+        return;
+      }
+
+      const subjectData = {};
+      data.exams.forEach(exam => {
+        const pct = exam.maxScore > 0 ? (exam.myScore / exam.maxScore) * 100 : 0;
+        if (!subjectData[exam.subject]) subjectData[exam.subject] = [];
+        subjectData[exam.subject].push(pct);
+      });
+
+      const subjects = Object.keys(subjectData);
+      const averages = subjects.map(sub => {
+        const scores = subjectData[sub];
+        return scores.reduce((a,b) => a + b, 0) / scores.length;
+      });
+
+      const colors = ['#8B1A2B', '#E8849A', '#D4A373', '#9B6BB7', '#F4A7B9', '#B2223C'];
+
+      examChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: subjects,
+          datasets: [{
+            label: 'Average Score %',
+            data: averages,
+            backgroundColor: subjects.map((_, i) => colors[i % colors.length]),
+            borderColor: '#8B1A2B',
+            borderWidth: 2,
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: '#3D2C33', font: { weight: '600' } } }
+          },
+          scales: {
+            x: { ticks: { color: '#7A5D66', font: { weight: '500' } }, grid: { color: '#F0E0DF' } },
+            y: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' }, beginAtZero: true, max: 100 }
+          }
+        }
+      });
+    }
+
     function addExam() {
       const subject = document.getElementById('examSubject').value.trim();
+      const maxScore = parseFloat(document.getElementById('examMaxScore').value);
+      const myScore = parseFloat(document.getElementById('examMyScore').value);
       const date = document.getElementById('examDate').value;
-      const target = document.getElementById('examTarget').value;
-      if (!subject || !date) return alert('Enter subject and date');
-      data.exams.push({ subject, date, target: target || '--' });
+
+      if (!subject) return alert('Enter a subject');
+      if (isNaN(maxScore) || maxScore <= 0) return alert('Enter a valid max score');
+      if (isNaN(myScore) || myScore < 0) return alert('Enter your score');
+      if (myScore > maxScore) return alert('Your score cannot be higher than max score');
+      if (!date) return alert('Select a date');
+
+      data.exams.push({ subject, maxScore, myScore, date });
       saveData(data);
       renderExams();
+      
       document.getElementById('examSubject').value = '';
+      document.getElementById('examMaxScore').value = '';
+      document.getElementById('examMyScore').value = '';
       document.getElementById('examDate').value = '';
-      document.getElementById('examTarget').value = '';
     }
+
+    function editExam(idx) {
+      const exam = data.exams[idx];
+      const newSubject = prompt('Subject:', exam.subject);
+      if (newSubject === null) return;
+      const newMax = parseFloat(prompt('Max Score:', exam.maxScore));
+      if (isNaN(newMax) || newMax <= 0) return alert('Invalid max score');
+      const newMy = parseFloat(prompt('Your Score:', exam.myScore));
+      if (isNaN(newMy) || newMy < 0) return alert('Invalid score');
+      if (newMy > newMax) return alert('Score cannot be higher than max');
+      const newDate = prompt('Date (YYYY-MM-DD):', exam.date);
+      if (!newDate) return;
+
+      data.exams[idx] = { subject: newSubject.trim(), maxScore: newMax, myScore: newMy, date: newDate };
+      saveData(data);
+      renderExams();
+    }
+
     function deleteExam(idx) {
+      if (!confirm('Delete this exam?')) return;
       data.exams.splice(idx, 1);
       saveData(data);
       renderExams();
@@ -1154,7 +1700,7 @@
     }
 
     // ================================================
-    // SELF-CARE (EDITABLE)
+    // SELF-CARE
     // ================================================
     function renderCareTable() {
       const body = document.getElementById('careBody');
@@ -1383,7 +1929,7 @@
     window.addSubject = addSubject; window.deleteSubject = deleteSubject; window.updateSubjectName = updateSubjectName;
     window.addLesson = addLesson; window.toggleLesson = toggleLesson; window.deleteLesson = deleteLesson;
     window.updateLessonName = updateLessonName;
-    window.addExam = addExam; window.deleteExam = deleteExam;
+    window.addExam = addExam; window.editExam = editExam; window.deleteExam = deleteExam;
     window.addTask = addTask; window.toggleTask = toggleTask; window.deleteTask = deleteTask; window.updateTaskName = updateTaskName;
     window.toggleWorshipItem = toggleWorshipItem; window.updateWorshipName = updateWorshipName;
     window.addWorshipItem = addWorshipItem; window.deleteWorshipItem = deleteWorshipItem;
@@ -1396,6 +1942,9 @@
     window.showReview = showReview;
     window.exportData = exportData; window.importData = importData;
     window.switchTab = switchTab;
+    window.changeWeek = changeWeek; window.goToCurrentWeek = goToCurrentWeek;
+    window.addTaskToDay = addTaskToDay; window.addWeekTask = addWeekTask;
+    window.changeTaskStatus = changeTaskStatus; window.deleteWeekTask = deleteWeekTask;
   </script>
 </body>
 </html>
