@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
+    /* ===== RESET ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Poppins', sans-serif;
@@ -31,6 +32,7 @@
       --shadow-hover: 0 12px 40px rgba(139, 26, 43, 0.18);
     }
 
+    /* ===== TOP NAVBAR ===== */
     .top-nav {
       background: #FFFFFF;
       padding: 12px 35px;
@@ -71,6 +73,10 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: inherit;
     }
     .nav-links a i { font-size: 1.1rem; }
     .nav-links a:hover { color: var(--burgundy); background: #FFF5F2; }
@@ -83,6 +89,7 @@
 
     .main-content { padding: 30px 35px; max-width: 1400px; margin: 0 auto; }
 
+    /* ===== STATS ===== */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -119,6 +126,7 @@
     .stat-info h3 { font-size: 1.8rem; font-weight: 700; color: var(--text-primary); }
     .stat-info p { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
 
+    /* ===== CARDS ===== */
     .card {
       background: var(--bg-card);
       border-radius: 24px;
@@ -140,6 +148,7 @@
     }
     .card-title i { color: var(--pink-medium); }
 
+    /* ===== BUTTONS ===== */
     .btn {
       background: var(--burgundy);
       border: none;
@@ -167,7 +176,20 @@
     .btn-gold:hover { background: #C49A6A; }
     .btn-green { background: #3D9B7B; color: #FFFFFF; }
     .btn-green:hover { background: #2D7B5F; }
+    .btn-edit {
+      background: transparent;
+      border: 2px solid var(--gold-soft);
+      color: var(--gold-soft);
+      padding: 2px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn-edit:hover { background: var(--gold-soft); color: #FFFFFF; }
 
+    /* ===== INPUTS ===== */
     input, select, textarea {
       background: #FFFBF9;
       border: 2px solid var(--border-color);
@@ -185,11 +207,13 @@
       box-shadow: 0 0 0 4px rgba(178, 34, 60, 0.08);
     }
 
+    /* ===== GRID ===== */
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
     .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
     .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
     .grid-7 { display: grid; grid-template-columns: repeat(7,1fr); gap: 12px; }
 
+    /* ===== TABLES ===== */
     .table-wrap {
       overflow: auto;
       max-height: 500px;
@@ -239,6 +263,7 @@
       right: 0;
     }
 
+    /* ===== SPACE TIMER ===== */
     .space-timer {
       background: linear-gradient(135deg, #FFF5F2, #FFE8EC);
       border: 2px solid var(--pink-soft);
@@ -272,6 +297,7 @@
       z-index: 2;
     }
 
+    /* ===== CHART ===== */
     .chart-container {
       background: #FFFBF9;
       border-radius: 20px;
@@ -280,6 +306,7 @@
       border: 1px solid var(--border-color);
     }
 
+    /* ===== CHECKLIST ===== */
     .checklist { list-style: none; padding: 0; }
     .checklist li {
       padding: 10px 0;
@@ -297,6 +324,7 @@
       cursor: pointer;
     }
 
+    /* ===== TABS ===== */
     .tab-content { display: none; }
     .tab-content.active { display: block; }
     .text-secondary { color: var(--text-secondary); }
@@ -451,7 +479,6 @@
       background: var(--burgundy);
     }
 
-    /* Worship editable */
     .worship-item {
       display: flex;
       align-items: center;
@@ -513,19 +540,6 @@
     }
     .lesson-status.done { background: #D4EDDA; color: #155724; }
     .lesson-status.not-done { background: #F8D7DA; color: #721C24; }
-
-    .btn-edit {
-      background: transparent;
-      border: 2px solid var(--gold-soft);
-      color: var(--gold-soft);
-      padding: 2px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.7rem;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .btn-edit:hover { background: var(--gold-soft); color: #FFFFFF; }
 
     @media (max-width: 1024px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -642,7 +656,6 @@
       <div class="card">
         <div class="card-title"><i class="fas fa-calendar-week"></i> Weekly Planner</div>
         
-        <!-- Week Navigation -->
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; margin-bottom:20px;">
           <div style="display:flex; gap:10px; align-items:center;">
             <button class="btn btn-outline btn-sm" onclick="changeWeek(-1)"><i class="fas fa-chevron-left"></i></button>
@@ -653,7 +666,6 @@
           <button class="btn btn-sm" onclick="addWeekTask()"><i class="fas fa-plus"></i> Add Task</button>
         </div>
 
-        <!-- Week Stats -->
         <div class="week-stats">
           <div class="week-stat-box">
             <h4>📋 Total Tasks</h4>
@@ -673,7 +685,6 @@
           </div>
         </div>
 
-        <!-- Week Days -->
         <div class="grid-7" id="weekDaysContainer"></div>
       </div>
     </div>
@@ -928,7 +939,7 @@
         subjects: [],
         exams: [],
         tasks: [],
-        weeklyPlanner: {}, // { '2024-01-01': [{ id, text, status }] }
+        weeklyPlanner: {},
         worship: {
           prayers: ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'],
           morning: ['O Allah, we have entered the morning', 'We have woken up and the kingdom belongs to Allah'],
@@ -951,7 +962,7 @@
     }
 
     // ================================================
-    // INIT
+    // INIT - FIXED NAVIGATION
     // ================================================
     let data = getData();
     let currentTab = 'dashboard';
@@ -964,16 +975,24 @@
     let currentWeekOffset = 0;
     let taskIdCounter = 1000;
 
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set worship date
       document.getElementById('worshipDate').value = currentWorshipDate;
+      
+      // Render everything
       renderAll();
       updateDate();
-      document.querySelectorAll('#navLinks a').forEach(link => {
-        link.addEventListener('click', (e) => {
+      
+      // ===== FIXED NAVIGATION =====
+      const navLinks = document.querySelectorAll('#navLinks a');
+      navLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
           e.preventDefault();
-          switchTab(link.dataset.tab);
+          const tabId = this.getAttribute('data-tab');
+          switchTab(tabId);
         });
       });
+      
       setTimerPreset();
     });
 
@@ -982,18 +1001,39 @@
       document.getElementById('todayDate').textContent = now.toLocaleDateString('en-US', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
     }
 
+    // ===== SWITCH TAB FUNCTION =====
     function switchTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
-      document.querySelectorAll('#navLinks a').forEach(el => el.classList.remove('active'));
-      document.querySelector(`#navLinks a[data-tab="${tabId}"]`).classList.add('active');
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      
+      // Show selected tab
+      const targetTab = document.getElementById(tabId);
+      if (targetTab) {
+        targetTab.classList.add('active');
+      }
+      
+      // Update nav links
+      document.querySelectorAll('#navLinks a').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      
+      const activeLink = document.querySelector('#navLinks a[data-tab="' + tabId + '"]');
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+      
       currentTab = tabId;
+      
+      // Render specific sections
       if (tabId === 'reviews') renderReview('weekly');
       if (tabId === 'subjects') renderSubjects();
       if (tabId === 'selfcare') renderCareTable();
       if (tabId === 'worship') loadWorshipForDate();
       if (tabId === 'exams') renderExams();
       if (tabId === 'weeklyplanner') renderWeeklyPlanner();
+      
       updateStats();
     }
 
@@ -1043,7 +1083,7 @@
     // ================================================
     function getWeekDays(offset) {
       const now = new Date();
-      const day = now.getDay(); // 0 = Sunday
+      const day = now.getDay();
       const diff = now.getDate() - day + (offset * 7);
       const monday = new Date(now);
       monday.setDate(diff);
@@ -1061,7 +1101,6 @@
       const days = getWeekDays(currentWeekOffset);
       const container = document.getElementById('weekDaysContainer');
       
-      // Update label
       const start = days[0];
       const end = days[6];
       document.getElementById('weekLabel').textContent = 
@@ -1218,7 +1257,7 @@
           <input type="checkbox" class="worship-check" ${statuses[idx] ? 'checked' : ''} 
                  onchange="toggleWorshipItem('${type}', ${idx})">
           <input type="text" value="${name}" onchange="updateWorshipName('${type}', ${idx}, this.value)" 
-                 class="editable" style="flex:1; min-width:80px; padding:4px 10px; margin:0; border:2px dashed var(--pink-soft); background:#FFF9F7; border-radius:10px; font-size:0.9rem;">
+                 style="flex:1; min-width:80px; padding:4px 10px; margin:0; border:2px dashed var(--pink-soft); background:#FFF9F7; border-radius:10px; font-size:0.9rem;">
           <button onclick="deleteWorshipItem('${type}', ${idx})" style="background:none; border:none; color:var(--burgundy); cursor:pointer;">🗑️</button>
         </div>
       `).join('');
