@@ -210,6 +210,10 @@
     .btn-pink:hover {
       background: var(--pink-soft);
     }
+    .btn-sm {
+      padding: 5px 14px;
+      font-size: 0.75rem;
+    }
 
     /* ===== INPUTS ===== */
     input, select, textarea {
@@ -234,20 +238,20 @@
     .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
     .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
 
-    /* ===== LIFE-LONG TABLE ===== */
-    .lifetime-table-wrap {
+    /* ===== TABLES ===== */
+    .table-wrap {
       overflow: auto;
       max-height: 500px;
       border-radius: 16px;
       background: #FFFBF9;
       border: 1px solid var(--border-color);
     }
-    .lifetime-table {
+    .data-table {
       border-collapse: collapse;
-      min-width: 800px;
+      min-width: 600px;
       width: 100%;
     }
-    .lifetime-table th {
+    .data-table th {
       background: var(--burgundy);
       color: #FFFFFF;
       padding: 14px 8px;
@@ -257,14 +261,13 @@
       z-index: 5;
       font-weight: 600;
     }
-    .lifetime-table td {
+    .data-table td {
       padding: 12px 8px;
       border: 1px solid var(--border-color);
       text-align: center;
-      min-width: 60px;
       color: var(--text-primary);
     }
-    .lifetime-table td input {
+    .data-table td input {
       width: 55px;
       padding: 6px;
       margin: 0;
@@ -274,7 +277,7 @@
       border-radius: 8px;
       color: var(--text-primary);
     }
-    .lifetime-table .row-label {
+    .data-table .row-label {
       background: #FFF5F2;
       font-weight: 600;
       color: var(--burgundy);
@@ -283,6 +286,21 @@
       padding-right: 15px;
       position: sticky;
       right: 0;
+    }
+    .data-table td .done-badge {
+      display: inline-block;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .data-table td .done-badge.done {
+      background: #D4EDDA;
+      color: #155724;
+    }
+    .data-table td .done-badge.not-done {
+      background: #F8D7DA;
+      color: #721C24;
     }
 
     /* ===== SPACE TIMER ===== */
@@ -347,6 +365,32 @@
       height: 20px;
       accent-color: var(--burgundy);
       cursor: pointer;
+    }
+
+    /* ===== SUBJECT LESSONS ===== */
+    .lesson-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid #F5EAE8;
+    }
+    .lesson-item .lesson-name {
+      flex: 1;
+    }
+    .lesson-item .lesson-status {
+      font-size: 0.8rem;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .lesson-item .lesson-status.done {
+      background: #D4EDDA;
+      color: #155724;
+    }
+    .lesson-item .lesson-status.not-done {
+      background: #F8D7DA;
+      color: #721C24;
     }
 
     /* ===== TABS ===== */
@@ -502,8 +546,8 @@
           <button class="btn" onclick="addLifeRow()">Add Row</button>
           <button class="btn btn-outline" onclick="addLifeColumn()">Add Column</button>
         </div>
-        <div class="lifetime-table-wrap">
-          <table class="lifetime-table" id="lifeTable">
+        <div class="table-wrap">
+          <table class="data-table" id="lifeTable">
             <thead id="lifeHead"></thead>
             <tbody id="lifeBody"></tbody>
           </table>
@@ -511,15 +555,15 @@
       </div>
     </div>
 
-    <!-- ==================== SUBJECTS ==================== -->
+    <!-- ==================== SUBJECTS (with Lessons) ==================== -->
     <div id="subjects" class="tab-content">
       <div class="card">
-        <div class="card-title"><i class="fas fa-book-open"></i> My Subjects</div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <input type="text" id="subjectName" placeholder="Subject name" style="flex:1; min-width:200px;">
+        <div class="card-title"><i class="fas fa-book-open"></i> My Subjects & Lessons</div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
+          <input type="text" id="subjectName" placeholder="Subject name" style="flex:1; min-width:150px;">
           <button class="btn" onclick="addSubject()">Add Subject</button>
         </div>
-        <ul id="subjectList" class="checklist" style="margin-top: 20px;"></ul>
+        <div id="subjectListContainer"></div>
       </div>
     </div>
 
@@ -556,7 +600,7 @@
       </div>
     </div>
 
-    <!-- ==================== SELF-CARE ==================== -->
+    <!-- ==================== SELF-CARE (with Infinite Table) ==================== -->
     <div id="selfcare" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-spa"></i> Daily Self-Care</div>
@@ -568,7 +612,28 @@
           <button class="btn btn-pink" onclick="switchCareTab('nails')">Nails</button>
           <button class="btn btn-pink" onclick="switchCareTab('exercise')">Exercise</button>
         </div>
-        <div id="careContent" class="checklist"></div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+          <input type="text" id="newCareItem" placeholder="Add new care item" style="flex:1; min-width:150px;">
+          <button class="btn" onclick="addCareItem()">Add Item</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" id="careTable">
+            <thead>
+              <tr>
+                <th style="min-width:200px;">Care Item</th>
+                <th style="min-width:80px;">Day 1</th>
+                <th style="min-width:80px;">Day 2</th>
+                <th style="min-width:80px;">Day 3</th>
+                <th style="min-width:80px;">Day 4</th>
+                <th style="min-width:80px;">Day 5</th>
+                <th style="min-width:80px;">Day 6</th>
+                <th style="min-width:80px;">Day 7</th>
+                <th style="min-width:60px;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="careBody"></tbody>
+          </table>
+        </div>
         <button class="btn" onclick="saveCare()" style="margin-top: 15px;">Save Care</button>
       </div>
     </div>
@@ -638,7 +703,7 @@
         lifeRows: ['Programming', 'Korean', 'French', 'Design'],
         lifeCols: [],
         lifeCells: {},
-        subjects: [],
+        subjects: [], // { name, lessons: [{ name, done }] }
         exams: [],
         tasks: [],
         worship: {
@@ -656,6 +721,7 @@
           nails: ['Hand cream', 'Cut nails'],
           exercise: ['Resistance training', 'Walk 30 min']
         },
+        careTracker: {}, // { skin: { 'Gentle cleanser': { '2024-01-01': true, ... } } }
         timerSessions: 0,
         reviewData: { weekly: [], monthly: [], yearly: [] }
       };
@@ -702,6 +768,8 @@
       document.querySelector(`#navLinks a[data-tab="${tabId}"]`).classList.add('active');
       currentTab = tabId;
       if (tabId === 'reviews') renderReview('weekly');
+      if (tabId === 'subjects') renderSubjects();
+      if (tabId === 'selfcare') renderCareTable();
       updateStats();
     }
 
@@ -714,7 +782,7 @@
       renderExams();
       renderTasks();
       renderWorship();
-      renderCare();
+      renderCareTable();
       renderDashboard();
       updateStats();
     }
@@ -745,7 +813,9 @@
       document.getElementById('todayWorship').innerHTML = `<li>🌟 Completed ${doneCount} out of ${worshipItems.length} worship items today</li>`;
     }
 
-    // ---------- LIFE TABLE ----------
+    // ================================================
+    // LIFE-LONG TRACKER
+    // ================================================
     function renderLifeTable() {
       const head = document.getElementById('lifeHead');
       const body = document.getElementById('lifeBody');
@@ -762,16 +832,18 @@
         const d = new Date(col);
         htmlHead += `<th>${d.getDate()}/${d.getMonth()+1}</th>`;
       });
+      htmlHead += '<th style="min-width:60px;">Action</th>';
       head.innerHTML = htmlHead;
 
       let htmlBody = '';
       data.lifeRows.forEach((row, rowIdx) => {
-        htmlBody += `<tr><td class="row-label">${row} <button onclick="deleteRow(${rowIdx})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button></td>`;
+        htmlBody += `<tr><td class="row-label">${row}</td>`;
         data.lifeCols.forEach((col, colIdx) => {
           const key = `${rowIdx}_${colIdx}`;
           const val = data.lifeCells[key] || '';
           htmlBody += `<td><input type="text" value="${val}" onchange="updateCell(${rowIdx},${colIdx},this.value)"></td>`;
         });
+        htmlBody += `<td><button onclick="deleteLifeRow(${rowIdx})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;font-size:1.1rem;">🗑️</button></td>`;
         htmlBody += '</tr>';
       });
       body.innerHTML = htmlBody;
@@ -789,7 +861,7 @@
       renderLifeTable();
       document.getElementById('newRowName').value = '';
     }
-    function deleteRow(idx) {
+    function deleteLifeRow(idx) {
       if (!confirm('Delete this row?')) return;
       data.lifeRows.splice(idx, 1);
       for (let key in data.lifeCells) {
@@ -812,28 +884,89 @@
       renderLifeTable();
     }
 
-    // ---------- SUBJECTS ----------
+    // ================================================
+    // SUBJECTS (with Lessons)
+    // ================================================
     function renderSubjects() {
-      const ul = document.getElementById('subjectList');
-      ul.innerHTML = data.subjects.map((s, i) => `<li>${s.name} <span style="color:var(--pink-medium); font-weight:600;">${s.progress||0}%</span> <button onclick="deleteSubject(${i})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button></li>`).join('');
+      const container = document.getElementById('subjectListContainer');
+      if (data.subjects.length === 0) {
+        container.innerHTML = '<p style="color:var(--text-secondary);">No subjects yet. Add one above!</p>';
+        return;
+      }
+      let html = '';
+      data.subjects.forEach((subject, idx) => {
+        html += `
+          <div class="card" style="margin-bottom:15px; padding:18px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+              <h4 style="color:var(--burgundy); font-size:1.1rem;">
+                <i class="fas fa-book" style="color:var(--pink-medium);"></i> ${subject.name}
+              </h4>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <button class="btn btn-pink btn-sm" onclick="addLesson(${idx})"><i class="fas fa-plus"></i> Add Lesson</button>
+                <button class="btn btn-outline btn-sm" onclick="deleteSubject(${idx})"><i class="fas fa-trash"></i> Delete</button>
+              </div>
+            </div>
+            <div>
+              ${subject.lessons && subject.lessons.length > 0 ? subject.lessons.map((lesson, li) => `
+                <div class="lesson-item">
+                  <span class="lesson-name">${lesson.name}</span>
+                  <span class="lesson-status ${lesson.done ? 'done' : 'not-done'}">${lesson.done ? '✅ Done' : '⏳ Not Done'}</span>
+                  <button onclick="toggleLesson(${idx}, ${li})" style="background:none;border:2px solid var(--pink-medium);border-radius:20px;padding:2px 12px;cursor:pointer;color:var(--burgundy);font-weight:600;font-size:0.75rem;">
+                    ${lesson.done ? 'Mark Undone' : 'Mark Done'}
+                  </button>
+                  <button onclick="deleteLesson(${idx}, ${li})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button>
+                </div>
+              `).join('') : '<p style="color:var(--text-secondary); font-size:0.9rem;">No lessons yet. Add your first lesson!</p>'}
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
     }
+
     function addSubject() {
       const name = document.getElementById('subjectName').value.trim();
-      if (!name) return;
-      data.subjects.push({ name, progress: 0, notes: '' });
+      if (!name) return alert('Enter a subject name');
+      data.subjects.push({ name, lessons: [] });
       saveData(data);
       renderSubjects();
       document.getElementById('subjectName').value = '';
       updateStats();
     }
+
     function deleteSubject(idx) {
+      if (!confirm('Delete this subject and all its lessons?')) return;
       data.subjects.splice(idx, 1);
       saveData(data);
       renderSubjects();
       updateStats();
     }
 
-    // ---------- EXAMS ----------
+    function addLesson(idx) {
+      const name = prompt('Enter lesson name:');
+      if (!name || name.trim() === '') return;
+      if (!data.subjects[idx].lessons) data.subjects[idx].lessons = [];
+      data.subjects[idx].lessons.push({ name: name.trim(), done: false });
+      saveData(data);
+      renderSubjects();
+    }
+
+    function toggleLesson(subjectIdx, lessonIdx) {
+      data.subjects[subjectIdx].lessons[lessonIdx].done = !data.subjects[subjectIdx].lessons[lessonIdx].done;
+      saveData(data);
+      renderSubjects();
+    }
+
+    function deleteLesson(subjectIdx, lessonIdx) {
+      if (!confirm('Delete this lesson?')) return;
+      data.subjects[subjectIdx].lessons.splice(lessonIdx, 1);
+      saveData(data);
+      renderSubjects();
+    }
+
+    // ================================================
+    // EXAMS
+    // ================================================
     function renderExams() {
       const ul = document.getElementById('examList');
       ul.innerHTML = data.exams.map((e, i) => `<li>${e.subject} - ${e.date} <span style="color:var(--pink-medium);">Target: ${e.target}</span> <button onclick="deleteExam(${i})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button></li>`).join('');
@@ -856,7 +989,9 @@
       renderExams();
     }
 
-    // ---------- TASKS ----------
+    // ================================================
+    // TASKS
+    // ================================================
     function renderTasks() {
       const ul = document.getElementById('taskList');
       ul.innerHTML = data.tasks.map((t, i) => `<li><input type="checkbox" onchange="toggleTask(${i})" ${t.done?'checked':''}> ${t.title} <span style="color:var(--pink-medium); font-weight:500;">${t.priority}</span> <span style="color:var(--text-secondary); font-size:0.85rem;">${t.date}</span> <button onclick="deleteTask(${i})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button></li>`).join('');
@@ -887,7 +1022,9 @@
       updateStats();
     }
 
-    // ---------- WORSHIP ----------
+    // ================================================
+    // WORSHIP
+    // ================================================
     function renderWorship() {
       const today = new Date().toDateString();
       const done = data.worship.completed[today] || {};
@@ -922,30 +1059,87 @@
       alert('Quran reading progress saved!');
     }
 
-    // ---------- CARE ----------
-    function renderCare() {
+    // ================================================
+    // SELF-CARE (Infinite Table)
+    // ================================================
+    function renderCareTable() {
+      const body = document.getElementById('careBody');
       const items = data.care[careTab] || [];
-      const container = document.getElementById('careContent');
-      container.innerHTML = items.map((item, i) => 
-        `<li><input type="checkbox" onchange="toggleCareItem('${careTab}',${i})"> ${item}</li>`
-      ).join('');
+      
+      // Get last 7 days
+      const days = [];
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        days.push(d.toISOString().slice(0,10));
+      }
+      
+      if (items.length === 0) {
+        body.innerHTML = `<tr><td colspan="9" style="color:var(--text-secondary);">No items. Add one below!</td></tr>`;
+        return;
+      }
+      
+      let html = '';
+      items.forEach((item, idx) => {
+        html += `<tr>`;
+        html += `<td class="row-label">${item}</td>`;
+        days.forEach(day => {
+          const key = `${careTab}_${item}_${day}`;
+          const checked = data.careTracker && data.careTracker[careTab] && data.careTracker[careTab][item] && data.careTracker[careTab][item][day] ? true : false;
+          html += `<td><input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleCareDay('${careTab}','${item}','${day}')" style="width:20px;height:20px;accent-color:var(--burgundy);cursor:pointer;"></td>`;
+        });
+        html += `<td><button onclick="deleteCareItem(${idx})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;font-size:1.1rem;">🗑️</button></td>`;
+        html += `</tr>`;
+      });
+      body.innerHTML = html;
     }
+
+    function toggleCareDay(tab, item, day) {
+      if (!data.careTracker) data.careTracker = {};
+      if (!data.careTracker[tab]) data.careTracker[tab] = {};
+      if (!data.careTracker[tab][item]) data.careTracker[tab][item] = {};
+      data.careTracker[tab][item][day] = !data.careTracker[tab][item][day];
+      saveData(data);
+      renderCareTable();
+    }
+
+    function addCareItem() {
+      const name = document.getElementById('newCareItem').value.trim();
+      if (!name) return alert('Enter a care item name');
+      if (!data.care[careTab]) data.care[careTab] = [];
+      data.care[careTab].push(name);
+      // Initialize tracker
+      if (!data.careTracker) data.careTracker = {};
+      if (!data.careTracker[careTab]) data.careTracker[careTab] = {};
+      data.careTracker[careTab][name] = {};
+      saveData(data);
+      renderCareTable();
+      document.getElementById('newCareItem').value = '';
+    }
+
+    function deleteCareItem(idx) {
+      if (!confirm('Delete this care item?')) return;
+      const item = data.care[careTab][idx];
+      data.care[careTab].splice(idx, 1);
+      if (data.careTracker && data.careTracker[careTab]) {
+        delete data.careTracker[careTab][item];
+      }
+      saveData(data);
+      renderCareTable();
+    }
+
     function switchCareTab(tab) {
       careTab = tab;
-      renderCare();
+      renderCareTable();
     }
-    function toggleCareItem(tab, idx) {
-      if (!data.careChecked) data.careChecked = {};
-      const key = `${tab}_${idx}`;
-      data.careChecked[key] = !data.careChecked[key];
-      saveData(data);
-      renderCare();
-    }
+
     function saveCare() {
       alert('Care routine saved automatically!');
     }
 
-    // ---------- TIMERS ----------
+    // ================================================
+    // TIMERS
+    // ================================================
     function setTimerPreset() {
       const val = parseInt(document.getElementById('timerPreset').value);
       fullSeconds = val * 60;
@@ -1003,7 +1197,9 @@
       fullPaused = false;
     }
 
-    // ---------- REVIEWS ----------
+    // ================================================
+    // REVIEWS
+    // ================================================
     let reviewChart = null;
     function renderReview(period) {
       const ctx = document.getElementById('reviewChart').getContext('2d');
@@ -1055,7 +1251,9 @@
     }
     function showReview(period) { renderReview(period); }
 
-    // ---------- SETTINGS ----------
+    // ================================================
+    // SETTINGS
+    // ================================================
     function exportData() {
       const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
       const a = document.createElement('a');
@@ -1083,14 +1281,18 @@
       input.click();
     }
 
-    // ---------- GLOBAL FUNCTIONS ----------
+    // ================================================
+    // GLOBAL FUNCTIONS
+    // ================================================
     window.addLifeRow = addLifeRow; window.addLifeColumn = addLifeColumn;
-    window.updateCell = updateCell; window.deleteRow = deleteRow;
+    window.updateCell = updateCell; window.deleteLifeRow = deleteLifeRow;
     window.addSubject = addSubject; window.deleteSubject = deleteSubject;
+    window.addLesson = addLesson; window.toggleLesson = toggleLesson; window.deleteLesson = deleteLesson;
     window.addExam = addExam; window.deleteExam = deleteExam;
     window.addTask = addTask; window.toggleTask = toggleTask; window.deleteTask = deleteTask;
     window.toggleWorship = toggleWorship; window.saveWorship = saveWorship;
-    window.switchCareTab = switchCareTab; window.toggleCareItem = toggleCareItem; window.saveCare = saveCare;
+    window.switchCareTab = switchCareTab; window.addCareItem = addCareItem; window.deleteCareItem = deleteCareItem;
+    window.toggleCareDay = toggleCareDay; window.saveCare = saveCare;
     window.startQuickTimer = startQuickTimer; window.pauseQuickTimer = pauseQuickTimer; window.resetQuickTimer = resetQuickTimer;
     window.startFullTimer = startFullTimer; window.pauseFullTimer = pauseFullTimer; window.resetFullTimer = resetFullTimer;
     window.setTimerPreset = setTimerPreset;
