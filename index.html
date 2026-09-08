@@ -6,6 +6,7 @@
   <title>Kimi Life & Self Care</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -33,6 +34,9 @@
       border-bottom: 2px solid var(--border-color);
       flex-wrap: wrap;
       gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
     .nav-brand {
       font-size: 1.5rem;
@@ -110,9 +114,20 @@
       font-size: 0.85rem;
     }
     .btn:hover { background: var(--burgundy-light); transform: scale(1.03); }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--pink-medium);
+      color: var(--burgundy);
+    }
+    .btn-outline:hover { background: var(--pink-soft); color: #FFFFFF; }
+    .btn-pink { background: var(--pink-medium); color: #FFFFFF; }
+    .btn-pink:hover { background: var(--pink-soft); }
+    .btn-sm { padding: 5px 14px; font-size: 0.75rem; }
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
     .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    .grid-7 { display: grid; grid-template-columns: repeat(7,1fr); gap: 12px; }
 
     .stats-grid {
       display: grid;
@@ -160,16 +175,172 @@
       accent-color: var(--burgundy);
       cursor: pointer;
     }
+    .checklist input[type="text"] {
+      flex: 1;
+      min-width: 100px;
+      padding: 4px 10px;
+      border: 2px dashed var(--pink-soft);
+      background: #FFF9F7;
+      border-radius: 10px;
+      font-size: 0.9rem;
+    }
 
+    .space-timer {
+      background: linear-gradient(135deg, #FFF5F2, #FFE8EC);
+      border: 2px solid var(--pink-soft);
+      border-radius: 60px;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .timer-display {
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--burgundy);
+      position: relative;
+      z-index: 2;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      max-height: 500px;
+      border-radius: 16px;
+      background: #FFFBF9;
+      border: 1px solid var(--border-color);
+    }
+    .data-table {
+      border-collapse: collapse;
+      min-width: 600px;
+      width: 100%;
+    }
+    .data-table th {
+      background: var(--burgundy);
+      color: #FFFFFF;
+      padding: 14px 8px;
+      border: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      font-weight: 600;
+    }
+    .data-table td {
+      padding: 12px 8px;
+      border: 1px solid var(--border-color);
+      text-align: center;
+      color: var(--text-primary);
+    }
+    .data-table .row-label {
+      background: #FFF5F2;
+      font-weight: 600;
+      color: var(--burgundy);
+      min-width: 120px;
+      text-align: right;
+      padding-right: 15px;
+      position: sticky;
+      right: 0;
+    }
+
+    .week-day {
+      background: #FFFBF9;
+      border-radius: 16px;
+      padding: 15px;
+      border: 1px solid var(--border-color);
+      min-height: 200px;
+    }
+    .week-day .day-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border-color);
+    }
+    .week-day .day-name { font-weight: 700; color: var(--burgundy); }
+    .week-day .day-tasks { list-style: none; padding: 0; max-height: 150px; overflow-y: auto; }
+    .week-day .day-tasks li { padding: 4px 0; border-bottom: 1px solid #F5EAE8; font-size: 0.85rem; }
+    .week-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .week-stat-box {
+      background: #FFF5F2;
+      border-radius: 16px;
+      padding: 15px 20px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+    .week-stat-box .number { font-size: 1.8rem; font-weight: 700; color: var(--burgundy); }
+
+    .worship-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      flex-wrap: wrap;
+    }
+    .worship-item input[type="text"] {
+      flex: 1;
+      min-width: 80px;
+      padding: 4px 10px;
+      border: 2px dashed var(--pink-soft);
+      background: #FFF9F7;
+      border-radius: 10px;
+      font-size: 0.85rem;
+    }
+    .worship-item .worship-check { width: 18px; height: 18px; accent-color: var(--burgundy); cursor: pointer; }
+
+    .exam-stat-box {
+      background: #FFF5F2;
+      border-radius: 16px;
+      padding: 15px 20px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+    .exam-stat-box .number { font-size: 1.8rem; font-weight: 700; color: var(--burgundy); }
+    .exam-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
+    .exam-table td .score-bar {
+      height: 6px;
+      border-radius: 10px;
+      background: #F0E0DF;
+      margin-top: 4px;
+      overflow: hidden;
+      width: 100%;
+    }
+    .exam-table td .score-bar .fill { height: 100%; border-radius: 10px; transition: 0.5s; background: var(--burgundy); }
+
+    .chart-container {
+      background: #FFFBF9;
+      border-radius: 20px;
+      padding: 15px;
+      height: 220px;
+      border: 1px solid var(--border-color);
+    }
+
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .exam-stats { grid-template-columns: repeat(2, 1fr); }
+      .week-stats { grid-template-columns: repeat(2, 1fr); }
+      .grid-7 { grid-template-columns: repeat(4, 1fr); }
+    }
     @media (max-width: 768px) {
       .top-nav { flex-direction: column; align-items: stretch; }
       .nav-links { justify-content: center; }
       .main-content { padding: 20px; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
       .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: 1fr 1fr; }
+      .grid-7 { grid-template-columns: repeat(2, 1fr); }
+      .timer-display { font-size: 2.5rem; }
+      .exam-stats { grid-template-columns: 1fr; }
+      .week-stats { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       .stats-grid { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: 1fr; }
+      .grid-7 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -196,7 +367,7 @@
   <!-- ===== MAIN CONTENT ===== -->
   <div class="main-content">
 
-    <!-- ===== DASHBOARD ===== -->
+    <!-- ==================== DASHBOARD ==================== -->
     <div id="dashboard" class="tab-content active">
       <div class="stats-grid">
         <div class="stat-card">
@@ -217,111 +388,220 @@
         </div>
       </div>
 
-      <h1 style="font-size:2rem; font-weight:700; margin-bottom:8px;">🌸 Welcome back, Kimi!</h1>
-      <p style="font-size:1.1rem; color:var(--text-secondary); margin-bottom:25px;"><span id="todayDate"></span></p>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:25px;">
+        <h1 style="font-size:2rem; font-weight:700;">🌸 Welcome back, Kimi!</h1>
+        <p style="font-size:1.1rem; color:var(--text-secondary);"><span id="todayDate"></span></p>
+      </div>
 
       <div class="grid-2">
         <div class="card">
           <div class="card-title"><i class="fas fa-check-circle"></i> Today's Tasks</div>
-          <ul id="todayTasks" class="checklist"><li>✨ No tasks for today</li></ul>
+          <ul id="todayTasks" class="checklist"></ul>
         </div>
         <div class="card">
           <div class="card-title"><i class="fas fa-star"></i> Today's Worship</div>
-          <ul id="todayWorship" class="checklist"><li>🌟 No worship recorded</li></ul>
+          <ul id="todayWorship" class="checklist"></ul>
+        </div>
+      </div>
+
+      <div class="card space-timer">
+        <div class="card-title" style="justify-content:center;"><i class="fas fa-rocket"></i> Quick Timer</div>
+        <div class="timer-display" id="quickTimer">25:00</div>
+        <div style="margin-top:15px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+          <button class="btn" onclick="startQuickTimer()">Start</button>
+          <button class="btn btn-outline" onclick="pauseQuickTimer()">Pause</button>
+          <button class="btn btn-outline" onclick="resetQuickTimer()">Reset</button>
         </div>
       </div>
     </div>
 
-    <!-- ===== WEEKLY PLANNER ===== -->
+    <!-- ==================== WEEKLY PLANNER ==================== -->
     <div id="weeklyplanner" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-calendar-week"></i> Weekly Planner</div>
-        <p style="color:var(--text-secondary);">This section is ready for your weekly tasks!</p>
-        <button class="btn" onclick="alert('Weekly Planner coming soon!')">Add Task</button>
+        <div style="display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap;">
+          <button class="btn btn-outline btn-sm" onclick="changeWeek(-1)"><i class="fas fa-chevron-left"></i></button>
+          <span id="weekLabel" style="font-weight:600; color:var(--burgundy); font-size:1.1rem;"></span>
+          <button class="btn btn-outline btn-sm" onclick="changeWeek(1)"><i class="fas fa-chevron-right"></i></button>
+          <button class="btn btn-sm btn-pink" onclick="goToCurrentWeek()">Today</button>
+          <button class="btn btn-sm" onclick="addWeekTask()"><i class="fas fa-plus"></i> Add Task</button>
+        </div>
+        <div class="week-stats">
+          <div class="week-stat-box"><h4>📋 Total</h4><div class="number" id="weekTotalTasks">0</div></div>
+          <div class="week-stat-box"><h4>✅ Done</h4><div class="number" id="weekCompletedTasks">0</div></div>
+          <div class="week-stat-box"><h4>⏳ Progress</h4><div class="number" id="weekInProgressTasks">0</div></div>
+          <div class="week-stat-box"><h4>📈 Rate</h4><div class="number" id="weekCompletionRate">0%</div></div>
+        </div>
+        <div class="grid-7" id="weekDaysContainer"></div>
       </div>
     </div>
 
-    <!-- ===== WORSHIP ===== -->
+    <!-- ==================== WORSHIP ==================== -->
     <div id="worship" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-mosque"></i> My Worship</div>
-        <p style="color:var(--text-secondary);">Track your daily worship here!</p>
-        <button class="btn" onclick="alert('Worship section coming soon!')">Add Worship</button>
+        <div style="display:flex; gap:15px; align-items:center; flex-wrap:wrap; margin-bottom:20px;">
+          <label>Date:</label>
+          <input type="date" id="worshipDate" style="width:auto; margin:0;">
+          <button class="btn btn-sm" onclick="loadWorshipForDate()">Load</button>
+          <button class="btn btn-pink btn-sm" onclick="saveWorshipForDate()">Save</button>
+        </div>
+        <div class="grid-3">
+          <div><h4>Prayers</h4><div id="prayerList" class="checklist"></div></div>
+          <div><h4>Morning Dhikr</h4><div id="morningAdhkar" class="checklist"></div></div>
+          <div><h4>Evening Dhikr</h4><div id="eveningAdhkar" class="checklist"></div></div>
+        </div>
+        <div style="margin-top:20px;">
+          <label>Quran Pages: <input type="number" id="quranPages" value="2" style="width:80px; display:inline;"></label>
+          <button class="btn" onclick="saveQuranPages()">Save</button>
+        </div>
+        <div id="worshipStats" style="margin-top:15px; color:var(--burgundy); font-weight:600;"></div>
       </div>
     </div>
 
-    <!-- ===== TRACKER ===== -->
+    <!-- ==================== LIFE-LONG TRACKER ==================== -->
     <div id="lifetracker" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-infinity"></i> Life-Long Tracker</div>
-        <p style="color:var(--text-secondary);">Track your lifelong skills here!</p>
-        <button class="btn" onclick="alert('Tracker coming soon!')">Add Skill</button>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
+          <input type="text" id="newRowName" placeholder="New skill name" style="flex:1; min-width:150px;">
+          <button class="btn" onclick="addLifeRow()">Add Row</button>
+          <button class="btn btn-outline" onclick="addLifeColumn()">Add Column</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" id="lifeTable">
+            <thead id="lifeHead"></thead>
+            <tbody id="lifeBody"></tbody>
+          </table>
+        </div>
       </div>
     </div>
 
-    <!-- ===== SUBJECTS ===== -->
+    <!-- ==================== SUBJECTS ==================== -->
     <div id="subjects" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-book-open"></i> My Subjects</div>
-        <p style="color:var(--text-secondary);">Manage your subjects and lessons here!</p>
-        <button class="btn" onclick="alert('Subjects coming soon!')">Add Subject</button>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
+          <input type="text" id="subjectName" placeholder="Subject name" style="flex:1; min-width:150px;">
+          <button class="btn" onclick="addSubject()">Add Subject</button>
+        </div>
+        <div id="subjectListContainer"></div>
       </div>
     </div>
 
-    <!-- ===== EXAMS ===== -->
+    <!-- ==================== EXAMS ==================== -->
     <div id="exams" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-pencil-alt"></i> Exam Tracker</div>
-        <p style="color:var(--text-secondary);">Track your exam scores here!</p>
-        <button class="btn" onclick="alert('Exams coming soon!')">Add Exam</button>
+        <div class="exam-stats">
+          <div class="exam-stat-box"><h4>📊 Average</h4><div class="number" id="avgScore">0%</div></div>
+          <div class="exam-stat-box"><h4>📚 Total</h4><div class="number" id="totalExams">0</div></div>
+          <div class="exam-stat-box"><h4>🏆 Best</h4><div class="number" id="bestSubject" style="font-size:1.2rem;">-</div></div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr auto; gap:10px; align-items:end; margin-bottom:20px;">
+          <input type="text" id="examSubject" placeholder="Subject">
+          <input type="number" id="examMaxScore" placeholder="Max Score">
+          <input type="number" id="examMyScore" placeholder="My Score">
+          <input type="date" id="examDate">
+          <button class="btn" onclick="addExam()">Add</button>
+        </div>
+        <div class="table-wrap exam-table">
+          <table class="data-table" id="examTable">
+            <thead><tr><th>Subject</th><th>Max</th><th>My Score</th><th>%</th><th>Date</th><th>Action</th></tr></thead>
+            <tbody id="examBody"></tbody>
+          </table>
+        </div>
+        <div style="margin-top:20px;">
+          <h4 style="color:var(--burgundy);">📈 Performance by Subject</h4>
+          <div class="chart-container"><canvas id="examChart"></canvas></div>
+        </div>
       </div>
     </div>
 
-    <!-- ===== TIMER ===== -->
+    <!-- ==================== TIMER ==================== -->
     <div id="timer" class="tab-content">
-      <div class="card">
-        <div class="card-title"><i class="fas fa-rocket"></i> Space Timer</div>
-        <p style="color:var(--text-secondary);">Focus timer with space theme!</p>
-        <button class="btn" onclick="alert('Timer coming soon!')">Start Timer</button>
+      <div class="card space-timer">
+        <div class="card-title" style="justify-content:center;"><i class="fas fa-rocket"></i> Advanced Timer</div>
+        <div class="timer-display" id="fullTimer">25:00</div>
+        <div style="margin-top:15px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+          <button class="btn" onclick="startFullTimer()">Start</button>
+          <button class="btn btn-outline" onclick="pauseFullTimer()">Pause</button>
+          <button class="btn btn-outline" onclick="resetFullTimer()">Reset</button>
+          <select id="timerPreset" onchange="setTimerPreset()" style="width:auto; background:#FFFFFF;">
+            <option value="25">25 min</option>
+            <option value="5">5 min</option>
+            <option value="10">10 min</option>
+          </select>
+        </div>
+        <div style="margin-top:15px; color:var(--text-secondary);">Sessions: <span id="sessionCount" style="color:var(--burgundy); font-weight:700;">0</span></div>
       </div>
     </div>
 
-    <!-- ===== SELF-CARE ===== -->
+    <!-- ==================== SELF-CARE ==================== -->
     <div id="selfcare" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-spa"></i> Daily Self-Care</div>
-        <p style="color:var(--text-secondary);">Track your self-care routine here!</p>
-        <button class="btn" onclick="alert('Self-Care coming soon!')">Add Routine</button>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
+          <button class="btn btn-pink btn-sm" onclick="switchCareTab('skin')">Skin</button>
+          <button class="btn btn-pink btn-sm" onclick="switchCareTab('hair')">Hair</button>
+          <button class="btn btn-pink btn-sm" onclick="switchCareTab('body')">Body</button>
+          <button class="btn btn-pink btn-sm" onclick="switchCareTab('clothes')">Clothes</button>
+          <button class="btn btn-pink btn-sm" onclick="switchCareTab('nails')">Nails</button>
+          <button class="btn btn-pink btn-sm" onclick="switchCareTab('exercise')">Exercise</button>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
+          <input type="text" id="newCareItem" placeholder="Add new item" style="flex:1; min-width:150px;">
+          <button class="btn" onclick="addCareItem()">Add</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" id="careTable">
+            <thead><tr><th>Item</th><th>Day1</th><th>Day2</th><th>Day3</th><th>Day4</th><th>Day5</th><th>Day6</th><th>Day7</th><th>Action</th></tr></thead>
+            <tbody id="careBody"></tbody>
+          </table>
+        </div>
       </div>
     </div>
 
-    <!-- ===== TASKS ===== -->
+    <!-- ==================== TASKS ==================== -->
     <div id="tasks" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-tasks"></i> My Tasks</div>
-        <p style="color:var(--text-secondary);">Manage all your tasks here!</p>
-        <button class="btn" onclick="alert('Tasks coming soon!')">Add Task</button>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <input type="text" id="taskInput" placeholder="New task" style="flex:1; min-width:150px;">
+          <input type="date" id="taskDate" style="width:auto;">
+          <select id="taskPriority" style="width:auto;">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+          <button class="btn" onclick="addTask()">Add</button>
+        </div>
+        <ul id="taskList" class="checklist" style="margin-top:20px;"></ul>
       </div>
     </div>
 
-    <!-- ===== REVIEWS ===== -->
+    <!-- ==================== REVIEWS ==================== -->
     <div id="reviews" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-chart-line"></i> Reviews</div>
-        <p style="color:var(--text-secondary);">View your weekly, monthly, and yearly reviews!</p>
-        <button class="btn" onclick="alert('Reviews coming soon!')">View Reviews</button>
+        <div style="display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap;">
+          <button class="btn" onclick="showReview('weekly')">Weekly</button>
+          <button class="btn btn-outline" onclick="showReview('monthly')">Monthly</button>
+          <button class="btn btn-outline" onclick="showReview('yearly')">Yearly</button>
+        </div>
+        <div class="chart-container"><canvas id="reviewChart"></canvas></div>
+        <div id="reviewStats" style="margin-top:15px; color:var(--burgundy); font-weight:600;"></div>
       </div>
     </div>
 
-    <!-- ===== SETTINGS ===== -->
+    <!-- ==================== SETTINGS ==================== -->
     <div id="settings" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-cog"></i> Settings</div>
-        <p style="color:var(--text-secondary);">Export, import, or reset your data.</p>
-        <div style="display:flex; gap:15px; flex-wrap:wrap; margin-top:15px;">
-          <button class="btn" onclick="alert('Export data!')">Export</button>
-          <button class="btn" onclick="alert('Import data!')">Import</button>
-          <button class="btn" style="background:#8B0000;" onclick="if(confirm('Are you sure?')){localStorage.clear(); location.reload();}">Reset</button>
+        <div style="display:flex; gap:15px; flex-wrap:wrap;">
+          <button class="btn btn-outline" onclick="exportData()"><i class="fas fa-file-export"></i> Export</button>
+          <button class="btn btn-outline" onclick="importData()"><i class="fas fa-file-import"></i> Import</button>
+          <button class="btn" style="background:#8B0000;" onclick="if(confirm('Are you sure?')){localStorage.clear(); location.reload();}"><i class="fas fa-trash"></i> Reset</button>
         </div>
       </div>
     </div>
@@ -329,59 +609,948 @@
 
   <script>
     // ================================================
-    // SIMPLE NAVIGATION - THE FIX
+    // DATA LAYER
     // ================================================
-    
-    // ===== SWITCH TAB FUNCTION =====
+    const APP_KEY = 'kimiLifeData';
+    function getData() {
+      const raw = localStorage.getItem(APP_KEY);
+      if (!raw) return defaultData();
+      try { return JSON.parse(raw); } catch { return defaultData(); }
+    }
+    function saveData(data) { localStorage.setItem(APP_KEY, JSON.stringify(data)); }
+
+    function defaultData() {
+      return {
+        lifeRows: ['Programming', 'Korean', 'French'],
+        lifeCols: [],
+        lifeCells: {},
+        subjects: [],
+        exams: [],
+        tasks: [],
+        weeklyPlanner: {},
+        worship: {
+          prayers: ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'],
+          morning: ['Morning Dhikr 1', 'Morning Dhikr 2'],
+          evening: ['Evening Dhikr 1', 'Evening Dhikr 2'],
+          quranPages: 2,
+          dailyRecords: {}
+        },
+        care: {
+          skin: ['Gentle cleanser', 'Moisturizer', 'SPF'],
+          hair: ['Shampoo', 'Conditioner', 'Weekly mask'],
+          body: ['Body lotion', 'Drink 2L water'],
+          clothes: ['Plan outfit', 'Organize wardrobe'],
+          nails: ['Hand cream', 'Cut nails'],
+          exercise: ['Resistance training', 'Walk 30 min']
+        },
+        careTracker: {},
+        timerSessions: 0
+      };
+    }
+
+    // ================================================
+    // GLOBAL VARIABLES
+    // ================================================
+    let data = getData();
+    let currentTab = 'dashboard';
+    let careTab = 'skin';
+    let quickTimerInterval, fullTimerInterval;
+    let quickSeconds = 1500, fullSeconds = 1500;
+    let quickPaused = false, fullPaused = false;
+    let currentWorshipDate = new Date().toISOString().slice(0,10);
+    let examChart = null;
+    let currentWeekOffset = 0;
+    let taskIdCounter = 1000;
+
+    // ================================================
+    // NAVIGATION
+    // ================================================
     function switchTab(tabId) {
-      // Hide all tabs
       var tabs = document.querySelectorAll('.tab-content');
       for (var i = 0; i < tabs.length; i++) {
         tabs[i].classList.remove('active');
       }
-      
-      // Show selected tab
       var target = document.getElementById(tabId);
-      if (target) {
-        target.classList.add('active');
-      }
+      if (target) target.classList.add('active');
       
-      // Update nav links
       var links = document.querySelectorAll('#navLinks a');
       for (var j = 0; j < links.length; j++) {
         links[j].classList.remove('active');
-        // Check if this link's onclick contains the tabId
-        var onclickAttr = links[j].getAttribute('onclick');
-        if (onclickAttr && onclickAttr.indexOf(tabId) !== -1) {
+        if (links[j].getAttribute('onclick') && links[j].getAttribute('onclick').indexOf(tabId) !== -1) {
           links[j].classList.add('active');
         }
       }
+      
+      currentTab = tabId;
+      if (tabId === 'weeklyplanner') renderWeeklyPlanner();
+      if (tabId === 'worship') loadWorshipForDate();
+      if (tabId === 'exams') renderExams();
+      if (tabId === 'subjects') renderSubjects();
+      if (tabId === 'selfcare') renderCareTable();
+      if (tabId === 'tasks') renderTasks();
+      if (tabId === 'reviews') renderReview('weekly');
+      if (tabId === 'lifetracker') renderLifeTable();
+      updateStats();
     }
 
-    // ===== UPDATE DATE =====
-    function updateDate() {
-      var now = new Date();
-      var dateEl = document.getElementById('todayDate');
-      if (dateEl) {
-        dateEl.textContent = now.toLocaleDateString('en-US', { 
-          weekday: 'long', 
-          day: 'numeric', 
-          month: 'long', 
-          year: 'numeric' 
-        });
-      }
-    }
-
-    // Run when page loads
+    // ================================================
+    // UPDATE DATE & STATS
+    // ================================================
     document.addEventListener('DOMContentLoaded', function() {
-      updateDate();
+      document.getElementById('worshipDate').value = currentWorshipDate;
+      document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-US', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+      });
+      renderAll();
+      setTimerPreset();
       
       // Make sure dashboard is visible
       var dashboard = document.getElementById('dashboard');
-      if (dashboard) {
-        dashboard.classList.add('active');
-      }
+      if (dashboard) dashboard.classList.add('active');
     });
+
+    function renderAll() {
+      renderLifeTable();
+      renderSubjects();
+      renderExams();
+      renderTasks();
+      loadWorshipForDate();
+      renderCareTable();
+      renderDashboard();
+      renderWeeklyPlanner();
+      updateStats();
+    }
+
+    function updateStats() {
+      var today = new Date().toDateString();
+      var tasksDone = data.tasks.filter(function(t) { return t.date === today && t.done; }).length;
+      var worshipRecords = data.worship.dailyRecords || {};
+      var todayRecord = worshipRecords[currentWorshipDate] || {};
+      var worshipCount = 0;
+      for (var key in todayRecord) {
+        if (Array.isArray(todayRecord[key])) {
+          worshipCount += todayRecord[key].filter(function(v) { return v === true; }).length;
+        }
+      }
+      document.getElementById('statTasks').textContent = tasksDone;
+      document.getElementById('statWorship').textContent = worshipCount;
+      document.getElementById('statSessions').textContent = data.timerSessions || 0;
+      document.getElementById('statSubjects').textContent = data.subjects.length;
+    }
+
+    function renderDashboard() {
+      var today = new Date().toDateString();
+      var tasks = data.tasks.filter(function(t) { return t.date === today && !t.done; });
+      var ul = document.getElementById('todayTasks');
+      if (tasks.length === 0) {
+        ul.innerHTML = '<li>✨ No tasks for today</li>';
+      } else {
+        var html = '';
+        for (var i = 0; i < tasks.length; i++) {
+          html += '<li><input type="checkbox" onchange="toggleTask(' + i + ')"> ' + tasks[i].title + ' <span style="color:var(--pink-medium);">' + tasks[i].priority + '</span></li>';
+        }
+        ul.innerHTML = html;
+      }
+      
+      var records = data.worship.dailyRecords || {};
+      var todayRecord = records[currentWorshipDate] || {};
+      var allItems = [];
+      if (todayRecord.prayers) allItems = allItems.concat(todayRecord.prayers);
+      if (todayRecord.morning) allItems = allItems.concat(todayRecord.morning);
+      if (todayRecord.evening) allItems = allItems.concat(todayRecord.evening);
+      var doneCount = allItems.filter(function(v) { return v === true; }).length;
+      document.getElementById('todayWorship').innerHTML = '<li>🌟 Completed ' + doneCount + ' out of ' + allItems.length + ' today</li>';
+    }
+
+    // ================================================
+    // WEEKLY PLANNER
+    // ================================================
+    function getWeekDays(offset) {
+      var now = new Date();
+      var day = now.getDay();
+      var diff = now.getDate() - day + (offset * 7);
+      var monday = new Date(now);
+      monday.setDate(diff);
+      var days = [];
+      for (var i = 0; i < 7; i++) {
+        var d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        days.push(d);
+      }
+      return days;
+    }
+
+    function renderWeeklyPlanner() {
+      var days = getWeekDays(currentWeekOffset);
+      var container = document.getElementById('weekDaysContainer');
+      var start = days[0], end = days[6];
+      document.getElementById('weekLabel').textContent = 
+        start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' - ' + 
+        end.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      
+      var dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      var html = '';
+      var today = new Date().toISOString().slice(0,10);
+      
+      for (var i = 0; i < days.length; i++) {
+        var date = days[i];
+        var dateStr = date.toISOString().slice(0,10);
+        var tasks = data.weeklyPlanner[dateStr] || [];
+        var isToday = dateStr === today;
+        
+        html += '<div class="week-day" style="border-color:' + (isToday ? 'var(--burgundy)' : 'var(--border-color)') + ';background:' + (isToday ? '#FFF5F2' : '#FFFBF9') + ';">';
+        html += '<div class="day-header"><span class="day-name">' + dayNames[i] + (isToday ? ' ⭐' : '') + '</span><span>' + date.getDate() + '/' + (date.getMonth()+1) + '</span></div>';
+        html += '<ul class="day-tasks">';
+        if (tasks.length === 0) {
+          html += '<li style="color:var(--text-secondary);font-size:0.75rem;">No tasks</li>';
+        } else {
+          for (var j = 0; j < tasks.length; j++) {
+            html += '<li><span>' + tasks[j].text + '</span>';
+            html += '<span style="font-size:0.65rem;padding:1px 8px;border-radius:12px;background:' + (tasks[j].status === 'done' ? '#D4EDDA' : tasks[j].status === 'inprogress' ? '#FFF3CD' : '#F8D7DA') + ';">' + (tasks[j].status || 'To Do') + '</span>';
+            html += '<button onclick="changeTaskStatus(\'' + dateStr + '\',' + j + ',\'done\')" style="background:none;border:none;cursor:pointer;">✅</button>';
+            html += '<button onclick="changeTaskStatus(\'' + dateStr + '\',' + j + ',\'inprogress\')" style="background:none;border:none;cursor:pointer;">⏳</button>';
+            html += '<button onclick="deleteWeekTask(\'' + dateStr + '\',' + j + ')" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button>';
+            html += '</li>';
+          }
+        }
+        html += '</ul>';
+        html += '<button style="background:none;border:2px dashed var(--pink-soft);border-radius:10px;padding:4px;width:100%;cursor:pointer;margin-top:6px;" onclick="addTaskToDay(\'' + dateStr + '\')"><i class="fas fa-plus"></i> Add</button>';
+        html += '</div>';
+      }
+      container.innerHTML = html;
+      updateWeekStats();
+    }
+
+    function updateWeekStats() {
+      var days = getWeekDays(currentWeekOffset);
+      var total = 0, done = 0, inProgress = 0;
+      for (var i = 0; i < days.length; i++) {
+        var dateStr = days[i].toISOString().slice(0,10);
+        var tasks = data.weeklyPlanner[dateStr] || [];
+        total += tasks.length;
+        for (var j = 0; j < tasks.length; j++) {
+          if (tasks[j].status === 'done') done++;
+          else if (tasks[j].status === 'inprogress') inProgress++;
+        }
+      }
+      document.getElementById('weekTotalTasks').textContent = total;
+      document.getElementById('weekCompletedTasks').textContent = done;
+      document.getElementById('weekInProgressTasks').textContent = inProgress;
+      document.getElementById('weekCompletionRate').textContent = total > 0 ? Math.round((done/total)*100) + '%' : '0%';
+    }
+
+    function changeWeek(offset) { currentWeekOffset += offset; renderWeeklyPlanner(); }
+    function goToCurrentWeek() { currentWeekOffset = 0; renderWeeklyPlanner(); }
+
+    function addTaskToDay(dateStr) {
+      var text = prompt('Enter task:');
+      if (!text || text.trim() === '') return;
+      if (!data.weeklyPlanner[dateStr]) data.weeklyPlanner[dateStr] = [];
+      data.weeklyPlanner[dateStr].push({ id: taskIdCounter++, text: text.trim(), status: 'todo' });
+      saveData(data);
+      renderWeeklyPlanner();
+    }
+
+    function addWeekTask() {
+      var dateStr = prompt('Enter date (YYYY-MM-DD):', new Date().toISOString().slice(0,10));
+      if (!dateStr) return;
+      var text = prompt('Enter task:');
+      if (!text || text.trim() === '') return;
+      if (!data.weeklyPlanner[dateStr]) data.weeklyPlanner[dateStr] = [];
+      data.weeklyPlanner[dateStr].push({ id: taskIdCounter++, text: text.trim(), status: 'todo' });
+      saveData(data);
+      renderWeeklyPlanner();
+    }
+
+    function changeTaskStatus(dateStr, taskIdx, newStatus) {
+      if (!data.weeklyPlanner[dateStr]) return;
+      data.weeklyPlanner[dateStr][taskIdx].status = newStatus;
+      saveData(data);
+      renderWeeklyPlanner();
+    }
+
+    function deleteWeekTask(dateStr, taskIdx) {
+      if (!confirm('Delete this task?')) return;
+      data.weeklyPlanner[dateStr].splice(taskIdx, 1);
+      if (data.weeklyPlanner[dateStr].length === 0) delete data.weeklyPlanner[dateStr];
+      saveData(data);
+      renderWeeklyPlanner();
+    }
+
+    // ================================================
+    // WORSHIP
+    // ================================================
+    function loadWorshipForDate() {
+      var date = document.getElementById('worshipDate').value || currentWorshipDate;
+      currentWorshipDate = date;
+      if (!data.worship.dailyRecords) data.worship.dailyRecords = {};
+      if (!data.worship.dailyRecords[date]) {
+        data.worship.dailyRecords[date] = {
+          prayers: data.worship.prayers.map(function() { return false; }),
+          morning: data.worship.morning.map(function() { return false; }),
+          evening: data.worship.evening.map(function() { return false; })
+        };
+        saveData(data);
+      }
+      var record = data.worship.dailyRecords[date];
+      renderWorshipList('prayerList', record.prayers, data.worship.prayers, 'prayers');
+      renderWorshipList('morningAdhkar', record.morning, data.worship.morning, 'morning');
+      renderWorshipList('eveningAdhkar', record.evening, data.worship.evening, 'evening');
+      document.getElementById('quranPages').value = data.worship.quranPages || 2;
+      var total = record.prayers.length + record.morning.length + record.evening.length;
+      var done = record.prayers.filter(function(v) { return v; }).length + 
+                 record.morning.filter(function(v) { return v; }).length + 
+                 record.evening.filter(function(v) { return v; }).length;
+      document.getElementById('worshipStats').textContent = '📅 ' + date + ' - ' + done + ' / ' + total + ' completed';
+    }
+
+    function renderWorshipList(containerId, statuses, names, type) {
+      var container = document.getElementById(containerId);
+      var html = '';
+      for (var i = 0; i < names.length; i++) {
+        html += '<div class="worship-item">';
+        html += '<input type="checkbox" class="worship-check" ' + (statuses[i] ? 'checked' : '') + ' onchange="toggleWorshipItem(\'' + type + '\',' + i + ')">';
+        html += '<input type="text" value="' + names[i] + '" onchange="updateWorshipName(\'' + type + '\',' + i + ',this.value)">';
+        html += '<button onclick="deleteWorshipItem(\'' + type + '\',' + i + ')" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button>';
+        html += '</div>';
+      }
+      container.innerHTML = html;
+    }
+
+    function toggleWorshipItem(type, idx) {
+      var date = document.getElementById('worshipDate').value || currentWorshipDate;
+      var record = data.worship.dailyRecords[date];
+      if (type === 'prayers') record.prayers[idx] = !record.prayers[idx];
+      else if (type === 'morning') record.morning[idx] = !record.morning[idx];
+      else if (type === 'evening') record.evening[idx] = !record.evening[idx];
+      saveData(data);
+      loadWorshipForDate();
+      updateStats();
+      renderDashboard();
+    }
+
+    function updateWorshipName(type, idx, newName) {
+      if (type === 'prayers') data.worship.prayers[idx] = newName;
+      else if (type === 'morning') data.worship.morning[idx] = newName;
+      else if (type === 'evening') data.worship.evening[idx] = newName;
+      saveData(data);
+      loadWorshipForDate();
+    }
+
+    function addWorshipItem(type) {
+      var name = prompt('Enter new worship item:');
+      if (!name || name.trim() === '') return;
+      if (type === 'prayers') data.worship.prayers.push(name.trim());
+      else if (type === 'morning') data.worship.morning.push(name.trim());
+      else if (type === 'evening') data.worship.evening.push(name.trim());
+      var date = document.getElementById('worshipDate').value || currentWorshipDate;
+      if (!data.worship.dailyRecords[date]) {
+        data.worship.dailyRecords[date] = {
+          prayers: data.worship.prayers.map(function() { return false; }),
+          morning: data.worship.morning.map(function() { return false; }),
+          evening: data.worship.evening.map(function() { return false; })
+        };
+      }
+      var record = data.worship.dailyRecords[date];
+      if (type === 'prayers') record.prayers.push(false);
+      else if (type === 'morning') record.morning.push(false);
+      else if (type === 'evening') record.evening.push(false);
+      saveData(data);
+      loadWorshipForDate();
+    }
+
+    function deleteWorshipItem(type, idx) {
+      if (!confirm('Delete this?')) return;
+      if (type === 'prayers') data.worship.prayers.splice(idx, 1);
+      else if (type === 'morning') data.worship.morning.splice(idx, 1);
+      else if (type === 'evening') data.worship.evening.splice(idx, 1);
+      for (var date in data.worship.dailyRecords) {
+        var record = data.worship.dailyRecords[date];
+        if (type === 'prayers' && record.prayers) record.prayers.splice(idx, 1);
+        else if (type === 'morning' && record.morning) record.morning.splice(idx, 1);
+        else if (type === 'evening' && record.evening) record.evening.splice(idx, 1);
+      }
+      saveData(data);
+      loadWorshipForDate();
+    }
+
+    function saveWorshipForDate() {
+      var date = document.getElementById('worshipDate').value || currentWorshipDate;
+      currentWorshipDate = date;
+      saveData(data);
+      alert('✅ Worship saved for ' + date);
+    }
+
+    function saveQuranPages() {
+      var pages = parseInt(document.getElementById('quranPages').value) || 0;
+      data.worship.quranPages = pages;
+      saveData(data);
+      alert('Quran reading saved: ' + pages + ' pages');
+    }
+
+    // ================================================
+    // LIFE-LONG TRACKER
+    // ================================================
+    function renderLifeTable() {
+      var head = document.getElementById('lifeHead');
+      var body = document.getElementById('lifeBody');
+      if (data.lifeCols.length === 0) {
+        for (var i = -30; i <= 30; i++) {
+          var d = new Date();
+          d.setDate(d.getDate() + i);
+          data.lifeCols.push(d.toISOString().slice(0,10));
+        }
+        saveData(data);
+      }
+      var htmlHead = '<th>Subject/Skill</th>';
+      for (var j = 0; j < data.lifeCols.length; j++) {
+        var col = data.lifeCols[j];
+        var d2 = new Date(col);
+        htmlHead += '<th>' + d2.getDate() + '/' + (d2.getMonth()+1) + '</th>';
+      }
+      htmlHead += '<th>Action</th>';
+      head.innerHTML = htmlHead;
+
+      var htmlBody = '';
+      for (var r = 0; r < data.lifeRows.length; r++) {
+        var row = data.lifeRows[r];
+        htmlBody += '<tr><td class="row-label">' + row + '</td>';
+        for (var c = 0; c < data.lifeCols.length; c++) {
+          var key = r + '_' + c;
+          var val = data.lifeCells[key] || '';
+          htmlBody += '<td><input type="text" value="' + val + '" onchange="updateCell(' + r + ',' + c + ',this.value)"></td>';
+        }
+        htmlBody += '<td><button onclick="deleteLifeRow(' + r + ')" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button></td>';
+        htmlBody += '</tr>';
+      }
+      body.innerHTML = htmlBody;
+    }
+
+    function updateCell(row, col, val) {
+      data.lifeCells[row + '_' + col] = val;
+      saveData(data);
+    }
+
+    function addLifeRow() {
+      var name = document.getElementById('newRowName').value.trim();
+      if (!name) return alert('Enter a skill name');
+      data.lifeRows.push(name);
+      saveData(data);
+      renderLifeTable();
+      document.getElementById('newRowName').value = '';
+    }
+
+    function deleteLifeRow(idx) {
+      if (!confirm('Delete this row?')) return;
+      data.lifeRows.splice(idx, 1);
+      var newCells = {};
+      for (var key in data.lifeCells) {
+        var parts = key.split('_');
+        var r = parseInt(parts[0]);
+        var c = parseInt(parts[1]);
+        if (r === idx) continue;
+        if (r > idx) r--;
+        newCells[r + '_' + c] = data.lifeCells[key];
+      }
+      data.lifeCells = newCells;
+      saveData(data);
+      renderLifeTable();
+    }
+
+    function addLifeColumn() {
+      var d = new Date();
+      d.setDate(d.getDate() + data.lifeCols.length - 30);
+      data.lifeCols.push(d.toISOString().slice(0,10));
+      saveData(data);
+      renderLifeTable();
+    }
+
+    // ================================================
+    // SUBJECTS
+    // ================================================
+    function renderSubjects() {
+      var container = document.getElementById('subjectListContainer');
+      if (data.subjects.length === 0) {
+        container.innerHTML = '<p style="color:var(--text-secondary);">No subjects yet.</p>';
+        return;
+      }
+      var html = '';
+      for (var i = 0; i < data.subjects.length; i++) {
+        var subject = data.subjects[i];
+        html += '<div class="card" style="margin-bottom:15px;padding:18px;">';
+        html += '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">';
+        html += '<div style="display:flex;align-items:center;gap:10px;flex:1;">';
+        html += '<i class="fas fa-book" style="color:var(--pink-medium);"></i>';
+        html += '<input type="text" value="' + subject.name + '" onchange="updateSubjectName(' + i + ',this.value)" style="flex:1;min-width:120px;padding:4px 12px;border:2px dashed var(--pink-soft);background:#FFF9F7;border-radius:10px;font-size:1rem;font-weight:600;color:var(--burgundy);">';
+        html += '</div>';
+        html += '<div><button class="btn btn-pink btn-sm" onclick="addLesson(' + i + ')"><i class="fas fa-plus"></i> Lesson</button>';
+        html += ' <button class="btn btn-outline btn-sm" onclick="deleteSubject(' + i + ')"><i class="fas fa-trash"></i></button></div>';
+        html += '</div>';
+        html += '<div style="margin-top:12px;">';
+        if (subject.lessons && subject.lessons.length > 0) {
+          for (var j = 0; j < subject.lessons.length; j++) {
+            var lesson = subject.lessons[j];
+            html += '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid #F5EAE8;flex-wrap:wrap;">';
+            html += '<span style="flex:1;min-width:100px;"><input type="text" value="' + lesson.name + '" onchange="updateLessonName(' + i + ',' + j + ',this.value)" style="width:100%;padding:4px 10px;border:2px dashed var(--pink-soft);background:#FFF9F7;border-radius:10px;font-size:0.85rem;"></span>';
+            html += '<span style="font-size:0.75rem;padding:2px 10px;border-radius:20px;font-weight:600;background:' + (lesson.done ? '#D4EDDA' : '#F8D7DA') + ';color:' + (lesson.done ? '#155724' : '#721C24') + ';">' + (lesson.done ? '✅ Done' : '⏳ Not Done') + '</span>';
+            html += '<button onclick="toggleLesson(' + i + ',' + j + ')" style="background:none;border:2px solid var(--pink-medium);border-radius:20px;padding:2px 12px;cursor:pointer;color:var(--burgundy);font-weight:600;font-size:0.75rem;">' + (lesson.done ? 'Undo' : 'Done') + '</button>';
+            html += '<button onclick="deleteLesson(' + i + ',' + j + ')" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button>';
+            html += '</div>';
+          }
+        } else {
+          html += '<p style="color:var(--text-secondary);font-size:0.9rem;">No lessons yet.</p>';
+        }
+        html += '</div></div>';
+      }
+      container.innerHTML = html;
+    }
+
+    function updateSubjectName(idx, newName) {
+      data.subjects[idx].name = newName;
+      saveData(data);
+    }
+
+    function updateLessonName(subjectIdx, lessonIdx, newName) {
+      data.subjects[subjectIdx].lessons[lessonIdx].name = newName;
+      saveData(data);
+    }
+
+    function addSubject() {
+      var name = document.getElementById('subjectName').value.trim();
+      if (!name) return alert('Enter a subject name');
+      data.subjects.push({ name: name, lessons: [] });
+      saveData(data);
+      renderSubjects();
+      document.getElementById('subjectName').value = '';
+      updateStats();
+    }
+
+    function deleteSubject(idx) {
+      if (!confirm('Delete this subject?')) return;
+      data.subjects.splice(idx, 1);
+      saveData(data);
+      renderSubjects();
+      updateStats();
+    }
+
+    function addLesson(idx) {
+      var name = prompt('Enter lesson name:');
+      if (!name || name.trim() === '') return;
+      if (!data.subjects[idx].lessons) data.subjects[idx].lessons = [];
+      data.subjects[idx].lessons.push({ name: name.trim(), done: false });
+      saveData(data);
+      renderSubjects();
+    }
+
+    function toggleLesson(subjectIdx, lessonIdx) {
+      data.subjects[subjectIdx].lessons[lessonIdx].done = !data.subjects[subjectIdx].lessons[lessonIdx].done;
+      saveData(data);
+      renderSubjects();
+    }
+
+    function deleteLesson(subjectIdx, lessonIdx) {
+      if (!confirm('Delete this lesson?')) return;
+      data.subjects[subjectIdx].lessons.splice(lessonIdx, 1);
+      saveData(data);
+      renderSubjects();
+    }
+
+    // ================================================
+    // EXAMS
+    // ================================================
+    function renderExams() {
+      var body = document.getElementById('examBody');
+      if (data.exams.length === 0) {
+        body.innerHTML = '<tr><td colspan="6" style="color:var(--text-secondary);">No exams yet.</td></tr>';
+        updateExamStats();
+        renderExamChart();
+        return;
+      }
+
+      var sorted = data.exams.slice().sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+      var html = '';
+      for (var i = 0; i < sorted.length; i++) {
+        var exam = sorted[i];
+        var percentage = exam.maxScore > 0 ? ((exam.myScore / exam.maxScore) * 100).toFixed(1) : 0;
+        var color = percentage >= 80 ? '#28A745' : percentage >= 60 ? '#FFC107' : '#DC3545';
+        var originalIdx = data.exams.indexOf(exam);
+        html += '<tr><td><strong>' + exam.subject + '</strong></td>';
+        html += '<td>' + exam.maxScore + '</td>';
+        html += '<td>' + exam.myScore + '</td>';
+        html += '<td><span style="font-weight:700;color:' + color + ';">' + percentage + '%</span>';
+        html += '<div class="score-bar"><div class="fill" style="width:' + percentage + '%;background:' + color + ';"></div></div></td>';
+        html += '<td>' + exam.date + '</td>';
+        html += '<td><button onclick="editExam(' + originalIdx + ')" style="background:none;border:none;color:var(--gold-soft);cursor:pointer;"><i class="fas fa-edit"></i></button> ';
+        html += '<button onclick="deleteExam(' + originalIdx + ')" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button></td></tr>';
+      }
+      body.innerHTML = html;
+      updateExamStats();
+      renderExamChart();
+    }
+
+    function updateExamStats() {
+      if (data.exams.length === 0) {
+        document.getElementById('avgScore').textContent = '0%';
+        document.getElementById('totalExams').textContent = '0';
+        document.getElementById('bestSubject').textContent = '-';
+        return;
+      }
+      var totalPercentage = 0;
+      var subjectScores = {};
+      for (var i = 0; i < data.exams.length; i++) {
+        var exam = data.exams[i];
+        var pct = exam.maxScore > 0 ? (exam.myScore / exam.maxScore) * 100 : 0;
+        totalPercentage += pct;
+        if (!subjectScores[exam.subject]) subjectScores[exam.subject] = [];
+        subjectScores[exam.subject].push(pct);
+      }
+      var avg = (totalPercentage / data.exams.length).toFixed(1);
+      document.getElementById('avgScore').textContent = avg + '%';
+      document.getElementById('totalExams').textContent = data.exams.length;
+      var bestSubject = '-';
+      var bestAvg = -1;
+      for (var sub in subjectScores) {
+        var avgSub = subjectScores[sub].reduce(function(a,b) { return a + b; }, 0) / subjectScores[sub].length;
+        if (avgSub > bestAvg) { bestAvg = avgSub; bestSubject = sub; }
+      }
+      document.getElementById('bestSubject').textContent = bestSubject + ' (' + bestAvg.toFixed(1) + '%)';
+    }
+
+    function renderExamChart() {
+      var ctx = document.getElementById('examChart').getContext('2d');
+      if (examChart) examChart.destroy();
+      if (data.exams.length === 0) {
+        examChart = new Chart(ctx, {
+          type: 'bar',
+          data: { labels: ['No Data'], datasets: [{ label: 'No exams yet', data: [0], backgroundColor: ['#E8DCDA'], borderColor: '#D4A373', borderWidth: 1, borderRadius: 8 }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#3D2C33' } } }, scales: { x: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' } }, y: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' }, beginAtZero: true, max: 100 } } }
+        });
+        return;
+      }
+      var subjectData = {};
+      for (var i = 0; i < data.exams.length; i++) {
+        var exam = data.exams[i];
+        var pct = exam.maxScore > 0 ? (exam.myScore / exam.maxScore) * 100 : 0;
+        if (!subjectData[exam.subject]) subjectData[exam.subject] = [];
+        subjectData[exam.subject].push(pct);
+      }
+      var subjects = Object.keys(subjectData);
+      var averages = subjects.map(function(sub) {
+        var scores = subjectData[sub];
+        return scores.reduce(function(a,b) { return a + b; }, 0) / scores.length;
+      });
+      var colors = ['#8B1A2B', '#E8849A', '#D4A373', '#9B6BB7', '#F4A7B9', '#B2223C'];
+      examChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: subjects,
+          datasets: [{ label: 'Average Score %', data: averages, backgroundColor: subjects.map(function(_, i) { return colors[i % colors.length]; }), borderColor: '#8B1A2B', borderWidth: 2, borderRadius: 8 }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#3D2C33' } } }, scales: { x: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' } }, y: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' }, beginAtZero: true, max: 100 } } }
+      });
+    }
+
+    function addExam() {
+      var subject = document.getElementById('examSubject').value.trim();
+      var maxScore = parseFloat(document.getElementById('examMaxScore').value);
+      var myScore = parseFloat(document.getElementById('examMyScore').value);
+      var date = document.getElementById('examDate').value;
+      if (!subject) return alert('Enter a subject');
+      if (isNaN(maxScore) || maxScore <= 0) return alert('Enter max score');
+      if (isNaN(myScore) || myScore < 0) return alert('Enter your score');
+      if (myScore > maxScore) return alert('Score cannot be higher than max');
+      if (!date) return alert('Select a date');
+      data.exams.push({ subject: subject, maxScore: maxScore, myScore: myScore, date: date });
+      saveData(data);
+      renderExams();
+      document.getElementById('examSubject').value = '';
+      document.getElementById('examMaxScore').value = '';
+      document.getElementById('examMyScore').value = '';
+      document.getElementById('examDate').value = '';
+    }
+
+    function editExam(idx) {
+      var exam = data.exams[idx];
+      var newSubject = prompt('Subject:', exam.subject);
+      if (newSubject === null) return;
+      var newMax = parseFloat(prompt('Max Score:', exam.maxScore));
+      if (isNaN(newMax) || newMax <= 0) return alert('Invalid max score');
+      var newMy = parseFloat(prompt('Your Score:', exam.myScore));
+      if (isNaN(newMy) || newMy < 0) return alert('Invalid score');
+      if (newMy > newMax) return alert('Score cannot be higher than max');
+      var newDate = prompt('Date (YYYY-MM-DD):', exam.date);
+      if (!newDate) return;
+      data.exams[idx] = { subject: newSubject.trim(), maxScore: newMax, myScore: newMy, date: newDate };
+      saveData(data);
+      renderExams();
+    }
+
+    function deleteExam(idx) {
+      if (!confirm('Delete this exam?')) return;
+      data.exams.splice(idx, 1);
+      saveData(data);
+      renderExams();
+    }
+
+    // ================================================
+    // TASKS
+    // ================================================
+    function renderTasks() {
+      var ul = document.getElementById('taskList');
+      var html = '';
+      for (var i = 0; i < data.tasks.length; i++) {
+        var t = data.tasks[i];
+        html += '<li><input type="checkbox" onchange="toggleTask(' + i + ')" ' + (t.done ? 'checked' : '') + '> ';
+        html += '<input type="text" value="' + t.title + '" onchange="updateTaskName(' + i + ',this.value)"> ';
+        html += '<span style="color:var(--pink-medium);font-weight:500;">' + t.priority + '</span> ';
+        html += '<span style="color:var(--text-secondary);font-size:0.85rem;">' + t.date + '</span> ';
+        html += '<button onclick="deleteTask(' + i + ')" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button></li>';
+      }
+      ul.innerHTML = html;
+    }
+
+    function updateTaskName(idx, newName) {
+      data.tasks[idx].title = newName;
+      saveData(data);
+    }
+
+    function addTask() {
+      var title = document.getElementById('taskInput').value.trim();
+      var date = document.getElementById('taskDate').value || new Date().toISOString().slice(0,10);
+      var priority = document.getElementById('taskPriority').value;
+      if (!title) return;
+      data.tasks.push({ title: title, date: date, priority: priority, done: false });
+      saveData(data);
+      renderTasks();
+      document.getElementById('taskInput').value = '';
+      updateStats();
+    }
+
+    function toggleTask(idx) {
+      data.tasks[idx].done = !data.tasks[idx].done;
+      saveData(data);
+      renderTasks();
+      renderDashboard();
+      updateStats();
+    }
+
+    function deleteTask(idx) {
+      data.tasks.splice(idx, 1);
+      saveData(data);
+      renderTasks();
+      renderDashboard();
+      updateStats();
+    }
+
+    // ================================================
+    // SELF-CARE
+    // ================================================
+    function renderCareTable() {
+      var body = document.getElementById('careBody');
+      var items = data.care[careTab] || [];
+      var days = [];
+      for (var i = 6; i >= 0; i--) {
+        var d = new Date();
+        d.setDate(d.getDate() - i);
+        days.push(d.toISOString().slice(0,10));
+      }
+      if (items.length === 0) {
+        body.innerHTML = '<tr><td colspan="9" style="color:var(--text-secondary);">No items.</td></tr>';
+        return;
+      }
+      var html = '';
+      for (var j = 0; j < items.length; j++) {
+        var item = items[j];
+        html += '<tr><td class="row-label"><input type="text" value="' + item + '" onchange="updateCareItemName(\'' + careTab + '\',' + j + ',this.value)" style="width:100%;padding:4px 10px;border:2px dashed var(--pink-soft);background:#FFF9F7;border-radius:10px;font-size:0.85rem;text-align:right;"></td>';
+        for (var k = 0; k < days.length; k++) {
+          var day = days[k];
+          var key = careTab + '_' + item + '_' + day;
+          var checked = data.careTracker && data.careTracker[careTab] && data.careTracker[careTab][item] && data.careTracker[careTab][item][day] ? true : false;
+          html += '<td><input type="checkbox" ' + (checked ? 'checked' : '') + ' onchange="toggleCareDay(\'' + careTab + '\',\'' + item + '\',\'' + day + '\')"></td>';
+        }
+        html += '<td><button onclick="deleteCareItem(' + j + ')" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button></td></tr>';
+      }
+      body.innerHTML = html;
+    }
+
+    function updateCareItemName(tab, idx, newName) {
+      var oldName = data.care[tab][idx];
+      data.care[tab][idx] = newName;
+      if (data.careTracker && data.careTracker[tab] && data.careTracker[tab][oldName]) {
+        data.careTracker[tab][newName] = data.careTracker[tab][oldName];
+        delete data.careTracker[tab][oldName];
+      }
+      saveData(data);
+      renderCareTable();
+    }
+
+    function toggleCareDay(tab, item, day) {
+      if (!data.careTracker) data.careTracker = {};
+      if (!data.careTracker[tab]) data.careTracker[tab] = {};
+      if (!data.careTracker[tab][item]) data.careTracker[tab][item] = {};
+      data.careTracker[tab][item][day] = !data.careTracker[tab][item][day];
+      saveData(data);
+      renderCareTable();
+    }
+
+    function addCareItem() {
+      var name = document.getElementById('newCareItem').value.trim();
+      if (!name) return alert('Enter a care item');
+      if (!data.care[careTab]) data.care[careTab] = [];
+      data.care[careTab].push(name);
+      if (!data.careTracker) data.careTracker = {};
+      if (!data.careTracker[careTab]) data.careTracker[careTab] = {};
+      data.careTracker[careTab][name] = {};
+      saveData(data);
+      renderCareTable();
+      document.getElementById('newCareItem').value = '';
+    }
+
+    function deleteCareItem(idx) {
+      if (!confirm('Delete this item?')) return;
+      var item = data.care[careTab][idx];
+      data.care[careTab].splice(idx, 1);
+      if (data.careTracker && data.careTracker[careTab]) {
+        delete data.careTracker[careTab][item];
+      }
+      saveData(data);
+      renderCareTable();
+    }
+
+    function switchCareTab(tab) {
+      careTab = tab;
+      renderCareTable();
+    }
+
+    // ================================================
+    // TIMERS
+    // ================================================
+    function setTimerPreset() {
+      var val = parseInt(document.getElementById('timerPreset').value);
+      fullSeconds = val * 60;
+      document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
+      document.getElementById('quickTimer').textContent = formatTime(fullSeconds);
+    }
+
+    function formatTime(sec) {
+      var m = Math.floor(sec/60);
+      var s = sec % 60;
+      return (m.toString().padStart(2,'0') + ':' + s.toString().padStart(2,'0'));
+    }
+
+    function startQuickTimer() {
+      if (quickPaused) { quickPaused = false; return; }
+      if (quickTimerInterval) return;
+      quickTimerInterval = setInterval(function() {
+        if (quickSeconds <= 0) { clearInterval(quickTimerInterval); quickTimerInterval = null; return; }
+        quickSeconds--;
+        document.getElementById('quickTimer').textContent = formatTime(quickSeconds);
+      }, 1000);
+    }
+
+    function pauseQuickTimer() {
+      quickPaused = true;
+      if (quickTimerInterval) { clearInterval(quickTimerInterval); quickTimerInterval = null; }
+    }
+
+    function resetQuickTimer() {
+      clearInterval(quickTimerInterval);
+      quickTimerInterval = null;
+      quickSeconds = parseInt(document.getElementById('timerPreset').value) * 60 || 1500;
+      document.getElementById('quickTimer').textContent = formatTime(quickSeconds);
+      quickPaused = false;
+    }
+
+    function startFullTimer() {
+      if (fullPaused) { fullPaused = false; return; }
+      if (fullTimerInterval) return;
+      fullTimerInterval = setInterval(function() {
+        if (fullSeconds <= 0) {
+          clearInterval(fullTimerInterval);
+          fullTimerInterval = null;
+          data.timerSessions = (data.timerSessions || 0) + 1;
+          document.getElementById('sessionCount').textContent = data.timerSessions;
+          saveData(data);
+          updateStats();
+          return;
+        }
+        fullSeconds--;
+        document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
+      }, 1000);
+    }
+
+    function pauseFullTimer() {
+      fullPaused = true;
+      if (fullTimerInterval) { clearInterval(fullTimerInterval); fullTimerInterval = null; }
+    }
+
+    function resetFullTimer() {
+      clearInterval(fullTimerInterval);
+      fullTimerInterval = null;
+      fullSeconds = parseInt(document.getElementById('timerPreset').value) * 60 || 1500;
+      document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
+      fullPaused = false;
+    }
+
+    // ================================================
+    // REVIEWS
+    // ================================================
+    var reviewChart = null;
+
+    function renderReview(period) {
+      var ctx = document.getElementById('reviewChart').getContext('2d');
+      if (reviewChart) reviewChart.destroy();
+      var labels = period === 'weekly' ? ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'] :
+                    period === 'monthly' ? ['W1','W2','W3','W4'] :
+                    ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var dataset = labels.map(function() { return Math.floor(Math.random() * 10) + 1; });
+      reviewChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{ label: 'Achievement Rate', data: dataset, backgroundColor: ['#E8849A','#F4A7B9','#8B1A2B','#E8849A','#F4A7B9','#8B1A2B','#E8849A'], borderColor: '#8B1A2B', borderWidth: 2, borderRadius: 8 }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: '#3D2C33' } } },
+          scales: { x: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' } }, y: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' }, beginAtZero: true } }
+        }
+      });
+      document.getElementById('reviewStats').textContent = '📊 ' + period + ' - Average: ' + (dataset.reduce(function(a,b) { return a + b; }, 0) / dataset.length).toFixed(1) + '%';
+    }
+
+    function showReview(period) { renderReview(period); }
+
+    // ================================================
+    // SETTINGS
+    // ================================================
+    function exportData() {
+      var blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'kimi_backup_' + new Date().toISOString().slice(0,10) + '.json';
+      a.click();
+    }
+
+    function importData() {
+      var input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'application/json';
+      input.onchange = function(e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+          try {
+            var imported = JSON.parse(ev.target.result);
+            data = imported;
+            saveData(data);
+            location.reload();
+          } catch { alert('Error reading file'); }
+        };
+        reader.readAsText(file);
+      };
+      input.click();
+    }
   </script>
 </body>
 </html>
