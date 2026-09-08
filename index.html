@@ -122,7 +122,6 @@
     .stat-icon.burgundy { background: #F5E0E3; color: var(--burgundy); }
     .stat-icon.gold { background: #F5ECE0; color: var(--gold-soft); }
     .stat-icon.purple { background: #EDE4F5; color: #9B6BB7; }
-    .stat-icon.green { background: #E4F5ED; color: #3D9B7B; }
     .stat-info h3 { font-size: 1.8rem; font-weight: 700; color: var(--text-primary); }
     .stat-info p { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
 
@@ -172,22 +171,6 @@
     .btn-pink { background: var(--pink-medium); color: #FFFFFF; }
     .btn-pink:hover { background: var(--pink-soft); }
     .btn-sm { padding: 5px 14px; font-size: 0.75rem; }
-    .btn-gold { background: var(--gold-soft); color: #FFFFFF; }
-    .btn-gold:hover { background: #C49A6A; }
-    .btn-green { background: #3D9B7B; color: #FFFFFF; }
-    .btn-green:hover { background: #2D7B5F; }
-    .btn-edit {
-      background: transparent;
-      border: 2px solid var(--gold-soft);
-      color: var(--gold-soft);
-      padding: 2px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.7rem;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .btn-edit:hover { background: var(--gold-soft); color: #FFFFFF; }
 
     /* ===== INPUTS ===== */
     input, select, textarea {
@@ -210,7 +193,6 @@
     /* ===== GRID ===== */
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
     .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
     .grid-7 { display: grid; grid-template-columns: repeat(7,1fr); gap: 12px; }
 
     /* ===== TABLES ===== */
@@ -240,16 +222,6 @@
       padding: 12px 8px;
       border: 1px solid var(--border-color);
       text-align: center;
-      color: var(--text-primary);
-    }
-    .data-table td input[type="number"] {
-      width: 70px;
-      padding: 6px;
-      margin: 0;
-      background: #FFFBF9;
-      border: 1px solid #E8DCDA;
-      text-align: center;
-      border-radius: 8px;
       color: var(--text-primary);
     }
     .data-table .row-label {
@@ -335,7 +307,7 @@
       border-radius: 16px;
       padding: 15px;
       border: 1px solid var(--border-color);
-      min-height: 250px;
+      min-height: 200px;
       transition: 0.3s;
     }
     .week-day:hover { border-color: var(--pink-soft); box-shadow: var(--shadow-soft); }
@@ -347,34 +319,27 @@
       padding-bottom: 8px;
       border-bottom: 2px solid var(--border-color);
     }
-    .week-day .day-name {
-      font-weight: 700;
-      color: var(--burgundy);
-      font-size: 0.95rem;
-    }
-    .week-day .day-date {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-    }
+    .week-day .day-name { font-weight: 700; color: var(--burgundy); font-size: 0.95rem; }
+    .week-day .day-date { font-size: 0.75rem; color: var(--text-secondary); }
     .week-day .day-tasks {
       list-style: none;
       padding: 0;
-      max-height: 200px;
+      max-height: 150px;
       overflow-y: auto;
     }
     .week-day .day-tasks li {
-      padding: 6px 0;
+      padding: 4px 0;
       border-bottom: 1px solid #F5EAE8;
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.85rem;
+      gap: 6px;
+      font-size: 0.8rem;
       flex-wrap: wrap;
     }
     .week-day .day-tasks li .task-status {
-      font-size: 0.65rem;
-      padding: 1px 8px;
-      border-radius: 12px;
+      font-size: 0.6rem;
+      padding: 1px 6px;
+      border-radius: 10px;
       font-weight: 600;
     }
     .week-day .day-tasks li .task-status.todo { background: #F8D7DA; color: #721C24; }
@@ -383,34 +348,20 @@
     .week-day .add-task-btn {
       background: none;
       border: 2px dashed var(--pink-soft);
-      border-radius: 12px;
-      padding: 6px;
+      border-radius: 10px;
+      padding: 4px;
       width: 100%;
       color: var(--text-secondary);
       cursor: pointer;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       transition: 0.3s;
-      margin-top: 8px;
+      margin-top: 6px;
     }
     .week-day .add-task-btn:hover {
       border-color: var(--burgundy);
       color: var(--burgundy);
       background: #FFF5F2;
     }
-    .week-day .task-actions {
-      display: flex;
-      gap: 4px;
-      margin-right: auto;
-    }
-    .week-day .task-actions button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      transition: 0.3s;
-    }
-    .week-day .task-actions button:hover { color: var(--burgundy); }
 
     .week-stats {
       display: grid;
@@ -488,21 +439,17 @@
     }
     .worship-item input[type="text"] {
       flex: 1;
-      min-width: 100px;
-      padding: 6px 12px;
+      min-width: 80px;
+      padding: 4px 10px;
       margin: 0;
       border: 2px dashed var(--pink-soft);
       background: #FFF9F7;
       border-radius: 10px;
-      font-size: 0.9rem;
-    }
-    .worship-item input[type="text"]:focus {
-      border-color: var(--burgundy);
-      outline: none;
+      font-size: 0.85rem;
     }
     .worship-item .worship-check {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       accent-color: var(--burgundy);
       cursor: pointer;
     }
@@ -510,36 +457,42 @@
     .lesson-item {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 8px 0;
+      gap: 10px;
+      padding: 6px 0;
       border-bottom: 1px solid #F5EAE8;
       flex-wrap: wrap;
     }
-    .lesson-item .lesson-name {
-      flex: 1;
-      min-width: 120px;
-    }
+    .lesson-item .lesson-name { flex: 1; min-width: 100px; }
     .lesson-item .lesson-name input[type="text"] {
-      padding: 4px 12px;
+      padding: 4px 10px;
       margin: 0;
       border: 2px dashed var(--pink-soft);
       background: #FFF9F7;
       border-radius: 10px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       width: 100%;
     }
-    .lesson-item .lesson-name input[type="text"]:focus {
-      border-color: var(--burgundy);
-      outline: none;
-    }
     .lesson-status {
-      font-size: 0.8rem;
-      padding: 2px 12px;
+      font-size: 0.75rem;
+      padding: 2px 10px;
       border-radius: 20px;
       font-weight: 600;
     }
     .lesson-status.done { background: #D4EDDA; color: #155724; }
     .lesson-status.not-done { background: #F8D7DA; color: #721C24; }
+
+    .btn-edit {
+      background: transparent;
+      border: 2px solid var(--gold-soft);
+      color: var(--gold-soft);
+      padding: 2px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.65rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn-edit:hover { background: var(--gold-soft); color: #FFFFFF; }
 
     @media (max-width: 1024px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -550,13 +503,12 @@
     @media (max-width: 768px) {
       .top-nav { padding: 12px 20px; flex-direction: column; align-items: stretch; }
       .nav-links { justify-content: center; gap: 4px; }
-      .nav-links a { font-size: 0.8rem; padding: 6px 12px; }
+      .nav-links a { font-size: 0.75rem; padding: 4px 10px; }
       .main-content { padding: 20px; }
       .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
       .stat-card { padding: 15px 18px; }
       .stat-info h3 { font-size: 1.3rem; }
       .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .grid-4 { grid-template-columns: 1fr 1fr; }
       .grid-7 { grid-template-columns: repeat(2, 1fr); }
       .timer-display { font-size: 2.5rem; }
       .exam-stats { grid-template-columns: 1fr; }
@@ -564,9 +516,8 @@
     }
     @media (max-width: 480px) {
       .stats-grid { grid-template-columns: 1fr; }
-      .grid-4 { grid-template-columns: 1fr; }
       .grid-7 { grid-template-columns: 1fr; }
-      .nav-links a { font-size: 0.7rem; padding: 4px 10px; }
+      .nav-links a { font-size: 0.65rem; padding: 4px 8px; }
     }
   </style>
 </head>
@@ -593,7 +544,7 @@
   <!-- ===== MAIN CONTENT ===== -->
   <div class="main-content">
 
-    <!-- ==================== DASHBOARD ==================== -->
+    <!-- ===== DASHBOARD ===== -->
     <div id="dashboard" class="tab-content active">
       <div class="stats-grid">
         <div class="stat-card">
@@ -651,11 +602,10 @@
       </div>
     </div>
 
-    <!-- ==================== WEEKLY PLANNER ==================== -->
+    <!-- ===== WEEKLY PLANNER ===== -->
     <div id="weeklyplanner" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-calendar-week"></i> Weekly Planner</div>
-        
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; margin-bottom:20px;">
           <div style="display:flex; gap:10px; align-items:center;">
             <button class="btn btn-outline btn-sm" onclick="changeWeek(-1)"><i class="fas fa-chevron-left"></i></button>
@@ -665,67 +615,48 @@
           </div>
           <button class="btn btn-sm" onclick="addWeekTask()"><i class="fas fa-plus"></i> Add Task</button>
         </div>
-
         <div class="week-stats">
-          <div class="week-stat-box">
-            <h4>📋 Total Tasks</h4>
-            <div class="number" id="weekTotalTasks">0</div>
-          </div>
-          <div class="week-stat-box">
-            <h4>✅ Completed</h4>
-            <div class="number" id="weekCompletedTasks">0</div>
-          </div>
-          <div class="week-stat-box">
-            <h4>⏳ In Progress</h4>
-            <div class="number" id="weekInProgressTasks">0</div>
-          </div>
-          <div class="week-stat-box">
-            <h4>📈 Completion Rate</h4>
-            <div class="number" id="weekCompletionRate">0%</div>
-          </div>
+          <div class="week-stat-box"><h4>📋 Total</h4><div class="number" id="weekTotalTasks">0</div></div>
+          <div class="week-stat-box"><h4>✅ Done</h4><div class="number" id="weekCompletedTasks">0</div></div>
+          <div class="week-stat-box"><h4>⏳ In Progress</h4><div class="number" id="weekInProgressTasks">0</div></div>
+          <div class="week-stat-box"><h4>📈 Rate</h4><div class="number" id="weekCompletionRate">0%</div></div>
         </div>
-
         <div class="grid-7" id="weekDaysContainer"></div>
       </div>
     </div>
 
-    <!-- ==================== WORSHIP ==================== -->
+    <!-- ===== WORSHIP ===== -->
     <div id="worship" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-mosque"></i> My Worship</div>
         <div style="display:flex; gap:15px; align-items:center; flex-wrap:wrap; margin-bottom:20px;">
-          <label style="font-weight:600; color:var(--text-secondary);">Select Date:</label>
+          <label style="font-weight:600; color:var(--text-secondary);">Date:</label>
           <input type="date" id="worshipDate" style="width:auto; margin:0;" value="">
           <button class="btn btn-sm" onclick="loadWorshipForDate()">Load</button>
           <button class="btn btn-pink btn-sm" onclick="saveWorshipForDate()">Save</button>
         </div>
-
         <div class="grid-3">
           <div>
             <h4 style="color:var(--burgundy); display:flex; justify-content:space-between; align-items:center;">
-              Prayers
-              <button class="btn-edit" onclick="addWorshipItem('prayers')"><i class="fas fa-plus"></i> Add</button>
+              Prayers <button class="btn-edit" onclick="addWorshipItem('prayers')"><i class="fas fa-plus"></i></button>
             </h4>
             <div id="prayerList" class="checklist"></div>
           </div>
           <div>
             <h4 style="color:var(--burgundy); display:flex; justify-content:space-between; align-items:center;">
-              Morning Dhikr
-              <button class="btn-edit" onclick="addWorshipItem('morning')"><i class="fas fa-plus"></i> Add</button>
+              Morning <button class="btn-edit" onclick="addWorshipItem('morning')"><i class="fas fa-plus"></i></button>
             </h4>
             <div id="morningAdhkar" class="checklist"></div>
           </div>
           <div>
             <h4 style="color:var(--burgundy); display:flex; justify-content:space-between; align-items:center;">
-              Evening Dhikr
-              <button class="btn-edit" onclick="addWorshipItem('evening')"><i class="fas fa-plus"></i> Add</button>
+              Evening <button class="btn-edit" onclick="addWorshipItem('evening')"><i class="fas fa-plus"></i></button>
             </h4>
             <div id="eveningAdhkar" class="checklist"></div>
           </div>
         </div>
-
         <div style="margin-top:20px;">
-          <label style="color:var(--text-secondary);">Quran Daily Reading (Pages): 
+          <label style="color:var(--text-secondary);">Quran Pages: 
             <input type="number" id="quranPages" value="2" min="0" style="width:80px; display:inline;">
           </label>
           <button class="btn" onclick="saveQuranPages()">Save</button>
@@ -734,7 +665,7 @@
       </div>
     </div>
 
-    <!-- ==================== LIFE-LONG TRACKER ==================== -->
+    <!-- ===== LIFE-LONG TRACKER ===== -->
     <div id="lifetracker" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-infinity"></i> Life-Long Tracker</div>
@@ -752,7 +683,7 @@
       </div>
     </div>
 
-    <!-- ==================== SUBJECTS ==================== -->
+    <!-- ===== SUBJECTS ===== -->
     <div id="subjects" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-book-open"></i> My Subjects & Lessons</div>
@@ -764,60 +695,36 @@
       </div>
     </div>
 
-    <!-- ==================== EXAMS ==================== -->
+    <!-- ===== EXAMS ===== -->
     <div id="exams" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-pencil-alt"></i> Exam Tracker</div>
-        
         <div class="exam-stats">
-          <div class="exam-stat-box">
-            <h4>📊 Average Score</h4>
-            <div class="number" id="avgScore">0%</div>
-          </div>
-          <div class="exam-stat-box">
-            <h4>📚 Total Exams</h4>
-            <div class="number" id="totalExams">0</div>
-          </div>
-          <div class="exam-stat-box">
-            <h4>🏆 Best Subject</h4>
-            <div class="number" id="bestSubject" style="font-size:1.2rem;">-</div>
-          </div>
+          <div class="exam-stat-box"><h4>📊 Average</h4><div class="number" id="avgScore">0%</div></div>
+          <div class="exam-stat-box"><h4>📚 Total</h4><div class="number" id="totalExams">0</div></div>
+          <div class="exam-stat-box"><h4>🏆 Best</h4><div class="number" id="bestSubject" style="font-size:1.2rem;">-</div></div>
         </div>
-
-        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap:10px; align-items:end; margin-bottom:20px; flex-wrap:wrap;">
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr auto; gap:10px; align-items:end; margin-bottom:20px;">
           <input type="text" id="examSubject" placeholder="Subject">
           <input type="number" id="examMaxScore" placeholder="Max Score" step="0.5">
           <input type="number" id="examMyScore" placeholder="My Score" step="0.5">
           <input type="date" id="examDate">
           <button class="btn" onclick="addExam()">Add</button>
         </div>
-
         <div class="table-wrap exam-table">
           <table class="data-table" id="examTable">
-            <thead>
-              <tr>
-                <th>Subject</th>
-                <th>Max Score</th>
-                <th>My Score</th>
-                <th>Percentage</th>
-                <th>Date</th>
-                <th>Action</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Subject</th><th>Max</th><th>My Score</th><th>%</th><th>Date</th><th>Action</th></tr></thead>
             <tbody id="examBody"></tbody>
           </table>
         </div>
-
         <div style="margin-top:20px;">
           <h4 style="color:var(--burgundy); margin-bottom:10px;">📈 Performance by Subject</h4>
-          <div class="chart-container">
-            <canvas id="examChart"></canvas>
-          </div>
+          <div class="chart-container"><canvas id="examChart"></canvas></div>
         </div>
       </div>
     </div>
 
-    <!-- ==================== TIMER ==================== -->
+    <!-- ===== TIMER ===== -->
     <div id="timer" class="tab-content">
       <div class="card space-timer">
         <div class="card-title" style="justify-content:center;"><i class="fas fa-rocket" style="color:var(--burgundy-light);"></i> Advanced Space Timer</div>
@@ -827,46 +734,32 @@
           <button class="btn btn-outline" onclick="pauseFullTimer()"><i class="fas fa-pause"></i> Pause</button>
           <button class="btn btn-outline" onclick="resetFullTimer()"><i class="fas fa-redo"></i> Reset</button>
           <select id="timerPreset" onchange="setTimerPreset()" style="width:auto; background:#FFFFFF; border-color:var(--border-color);">
-            <option value="25">25 min (Study)</option>
-            <option value="5">5 min (Break)</option>
-            <option value="10">10 min (Worship)</option>
+            <option value="25">25 min</option><option value="5">5 min</option><option value="10">10 min</option>
           </select>
         </div>
-        <div style="margin-top:15px; color:var(--text-secondary);">Today's Sessions: <span id="sessionCount" style="color:var(--burgundy); font-weight:700;">0</span></div>
+        <div style="margin-top:15px; color:var(--text-secondary);">Sessions: <span id="sessionCount" style="color:var(--burgundy); font-weight:700;">0</span></div>
       </div>
     </div>
 
-    <!-- ==================== SELF-CARE ==================== -->
+    <!-- ===== SELF-CARE ===== -->
     <div id="selfcare" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-spa"></i> Daily Self-Care</div>
         <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
-          <button class="btn btn-pink" onclick="switchCareTab('skin')">Skin</button>
-          <button class="btn btn-pink" onclick="switchCareTab('hair')">Hair</button>
-          <button class="btn btn-pink" onclick="switchCareTab('body')">Body</button>
-          <button class="btn btn-pink" onclick="switchCareTab('clothes')">Clothes</button>
-          <button class="btn btn-pink" onclick="switchCareTab('nails')">Nails</button>
-          <button class="btn btn-pink" onclick="switchCareTab('exercise')">Exercise</button>
+          <button class="btn btn-pink btn-sm" onclick="switchCareTab('skin')">Skin</button>
+          <button class="btn btn-pink btn-sm" onclick="switchCareTab('hair')">Hair</button>
+          <button class="btn btn-pink btn-sm" onclick="switchCareTab('body')">Body</button>
+          <button class="btn btn-pink btn-sm" onclick="switchCareTab('clothes')">Clothes</button>
+          <button class="btn btn-pink btn-sm" onclick="switchCareTab('nails')">Nails</button>
+          <button class="btn btn-pink btn-sm" onclick="switchCareTab('exercise')">Exercise</button>
         </div>
         <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
-          <input type="text" id="newCareItem" placeholder="Add new care item" style="flex:1; min-width:150px;">
-          <button class="btn" onclick="addCareItem()">Add Item</button>
+          <input type="text" id="newCareItem" placeholder="Add new item" style="flex:1; min-width:150px;">
+          <button class="btn" onclick="addCareItem()">Add</button>
         </div>
         <div class="table-wrap">
           <table class="data-table" id="careTable">
-            <thead>
-              <tr>
-                <th style="min-width:200px;">Care Item</th>
-                <th style="min-width:80px;">Day 1</th>
-                <th style="min-width:80px;">Day 2</th>
-                <th style="min-width:80px;">Day 3</th>
-                <th style="min-width:80px;">Day 4</th>
-                <th style="min-width:80px;">Day 5</th>
-                <th style="min-width:80px;">Day 6</th>
-                <th style="min-width:80px;">Day 7</th>
-                <th style="min-width:60px;">Action</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Care Item</th><th>Day1</th><th>Day2</th><th>Day3</th><th>Day4</th><th>Day5</th><th>Day6</th><th>Day7</th><th>Action</th></tr></thead>
             <tbody id="careBody"></tbody>
           </table>
         </div>
@@ -874,7 +767,7 @@
       </div>
     </div>
 
-    <!-- ==================== TASKS ==================== -->
+    <!-- ===== TASKS ===== -->
     <div id="tasks" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-tasks"></i> My Tasks</div>
@@ -882,9 +775,7 @@
           <input type="text" id="taskInput" placeholder="New task" style="flex:1; min-width:150px;">
           <input type="date" id="taskDate" style="width:auto;">
           <select id="taskPriority" style="width:auto;">
-            <option value="low">Low</option>
-            <option value="medium" selected>Medium</option>
-            <option value="high">High</option>
+            <option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option>
           </select>
           <button class="btn" onclick="addTask()">Add</button>
         </div>
@@ -892,7 +783,7 @@
       </div>
     </div>
 
-    <!-- ==================== REVIEWS ==================== -->
+    <!-- ===== REVIEWS ===== -->
     <div id="reviews" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-chart-line"></i> Reviews</div>
@@ -906,14 +797,14 @@
       </div>
     </div>
 
-    <!-- ==================== SETTINGS ==================== -->
+    <!-- ===== SETTINGS ===== -->
     <div id="settings" class="tab-content">
       <div class="card">
         <div class="card-title"><i class="fas fa-cog"></i> Settings</div>
         <div style="display:flex; gap:15px; flex-wrap:wrap;">
-          <button class="btn btn-outline" onclick="exportData()"><i class="fas fa-file-export"></i> Export Data</button>
-          <button class="btn btn-outline" onclick="importData()"><i class="fas fa-file-import"></i> Import Data</button>
-          <button class="btn" style="background:#8B0000; border-color:#8B0000;" onclick="if(confirm('Are you sure?')){localStorage.clear(); location.reload();}"><i class="fas fa-trash"></i> Reset Everything</button>
+          <button class="btn btn-outline" onclick="exportData()"><i class="fas fa-file-export"></i> Export</button>
+          <button class="btn btn-outline" onclick="importData()"><i class="fas fa-file-import"></i> Import</button>
+          <button class="btn" style="background:#8B0000; border-color:#8B0000;" onclick="if(confirm('Are you sure?')){localStorage.clear(); location.reload();}"><i class="fas fa-trash"></i> Reset</button>
         </div>
       </div>
     </div>
@@ -942,8 +833,8 @@
         weeklyPlanner: {},
         worship: {
           prayers: ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'],
-          morning: ['O Allah, we have entered the morning', 'We have woken up and the kingdom belongs to Allah'],
-          evening: ['O Allah, we have entered the evening', 'We have entered the evening and the kingdom belongs to Allah'],
+          morning: ['Morning Dhikr 1', 'Morning Dhikr 2'],
+          evening: ['Evening Dhikr 1', 'Evening Dhikr 2'],
           quranPages: 2,
           dailyRecords: {}
         },
@@ -956,13 +847,12 @@
           exercise: ['Resistance training', 'Walk 30 min']
         },
         careTracker: {},
-        timerSessions: 0,
-        reviewData: { weekly: [], monthly: [], yearly: [] }
+        timerSessions: 0
       };
     }
 
     // ================================================
-    // INIT - FIXED NAVIGATION
+    // GLOBAL VARIABLES
     // ================================================
     let data = getData();
     let currentTab = 'dashboard';
@@ -975,6 +865,10 @@
     let currentWeekOffset = 0;
     let taskIdCounter = 1000;
 
+    // ================================================
+    // NAVIGATION - THE FIX
+    // ================================================
+    // This runs when the page loads
     document.addEventListener('DOMContentLoaded', function() {
       // Set worship date
       document.getElementById('worshipDate').value = currentWorshipDate;
@@ -983,45 +877,45 @@
       renderAll();
       updateDate();
       
-      // ===== FIXED NAVIGATION =====
-      const navLinks = document.querySelectorAll('#navLinks a');
-      navLinks.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const tabId = this.getAttribute('data-tab');
-          switchTab(tabId);
-        });
-      });
+      // ===== NAVIGATION EVENT LISTENERS =====
+      // Get all nav links
+      var navLinks = document.querySelectorAll('#navLinks a');
+      
+      // Loop through each link
+      for (var i = 0; i < navLinks.length; i++) {
+        (function(link) {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var tabId = this.getAttribute('data-tab');
+            switchTab(tabId);
+          });
+        })(navLinks[i]);
+      }
       
       setTimerPreset();
     });
 
-    function updateDate() {
-      const now = new Date();
-      document.getElementById('todayDate').textContent = now.toLocaleDateString('en-US', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
-    }
-
     // ===== SWITCH TAB FUNCTION =====
     function switchTab(tabId) {
       // Hide all tabs
-      document.querySelectorAll('.tab-content').forEach(function(el) {
-        el.classList.remove('active');
-      });
+      var tabs = document.querySelectorAll('.tab-content');
+      for (var i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove('active');
+      }
       
       // Show selected tab
-      const targetTab = document.getElementById(tabId);
-      if (targetTab) {
-        targetTab.classList.add('active');
+      var target = document.getElementById(tabId);
+      if (target) {
+        target.classList.add('active');
       }
       
       // Update nav links
-      document.querySelectorAll('#navLinks a').forEach(function(el) {
-        el.classList.remove('active');
-      });
-      
-      const activeLink = document.querySelector('#navLinks a[data-tab="' + tabId + '"]');
-      if (activeLink) {
-        activeLink.classList.add('active');
+      var links = document.querySelectorAll('#navLinks a');
+      for (var j = 0; j < links.length; j++) {
+        links[j].classList.remove('active');
+        if (links[j].getAttribute('data-tab') === tabId) {
+          links[j].classList.add('active');
+        }
       }
       
       currentTab = tabId;
@@ -1037,9 +931,18 @@
       updateStats();
     }
 
-    // ================================================
-    // RENDER ALL
-    // ================================================
+    // ===== UPDATE DATE =====
+    function updateDate() {
+      var now = new Date();
+      document.getElementById('todayDate').textContent = now.toLocaleDateString('en-US', { 
+        weekday: 'long', 
+        day: 'numeric', 
+        month: 'long', 
+        year: 'numeric' 
+      });
+    }
+
+    // ===== RENDER ALL =====
     function renderAll() {
       renderLifeTable();
       renderSubjects();
@@ -1052,12 +955,18 @@
       updateStats();
     }
 
+    // ===== UPDATE STATS =====
     function updateStats() {
-      const today = new Date().toDateString();
-      const tasksDone = data.tasks.filter(t => t.date === today && t.done).length;
-      const worshipRecords = data.worship.dailyRecords || {};
-      const todayRecord = worshipRecords[currentWorshipDate] || {};
-      const worshipCount = Object.values(todayRecord).flat().filter(v => v === true).length || 0;
+      var today = new Date().toDateString();
+      var tasksDone = data.tasks.filter(function(t) { return t.date === today && t.done; }).length;
+      var worshipRecords = data.worship.dailyRecords || {};
+      var todayRecord = worshipRecords[currentWorshipDate] || {};
+      var worshipCount = 0;
+      for (var key in todayRecord) {
+        if (Array.isArray(todayRecord[key])) {
+          worshipCount += todayRecord[key].filter(function(v) { return v === true; }).length;
+        }
+      }
       
       document.getElementById('statTasks').textContent = tasksDone;
       document.getElementById('statWorship').textContent = worshipCount;
@@ -1065,32 +974,43 @@
       document.getElementById('statSubjects').textContent = data.subjects.length;
     }
 
+    // ===== DASHBOARD =====
     function renderDashboard() {
-      const today = new Date().toDateString();
-      const tasks = data.tasks.filter(t => t.date === today && !t.done);
-      const ul = document.getElementById('todayTasks');
-      ul.innerHTML = tasks.map((t,i) => `<li><input type="checkbox" onchange="toggleTask(${i})" ${t.done?'checked':''}> ${t.title} <span style="color:var(--pink-medium); font-weight:500;">${t.priority}</span></li>`).join('') || '<li style="color:var(--text-secondary);">✨ No tasks for today</li>';
+      var today = new Date().toDateString();
+      var tasks = data.tasks.filter(function(t) { return t.date === today && !t.done; });
+      var ul = document.getElementById('todayTasks');
+      if (tasks.length === 0) {
+        ul.innerHTML = '<li style="color:var(--text-secondary);">✨ No tasks for today</li>';
+      } else {
+        var html = '';
+        for (var i = 0; i < tasks.length; i++) {
+          html += '<li><input type="checkbox" onchange="toggleTask(' + i + ')"> ' + tasks[i].title + ' <span style="color:var(--pink-medium); font-weight:500;">' + tasks[i].priority + '</span></li>';
+        }
+        ul.innerHTML = html;
+      }
       
-      const records = data.worship.dailyRecords || {};
-      const todayRecord = records[currentWorshipDate] || {};
-      const allItems = [...(todayRecord.prayers || []), ...(todayRecord.morning || []), ...(todayRecord.evening || [])];
-      const doneCount = allItems.filter(v => v === true).length;
-      document.getElementById('todayWorship').innerHTML = `<li>🌟 Completed ${doneCount} out of ${allItems.length} worship items today</li>`;
+      var records = data.worship.dailyRecords || {};
+      var todayRecord = records[currentWorshipDate] || {};
+      var allItems = [];
+      if (todayRecord.prayers) allItems = allItems.concat(todayRecord.prayers);
+      if (todayRecord.morning) allItems = allItems.concat(todayRecord.morning);
+      if (todayRecord.evening) allItems = allItems.concat(todayRecord.evening);
+      var doneCount = allItems.filter(function(v) { return v === true; }).length;
+      document.getElementById('todayWorship').innerHTML = '<li>🌟 Completed ' + doneCount + ' out of ' + allItems.length + ' worship items today</li>';
     }
 
     // ================================================
     // WEEKLY PLANNER
     // ================================================
     function getWeekDays(offset) {
-      const now = new Date();
-      const day = now.getDay();
-      const diff = now.getDate() - day + (offset * 7);
-      const monday = new Date(now);
+      var now = new Date();
+      var day = now.getDay();
+      var diff = now.getDate() - day + (offset * 7);
+      var monday = new Date(now);
       monday.setDate(diff);
-      
-      const days = [];
-      for (let i = 0; i < 7; i++) {
-        const d = new Date(monday);
+      var days = [];
+      for (var i = 0; i < 7; i++) {
+        var d = new Date(monday);
         d.setDate(monday.getDate() + i);
         days.push(d);
       }
@@ -1098,68 +1018,63 @@
     }
 
     function renderWeeklyPlanner() {
-      const days = getWeekDays(currentWeekOffset);
-      const container = document.getElementById('weekDaysContainer');
-      
-      const start = days[0];
-      const end = days[6];
+      var days = getWeekDays(currentWeekOffset);
+      var container = document.getElementById('weekDaysContainer');
+      var start = days[0];
+      var end = days[6];
       document.getElementById('weekLabel').textContent = 
-        `${start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${end.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+        start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' - ' + 
+        end.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
       
-      let html = '';
-      const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      var dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      var html = '';
+      var today = new Date().toISOString().slice(0,10);
       
-      days.forEach((date, idx) => {
-        const dateStr = date.toISOString().slice(0,10);
-        const tasks = data.weeklyPlanner[dateStr] || [];
-        const today = new Date().toISOString().slice(0,10);
-        const isToday = dateStr === today;
+      for (var i = 0; i < days.length; i++) {
+        var date = days[i];
+        var dateStr = date.toISOString().slice(0,10);
+        var tasks = data.weeklyPlanner[dateStr] || [];
+        var isToday = dateStr === today;
         
-        html += `
-          <div class="week-day" style="border-color: ${isToday ? 'var(--burgundy)' : 'var(--border-color)'}; background: ${isToday ? '#FFF5F2' : '#FFFBF9'};">
-            <div class="day-header">
-              <span class="day-name">${dayNames[idx]} ${isToday ? '⭐' : ''}</span>
-              <span class="day-date">${date.getDate()}/${date.getMonth()+1}</span>
-            </div>
-            <ul class="day-tasks" id="dayTasks_${dateStr}">
-              ${tasks.length === 0 ? '<li style="color:var(--text-secondary); font-size:0.75rem;">No tasks</li>' : ''}
-              ${tasks.map((task, taskIdx) => `
-                <li>
-                  <span style="flex:1;">${task.text}</span>
-                  <span class="task-status ${task.status || 'todo'}">${task.status || 'To Do'}</span>
-                  <div class="task-actions">
-                    <button onclick="changeTaskStatus('${dateStr}', ${taskIdx}, 'todo')" title="To Do">📝</button>
-                    <button onclick="changeTaskStatus('${dateStr}', ${taskIdx}, 'inprogress')" title="In Progress">⏳</button>
-                    <button onclick="changeTaskStatus('${dateStr}', ${taskIdx}, 'done')" title="Done">✅</button>
-                    <button onclick="deleteWeekTask('${dateStr}', ${taskIdx})" title="Delete">🗑️</button>
-                  </div>
-                </li>
-              `).join('')}
-            </ul>
-            <button class="add-task-btn" onclick="addTaskToDay('${dateStr}')">
-              <i class="fas fa-plus"></i> Add task
-            </button>
-          </div>
-        `;
-      });
+        html += '<div class="week-day" style="border-color: ' + (isToday ? 'var(--burgundy)' : 'var(--border-color)') + '; background: ' + (isToday ? '#FFF5F2' : '#FFFBF9') + ';">';
+        html += '<div class="day-header"><span class="day-name">' + dayNames[i] + (isToday ? ' ⭐' : '') + '</span><span class="day-date">' + date.getDate() + '/' + (date.getMonth()+1) + '</span></div>';
+        html += '<ul class="day-tasks">';
+        if (tasks.length === 0) {
+          html += '<li style="color:var(--text-secondary); font-size:0.75rem;">No tasks</li>';
+        } else {
+          for (var j = 0; j < tasks.length; j++) {
+            html += '<li><span style="flex:1;">' + tasks[j].text + '</span>';
+            html += '<span class="task-status ' + (tasks[j].status || 'todo') + '">' + (tasks[j].status || 'To Do') + '</span>';
+            html += '<div class="task-actions">';
+            html += '<button onclick="changeTaskStatus(\'' + dateStr + '\',' + j + ',\'todo\')" title="To Do">📝</button>';
+            html += '<button onclick="changeTaskStatus(\'' + dateStr + '\',' + j + ',\'inprogress\')" title="In Progress">⏳</button>';
+            html += '<button onclick="changeTaskStatus(\'' + dateStr + '\',' + j + ',\'done\')" title="Done">✅</button>';
+            html += '<button onclick="deleteWeekTask(\'' + dateStr + '\',' + j + ')" title="Delete">🗑️</button>';
+            html += '</div></li>';
+          }
+        }
+        html += '</ul>';
+        html += '<button class="add-task-btn" onclick="addTaskToDay(\'' + dateStr + '\')"><i class="fas fa-plus"></i> Add task</button>';
+        html += '</div>';
+      }
       container.innerHTML = html;
       
       updateWeekStats();
     }
 
     function updateWeekStats() {
-      const days = getWeekDays(currentWeekOffset);
-      let total = 0, done = 0, inProgress = 0;
+      var days = getWeekDays(currentWeekOffset);
+      var total = 0, done = 0, inProgress = 0;
       
-      days.forEach(date => {
-        const dateStr = date.toISOString().slice(0,10);
-        const tasks = data.weeklyPlanner[dateStr] || [];
+      for (var i = 0; i < days.length; i++) {
+        var dateStr = days[i].toISOString().slice(0,10);
+        var tasks = data.weeklyPlanner[dateStr] || [];
         total += tasks.length;
-        tasks.forEach(task => {
-          if (task.status === 'done') done++;
-          else if (task.status === 'inprogress') inProgress++;
-        });
-      });
+        for (var j = 0; j < tasks.length; j++) {
+          if (tasks[j].status === 'done') done++;
+          else if (tasks[j].status === 'inprogress') inProgress++;
+        }
+      }
       
       document.getElementById('weekTotalTasks').textContent = total;
       document.getElementById('weekCompletedTasks').textContent = done;
@@ -1178,29 +1093,21 @@
     }
 
     function addTaskToDay(dateStr) {
-      const text = prompt('Enter task:');
+      var text = prompt('Enter task:');
       if (!text || text.trim() === '') return;
       if (!data.weeklyPlanner[dateStr]) data.weeklyPlanner[dateStr] = [];
-      data.weeklyPlanner[dateStr].push({ 
-        id: taskIdCounter++, 
-        text: text.trim(), 
-        status: 'todo' 
-      });
+      data.weeklyPlanner[dateStr].push({ id: taskIdCounter++, text: text.trim(), status: 'todo' });
       saveData(data);
       renderWeeklyPlanner();
     }
 
     function addWeekTask() {
-      const dateStr = prompt('Enter date (YYYY-MM-DD) or leave empty for today:', new Date().toISOString().slice(0,10));
+      var dateStr = prompt('Enter date (YYYY-MM-DD) or leave empty for today:', new Date().toISOString().slice(0,10));
       if (!dateStr) return;
-      const text = prompt('Enter task:');
+      var text = prompt('Enter task:');
       if (!text || text.trim() === '') return;
       if (!data.weeklyPlanner[dateStr]) data.weeklyPlanner[dateStr] = [];
-      data.weeklyPlanner[dateStr].push({ 
-        id: taskIdCounter++, 
-        text: text.trim(), 
-        status: 'todo' 
-      });
+      data.weeklyPlanner[dateStr].push({ id: taskIdCounter++, text: text.trim(), status: 'todo' });
       saveData(data);
       renderWeeklyPlanner();
     }
@@ -1226,18 +1133,18 @@
     // WORSHIP
     // ================================================
     function loadWorshipForDate() {
-      const date = document.getElementById('worshipDate').value || currentWorshipDate;
+      var date = document.getElementById('worshipDate').value || currentWorshipDate;
       currentWorshipDate = date;
       if (!data.worship.dailyRecords) data.worship.dailyRecords = {};
       if (!data.worship.dailyRecords[date]) {
         data.worship.dailyRecords[date] = {
-          prayers: data.worship.prayers.map(p => false),
-          morning: data.worship.morning.map(p => false),
-          evening: data.worship.evening.map(p => false)
+          prayers: data.worship.prayers.map(function() { return false; }),
+          morning: data.worship.morning.map(function() { return false; }),
+          evening: data.worship.evening.map(function() { return false; })
         };
         saveData(data);
       }
-      const record = data.worship.dailyRecords[date];
+      var record = data.worship.dailyRecords[date];
       
       renderWorshipList('prayerList', record.prayers, data.worship.prayers, 'prayers');
       renderWorshipList('morningAdhkar', record.morning, data.worship.morning, 'morning');
@@ -1245,27 +1152,29 @@
       
       document.getElementById('quranPages').value = data.worship.quranPages || 2;
       
-      const total = record.prayers.length + record.morning.length + record.evening.length;
-      const done = record.prayers.filter(v => v).length + record.morning.filter(v => v).length + record.evening.filter(v => v).length;
-      document.getElementById('worshipStats').textContent = `📅 ${date} - ${done} / ${total} completed`;
+      var total = record.prayers.length + record.morning.length + record.evening.length;
+      var done = record.prayers.filter(function(v) { return v; }).length + 
+                 record.morning.filter(function(v) { return v; }).length + 
+                 record.evening.filter(function(v) { return v; }).length;
+      document.getElementById('worshipStats').textContent = '📅 ' + date + ' - ' + done + ' / ' + total + ' completed';
     }
 
     function renderWorshipList(containerId, statuses, names, type) {
-      const container = document.getElementById(containerId);
-      container.innerHTML = names.map((name, idx) => `
-        <div class="worship-item">
-          <input type="checkbox" class="worship-check" ${statuses[idx] ? 'checked' : ''} 
-                 onchange="toggleWorshipItem('${type}', ${idx})">
-          <input type="text" value="${name}" onchange="updateWorshipName('${type}', ${idx}, this.value)" 
-                 style="flex:1; min-width:80px; padding:4px 10px; margin:0; border:2px dashed var(--pink-soft); background:#FFF9F7; border-radius:10px; font-size:0.9rem;">
-          <button onclick="deleteWorshipItem('${type}', ${idx})" style="background:none; border:none; color:var(--burgundy); cursor:pointer;">🗑️</button>
-        </div>
-      `).join('');
+      var container = document.getElementById(containerId);
+      var html = '';
+      for (var i = 0; i < names.length; i++) {
+        html += '<div class="worship-item">';
+        html += '<input type="checkbox" class="worship-check" ' + (statuses[i] ? 'checked' : '') + ' onchange="toggleWorshipItem(\'' + type + '\',' + i + ')">';
+        html += '<input type="text" value="' + names[i] + '" onchange="updateWorshipName(\'' + type + '\',' + i + ',this.value)" style="flex:1; min-width:80px; padding:4px 10px; margin:0; border:2px dashed var(--pink-soft); background:#FFF9F7; border-radius:10px; font-size:0.85rem;">';
+        html += '<button onclick="deleteWorshipItem(\'' + type + '\',' + i + ')" style="background:none; border:none; color:var(--burgundy); cursor:pointer;">🗑️</button>';
+        html += '</div>';
+      }
+      container.innerHTML = html;
     }
 
     function toggleWorshipItem(type, idx) {
-      const date = document.getElementById('worshipDate').value || currentWorshipDate;
-      const record = data.worship.dailyRecords[date];
+      var date = document.getElementById('worshipDate').value || currentWorshipDate;
+      var record = data.worship.dailyRecords[date];
       if (type === 'prayers') record.prayers[idx] = !record.prayers[idx];
       else if (type === 'morning') record.morning[idx] = !record.morning[idx];
       else if (type === 'evening') record.evening[idx] = !record.evening[idx];
@@ -1284,21 +1193,21 @@
     }
 
     function addWorshipItem(type) {
-      const name = prompt('Enter new worship item name:');
+      var name = prompt('Enter new worship item name:');
       if (!name || name.trim() === '') return;
       if (type === 'prayers') data.worship.prayers.push(name.trim());
       else if (type === 'morning') data.worship.morning.push(name.trim());
       else if (type === 'evening') data.worship.evening.push(name.trim());
       
-      const date = document.getElementById('worshipDate').value || currentWorshipDate;
+      var date = document.getElementById('worshipDate').value || currentWorshipDate;
       if (!data.worship.dailyRecords[date]) {
         data.worship.dailyRecords[date] = {
-          prayers: data.worship.prayers.map(() => false),
-          morning: data.worship.morning.map(() => false),
-          evening: data.worship.evening.map(() => false)
+          prayers: data.worship.prayers.map(function() { return false; }),
+          morning: data.worship.morning.map(function() { return false; }),
+          evening: data.worship.evening.map(function() { return false; })
         };
       }
-      const record = data.worship.dailyRecords[date];
+      var record = data.worship.dailyRecords[date];
       if (type === 'prayers') record.prayers.push(false);
       else if (type === 'morning') record.morning.push(false);
       else if (type === 'evening') record.evening.push(false);
@@ -1313,8 +1222,8 @@
       else if (type === 'morning') data.worship.morning.splice(idx, 1);
       else if (type === 'evening') data.worship.evening.splice(idx, 1);
       
-      for (let date in data.worship.dailyRecords) {
-        const record = data.worship.dailyRecords[date];
+      for (var date in data.worship.dailyRecords) {
+        var record = data.worship.dailyRecords[date];
         if (type === 'prayers' && record.prayers) record.prayers.splice(idx, 1);
         else if (type === 'morning' && record.morning) record.morning.splice(idx, 1);
         else if (type === 'evening' && record.evening) record.evening.splice(idx, 1);
@@ -1324,84 +1233,90 @@
     }
 
     function saveWorshipForDate() {
-      const date = document.getElementById('worshipDate').value || currentWorshipDate;
+      var date = document.getElementById('worshipDate').value || currentWorshipDate;
       currentWorshipDate = date;
       saveData(data);
-      alert(`✅ Worship saved for ${date}`);
+      alert('✅ Worship saved for ' + date);
     }
 
     function saveQuranPages() {
-      const pages = parseInt(document.getElementById('quranPages').value) || 0;
+      var pages = parseInt(document.getElementById('quranPages').value) || 0;
       data.worship.quranPages = pages;
       saveData(data);
-      alert(`Quran reading saved: ${pages} pages`);
+      alert('Quran reading saved: ' + pages + ' pages');
     }
 
     // ================================================
     // LIFE-LONG TRACKER
     // ================================================
     function renderLifeTable() {
-      const head = document.getElementById('lifeHead');
-      const body = document.getElementById('lifeBody');
+      var head = document.getElementById('lifeHead');
+      var body = document.getElementById('lifeBody');
       if (data.lifeCols.length === 0) {
-        for (let i = -30; i <= 30; i++) {
-          const d = new Date();
+        for (var i = -30; i <= 30; i++) {
+          var d = new Date();
           d.setDate(d.getDate() + i);
           data.lifeCols.push(d.toISOString().slice(0,10));
         }
         saveData(data);
       }
-      let htmlHead = '<th style="min-width:120px;">Subject/Skill</th>';
-      data.lifeCols.forEach(col => {
-        const d = new Date(col);
-        htmlHead += `<th>${d.getDate()}/${d.getMonth()+1}</th>`;
-      });
+      var htmlHead = '<th style="min-width:120px;">Subject/Skill</th>';
+      for (var j = 0; j < data.lifeCols.length; j++) {
+        var col = data.lifeCols[j];
+        var d2 = new Date(col);
+        htmlHead += '<th>' + d2.getDate() + '/' + (d2.getMonth()+1) + '</th>';
+      }
       htmlHead += '<th style="min-width:60px;">Action</th>';
       head.innerHTML = htmlHead;
 
-      let htmlBody = '';
-      data.lifeRows.forEach((row, rowIdx) => {
-        htmlBody += `<tr><td class="row-label">${row}</td>`;
-        data.lifeCols.forEach((col, colIdx) => {
-          const key = `${rowIdx}_${colIdx}`;
-          const val = data.lifeCells[key] || '';
-          htmlBody += `<td><input type="text" value="${val}" onchange="updateCell(${rowIdx},${colIdx},this.value)"></td>`;
-        });
-        htmlBody += `<td><button onclick="deleteLifeRow(${rowIdx})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;font-size:1.1rem;">🗑️</button></td>`;
+      var htmlBody = '';
+      for (var r = 0; r < data.lifeRows.length; r++) {
+        var row = data.lifeRows[r];
+        htmlBody += '<tr><td class="row-label">' + row + '</td>';
+        for (var c = 0; c < data.lifeCols.length; c++) {
+          var key = r + '_' + c;
+          var val = data.lifeCells[key] || '';
+          htmlBody += '<td><input type="text" value="' + val + '" onchange="updateCell(' + r + ',' + c + ',this.value)"></td>';
+        }
+        htmlBody += '<td><button onclick="deleteLifeRow(' + r + ')" style="background:none;border:none;color:var(--burgundy);cursor:pointer;font-size:1.1rem;">🗑️</button></td>';
         htmlBody += '</tr>';
-      });
+      }
       body.innerHTML = htmlBody;
     }
 
     function updateCell(row, col, val) {
-      data.lifeCells[`${row}_${col}`] = val;
+      data.lifeCells[row + '_' + col] = val;
       saveData(data);
     }
+
     function addLifeRow() {
-      const name = document.getElementById('newRowName').value.trim();
+      var name = document.getElementById('newRowName').value.trim();
       if (!name) return alert('Enter a subject/skill name');
       data.lifeRows.push(name);
       saveData(data);
       renderLifeTable();
       document.getElementById('newRowName').value = '';
     }
+
     function deleteLifeRow(idx) {
       if (!confirm('Delete this row?')) return;
       data.lifeRows.splice(idx, 1);
-      for (let key in data.lifeCells) {
-        const [r] = key.split('_').map(Number);
-        if (r === idx) delete data.lifeCells[key];
-        else if (r > idx) {
-          const [row, col] = key.split('_').map(Number);
-          data.lifeCells[`${row-1}_${col}`] = data.lifeCells[key];
-          delete data.lifeCells[key];
-        }
+      var newCells = {};
+      for (var key in data.lifeCells) {
+        var parts = key.split('_');
+        var r = parseInt(parts[0]);
+        var c = parseInt(parts[1]);
+        if (r === idx) continue;
+        if (r > idx) r--;
+        newCells[r + '_' + c] = data.lifeCells[key];
       }
+      data.lifeCells = newCells;
       saveData(data);
       renderLifeTable();
     }
+
     function addLifeColumn() {
-      const d = new Date();
+      var d = new Date();
       d.setDate(d.getDate() + data.lifeCols.length - 30);
       data.lifeCols.push(d.toISOString().slice(0,10));
       saveData(data);
@@ -1412,43 +1327,40 @@
     // SUBJECTS
     // ================================================
     function renderSubjects() {
-      const container = document.getElementById('subjectListContainer');
+      var container = document.getElementById('subjectListContainer');
       if (data.subjects.length === 0) {
         container.innerHTML = '<p style="color:var(--text-secondary);">No subjects yet. Add one above!</p>';
         return;
       }
-      let html = '';
-      data.subjects.forEach((subject, idx) => {
-        html += `
-          <div class="card" style="margin-bottom:15px; padding:18px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
-              <div style="display:flex; align-items:center; gap:10px; flex:1;">
-                <i class="fas fa-book" style="color:var(--pink-medium);"></i>
-                <input type="text" value="${subject.name}" onchange="updateSubjectName(${idx}, this.value)" 
-                       style="flex:1; min-width:120px; padding:4px 12px; margin:0; border:2px dashed var(--pink-soft); background:#FFF9F7; border-radius:10px; font-size:1rem; font-weight:600; color:var(--burgundy);">
-              </div>
-              <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                <button class="btn btn-pink btn-sm" onclick="addLesson(${idx})"><i class="fas fa-plus"></i> Lesson</button>
-                <button class="btn btn-outline btn-sm" onclick="deleteSubject(${idx})"><i class="fas fa-trash"></i></button>
-              </div>
-            </div>
-            <div>
-              ${subject.lessons && subject.lessons.length > 0 ? subject.lessons.map((lesson, li) => `
-                <div class="lesson-item">
-                  <span class="lesson-name">
-                    <input type="text" value="${lesson.name}" onchange="updateLessonName(${idx}, ${li}, this.value)">
-                  </span>
-                  <span class="lesson-status ${lesson.done ? 'done' : 'not-done'}">${lesson.done ? '✅ Done' : '⏳ Not Done'}</span>
-                  <button onclick="toggleLesson(${idx}, ${li})" style="background:none;border:2px solid var(--pink-medium);border-radius:20px;padding:2px 12px;cursor:pointer;color:var(--burgundy);font-weight:600;font-size:0.75rem;">
-                    ${lesson.done ? 'Undo' : 'Done'}
-                  </button>
-                  <button onclick="deleteLesson(${idx}, ${li})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button>
-                </div>
-              `).join('') : '<p style="color:var(--text-secondary); font-size:0.9rem;">No lessons yet.</p>'}
-            </div>
-          </div>
-        `;
-      });
+      var html = '';
+      for (var i = 0; i < data.subjects.length; i++) {
+        var subject = data.subjects[i];
+        html += '<div class="card" style="margin-bottom:15px; padding:18px;">';
+        html += '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">';
+        html += '<div style="display:flex; align-items:center; gap:10px; flex:1;">';
+        html += '<i class="fas fa-book" style="color:var(--pink-medium);"></i>';
+        html += '<input type="text" value="' + subject.name + '" onchange="updateSubjectName(' + i + ', this.value)" style="flex:1; min-width:120px; padding:4px 12px; margin:0; border:2px dashed var(--pink-soft); background:#FFF9F7; border-radius:10px; font-size:1rem; font-weight:600; color:var(--burgundy);">';
+        html += '</div>';
+        html += '<div style="display:flex; gap:8px; flex-wrap:wrap;">';
+        html += '<button class="btn btn-pink btn-sm" onclick="addLesson(' + i + ')"><i class="fas fa-plus"></i> Lesson</button>';
+        html += '<button class="btn btn-outline btn-sm" onclick="deleteSubject(' + i + ')"><i class="fas fa-trash"></i></button>';
+        html += '</div></div>';
+        html += '<div>';
+        if (subject.lessons && subject.lessons.length > 0) {
+          for (var j = 0; j < subject.lessons.length; j++) {
+            var lesson = subject.lessons[j];
+            html += '<div class="lesson-item">';
+            html += '<span class="lesson-name"><input type="text" value="' + lesson.name + '" onchange="updateLessonName(' + i + ',' + j + ',this.value)"></span>';
+            html += '<span class="lesson-status ' + (lesson.done ? 'done' : 'not-done') + '">' + (lesson.done ? '✅ Done' : '⏳ Not Done') + '</span>';
+            html += '<button onclick="toggleLesson(' + i + ',' + j + ')" style="background:none;border:2px solid var(--pink-medium);border-radius:20px;padding:2px 12px;cursor:pointer;color:var(--burgundy);font-weight:600;font-size:0.75rem;">' + (lesson.done ? 'Undo' : 'Done') + '</button>';
+            html += '<button onclick="deleteLesson(' + i + ',' + j + ')" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button>';
+            html += '</div>';
+          }
+        } else {
+          html += '<p style="color:var(--text-secondary); font-size:0.9rem;">No lessons yet.</p>';
+        }
+        html += '</div></div>';
+      }
       container.innerHTML = html;
     }
 
@@ -1463,9 +1375,9 @@
     }
 
     function addSubject() {
-      const name = document.getElementById('subjectName').value.trim();
+      var name = document.getElementById('subjectName').value.trim();
       if (!name) return alert('Enter a subject name');
-      data.subjects.push({ name, lessons: [] });
+      data.subjects.push({ name: name, lessons: [] });
       saveData(data);
       renderSubjects();
       document.getElementById('subjectName').value = '';
@@ -1481,7 +1393,7 @@
     }
 
     function addLesson(idx) {
-      const name = prompt('Enter lesson name:');
+      var name = prompt('Enter lesson name:');
       if (!name || name.trim() === '') return;
       if (!data.subjects[idx].lessons) data.subjects[idx].lessons = [];
       data.subjects[idx].lessons.push({ name: name.trim(), done: false });
@@ -1506,7 +1418,7 @@
     // EXAMS
     // ================================================
     function renderExams() {
-      const body = document.getElementById('examBody');
+      var body = document.getElementById('examBody');
       
       if (data.exams.length === 0) {
         body.innerHTML = '<tr><td colspan="6" style="color:var(--text-secondary);">No exams yet. Add one above!</td></tr>';
@@ -1515,31 +1427,25 @@
         return;
       }
 
-      const sorted = [...data.exams].sort((a, b) => new Date(b.date) - new Date(a.date));
-
-      let html = '';
-      sorted.forEach((exam) => {
-        const percentage = exam.maxScore > 0 ? ((exam.myScore / exam.maxScore) * 100).toFixed(1) : 0;
-        const color = percentage >= 80 ? '#28A745' : percentage >= 60 ? '#FFC107' : '#DC3545';
-        const originalIdx = data.exams.indexOf(exam);
+      var sorted = data.exams.slice().sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+      var html = '';
+      for (var i = 0; i < sorted.length; i++) {
+        var exam = sorted[i];
+        var percentage = exam.maxScore > 0 ? ((exam.myScore / exam.maxScore) * 100).toFixed(1) : 0;
+        var color = percentage >= 80 ? '#28A745' : percentage >= 60 ? '#FFC107' : '#DC3545';
+        var originalIdx = data.exams.indexOf(exam);
         
-        html += `
-          <tr>
-            <td><strong>${exam.subject}</strong></td>
-            <td>${exam.maxScore}</td>
-            <td>${exam.myScore}</td>
-            <td>
-              <span style="font-weight:700; color:${color};">${percentage}%</span>
-              <div class="score-bar"><div class="fill" style="width:${percentage}%; background:${color};"></div></div>
-            </td>
-            <td>${exam.date}</td>
-            <td>
-              <button onclick="editExam(${originalIdx})" style="background:none;border:none;color:var(--gold-soft);cursor:pointer;font-size:1rem;"><i class="fas fa-edit"></i></button>
-              <button onclick="deleteExam(${originalIdx})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;font-size:1rem;">🗑️</button>
-            </td>
-          </tr>
-        `;
-      });
+        html += '<tr>';
+        html += '<td><strong>' + exam.subject + '</strong></td>';
+        html += '<td>' + exam.maxScore + '</td>';
+        html += '<td>' + exam.myScore + '</td>';
+        html += '<td><span style="font-weight:700; color:' + color + ';">' + percentage + '%</span>';
+        html += '<div class="score-bar"><div class="fill" style="width:' + percentage + '%; background:' + color + ';"></div></div></td>';
+        html += '<td>' + exam.date + '</td>';
+        html += '<td><button onclick="editExam(' + originalIdx + ')" style="background:none;border:none;color:var(--gold-soft);cursor:pointer;font-size:1rem;"><i class="fas fa-edit"></i></button> ';
+        html += '<button onclick="deleteExam(' + originalIdx + ')" style="background:none;border:none;color:var(--burgundy);cursor:pointer;font-size:1rem;">🗑️</button></td>';
+        html += '</tr>';
+      }
       body.innerHTML = html;
 
       updateExamStats();
@@ -1554,24 +1460,25 @@
         return;
       }
 
-      let totalPercentage = 0;
-      const subjectScores = {};
+      var totalPercentage = 0;
+      var subjectScores = {};
       
-      data.exams.forEach(exam => {
-        const pct = exam.maxScore > 0 ? (exam.myScore / exam.maxScore) * 100 : 0;
+      for (var i = 0; i < data.exams.length; i++) {
+        var exam = data.exams[i];
+        var pct = exam.maxScore > 0 ? (exam.myScore / exam.maxScore) * 100 : 0;
         totalPercentage += pct;
         if (!subjectScores[exam.subject]) subjectScores[exam.subject] = [];
         subjectScores[exam.subject].push(pct);
-      });
+      }
 
-      const avg = (totalPercentage / data.exams.length).toFixed(1);
+      var avg = (totalPercentage / data.exams.length).toFixed(1);
       document.getElementById('avgScore').textContent = avg + '%';
       document.getElementById('totalExams').textContent = data.exams.length;
 
-      let bestSubject = '-';
-      let bestAvg = -1;
-      for (let sub in subjectScores) {
-        const avgSub = subjectScores[sub].reduce((a,b) => a + b, 0) / subjectScores[sub].length;
+      var bestSubject = '-';
+      var bestAvg = -1;
+      for (var sub in subjectScores) {
+        var avgSub = subjectScores[sub].reduce(function(a,b) { return a + b; }, 0) / subjectScores[sub].length;
         if (avgSub > bestAvg) {
           bestAvg = avgSub;
           bestSubject = sub;
@@ -1581,7 +1488,7 @@
     }
 
     function renderExamChart() {
-      const ctx = document.getElementById('examChart').getContext('2d');
+      var ctx = document.getElementById('examChart').getContext('2d');
       if (examChart) examChart.destroy();
 
       if (data.exams.length === 0) {
@@ -1589,44 +1496,33 @@
           type: 'bar',
           data: {
             labels: ['No Data'],
-            datasets: [{
-              label: 'No exams yet',
-              data: [0],
-              backgroundColor: ['#E8DCDA'],
-              borderColor: '#D4A373',
-              borderWidth: 1,
-              borderRadius: 8
-            }]
+            datasets: [{ label: 'No exams yet', data: [0], backgroundColor: ['#E8DCDA'], borderColor: '#D4A373', borderWidth: 1, borderRadius: 8 }]
           },
           options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: { labels: { color: '#3D2C33', font: { weight: '600' } } }
-            },
-            scales: {
-              x: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' } },
-              y: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' }, beginAtZero: true, max: 100 }
-            }
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { labels: { color: '#3D2C33', font: { weight: '600' } } } },
+            scales: { x: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' } }, y: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' }, beginAtZero: true, max: 100 } }
           }
         });
         return;
       }
 
-      const subjectData = {};
-      data.exams.forEach(exam => {
-        const pct = exam.maxScore > 0 ? (exam.myScore / exam.maxScore) * 100 : 0;
+      var subjectData = {};
+      for (var i = 0; i < data.exams.length; i++) {
+        var exam = data.exams[i];
+        var pct = exam.maxScore > 0 ? (exam.myScore / exam.maxScore) * 100 : 0;
         if (!subjectData[exam.subject]) subjectData[exam.subject] = [];
         subjectData[exam.subject].push(pct);
-      });
+      }
 
-      const subjects = Object.keys(subjectData);
-      const averages = subjects.map(sub => {
-        const scores = subjectData[sub];
-        return scores.reduce((a,b) => a + b, 0) / scores.length;
-      });
+      var subjects = Object.keys(subjectData);
+      var averages = [];
+      for (var j = 0; j < subjects.length; j++) {
+        var scores = subjectData[subjects[j]];
+        averages.push(scores.reduce(function(a,b) { return a + b; }, 0) / scores.length);
+      }
 
-      const colors = ['#8B1A2B', '#E8849A', '#D4A373', '#9B6BB7', '#F4A7B9', '#B2223C'];
+      var colors = ['#8B1A2B', '#E8849A', '#D4A373', '#9B6BB7', '#F4A7B9', '#B2223C'];
 
       examChart = new Chart(ctx, {
         type: 'bar',
@@ -1635,31 +1531,25 @@
           datasets: [{
             label: 'Average Score %',
             data: averages,
-            backgroundColor: subjects.map((_, i) => colors[i % colors.length]),
+            backgroundColor: subjects.map(function(_, i) { return colors[i % colors.length]; }),
             borderColor: '#8B1A2B',
             borderWidth: 2,
             borderRadius: 8
           }]
         },
         options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { labels: { color: '#3D2C33', font: { weight: '600' } } }
-          },
-          scales: {
-            x: { ticks: { color: '#7A5D66', font: { weight: '500' } }, grid: { color: '#F0E0DF' } },
-            y: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' }, beginAtZero: true, max: 100 }
-          }
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: '#3D2C33', font: { weight: '600' } } } },
+          scales: { x: { ticks: { color: '#7A5D66', font: { weight: '500' } }, grid: { color: '#F0E0DF' } }, y: { ticks: { color: '#7A5D66' }, grid: { color: '#F0E0DF' }, beginAtZero: true, max: 100 } }
         }
       });
     }
 
     function addExam() {
-      const subject = document.getElementById('examSubject').value.trim();
-      const maxScore = parseFloat(document.getElementById('examMaxScore').value);
-      const myScore = parseFloat(document.getElementById('examMyScore').value);
-      const date = document.getElementById('examDate').value;
+      var subject = document.getElementById('examSubject').value.trim();
+      var maxScore = parseFloat(document.getElementById('examMaxScore').value);
+      var myScore = parseFloat(document.getElementById('examMyScore').value);
+      var date = document.getElementById('examDate').value;
 
       if (!subject) return alert('Enter a subject');
       if (isNaN(maxScore) || maxScore <= 0) return alert('Enter a valid max score');
@@ -1667,7 +1557,7 @@
       if (myScore > maxScore) return alert('Your score cannot be higher than max score');
       if (!date) return alert('Select a date');
 
-      data.exams.push({ subject, maxScore, myScore, date });
+      data.exams.push({ subject: subject, maxScore: maxScore, myScore: myScore, date: date });
       saveData(data);
       renderExams();
       
@@ -1678,15 +1568,15 @@
     }
 
     function editExam(idx) {
-      const exam = data.exams[idx];
-      const newSubject = prompt('Subject:', exam.subject);
+      var exam = data.exams[idx];
+      var newSubject = prompt('Subject:', exam.subject);
       if (newSubject === null) return;
-      const newMax = parseFloat(prompt('Max Score:', exam.maxScore));
+      var newMax = parseFloat(prompt('Max Score:', exam.maxScore));
       if (isNaN(newMax) || newMax <= 0) return alert('Invalid max score');
-      const newMy = parseFloat(prompt('Your Score:', exam.myScore));
+      var newMy = parseFloat(prompt('Your Score:', exam.myScore));
       if (isNaN(newMy) || newMy < 0) return alert('Invalid score');
       if (newMy > newMax) return alert('Score cannot be higher than max');
-      const newDate = prompt('Date (YYYY-MM-DD):', exam.date);
+      var newDate = prompt('Date (YYYY-MM-DD):', exam.date);
       if (!newDate) return;
 
       data.exams[idx] = { subject: newSubject.trim(), maxScore: newMax, myScore: newMy, date: newDate };
@@ -1705,24 +1595,36 @@
     // TASKS
     // ================================================
     function renderTasks() {
-      const ul = document.getElementById('taskList');
-      ul.innerHTML = data.tasks.map((t, i) => `<li><input type="checkbox" onchange="toggleTask(${i})" ${t.done?'checked':''}> <input type="text" value="${t.title}" onchange="updateTaskName(${i}, this.value)" style="flex:1; min-width:100px; padding:4px 10px; margin:0; border:2px dashed var(--pink-soft); background:#FFF9F7; border-radius:10px; font-size:0.9rem;"> <span style="color:var(--pink-medium); font-weight:500;">${t.priority}</span> <span style="color:var(--text-secondary); font-size:0.85rem;">${t.date}</span> <button onclick="deleteTask(${i})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button></li>`).join('');
+      var ul = document.getElementById('taskList');
+      var html = '';
+      for (var i = 0; i < data.tasks.length; i++) {
+        var t = data.tasks[i];
+        html += '<li><input type="checkbox" onchange="toggleTask(' + i + ')" ' + (t.done ? 'checked' : '') + '> ';
+        html += '<input type="text" value="' + t.title + '" onchange="updateTaskName(' + i + ', this.value)" style="flex:1; min-width:100px; padding:4px 10px; margin:0; border:2px dashed var(--pink-soft); background:#FFF9F7; border-radius:10px; font-size:0.9rem;"> ';
+        html += '<span style="color:var(--pink-medium); font-weight:500;">' + t.priority + '</span> ';
+        html += '<span style="color:var(--text-secondary); font-size:0.85rem;">' + t.date + '</span> ';
+        html += '<button onclick="deleteTask(' + i + ')" style="background:none;border:none;color:var(--burgundy);cursor:pointer;">🗑️</button></li>';
+      }
+      ul.innerHTML = html;
     }
+
     function updateTaskName(idx, newName) {
       data.tasks[idx].title = newName;
       saveData(data);
     }
+
     function addTask() {
-      const title = document.getElementById('taskInput').value.trim();
-      const date = document.getElementById('taskDate').value || new Date().toISOString().slice(0,10);
-      const priority = document.getElementById('taskPriority').value;
+      var title = document.getElementById('taskInput').value.trim();
+      var date = document.getElementById('taskDate').value || new Date().toISOString().slice(0,10);
+      var priority = document.getElementById('taskPriority').value;
       if (!title) return;
-      data.tasks.push({ title, date, priority, done: false });
+      data.tasks.push({ title: title, date: date, priority: priority, done: false });
       saveData(data);
       renderTasks();
       document.getElementById('taskInput').value = '';
       updateStats();
     }
+
     function toggleTask(idx) {
       data.tasks[idx].done = !data.tasks[idx].done;
       saveData(data);
@@ -1730,6 +1632,7 @@
       renderDashboard();
       updateStats();
     }
+
     function deleteTask(idx) {
       data.tasks.splice(idx, 1);
       saveData(data);
@@ -1742,41 +1645,42 @@
     // SELF-CARE
     // ================================================
     function renderCareTable() {
-      const body = document.getElementById('careBody');
-      const items = data.care[careTab] || [];
+      var body = document.getElementById('careBody');
+      var items = data.care[careTab] || [];
       
-      const days = [];
-      for (let i = 6; i >= 0; i--) {
-        const d = new Date();
+      var days = [];
+      for (var i = 6; i >= 0; i--) {
+        var d = new Date();
         d.setDate(d.getDate() - i);
         days.push(d.toISOString().slice(0,10));
       }
       
       if (items.length === 0) {
-        body.innerHTML = `<tr><td colspan="9" style="color:var(--text-secondary);">No items. Add one below!</td></tr>`;
+        body.innerHTML = '<tr><td colspan="9" style="color:var(--text-secondary);">No items. Add one below!</td></tr>';
         return;
       }
       
-      let html = '';
-      items.forEach((item, idx) => {
-        html += `<tr>`;
-        html += `<td class="row-label" style="display:flex; align-items:center; gap:8px; justify-content:flex-end;">
-          <input type="text" value="${item}" onchange="updateCareItemName('${careTab}', ${idx}, this.value)" 
-                 style="flex:1; min-width:80px; padding:4px 10px; margin:0; border:2px dashed var(--pink-soft); background:#FFF9F7; border-radius:10px; font-size:0.9rem; text-align:right;">
-        </td>`;
-        days.forEach(day => {
-          const key = `${careTab}_${item}_${day}`;
-          const checked = data.careTracker && data.careTracker[careTab] && data.careTracker[careTab][item] && data.careTracker[careTab][item][day] ? true : false;
-          html += `<td><input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleCareDay('${careTab}','${item}','${day}')" style="width:20px;height:20px;accent-color:var(--burgundy);cursor:pointer;"></td>`;
-        });
-        html += `<td><button onclick="deleteCareItem(${idx})" style="background:none;border:none;color:var(--burgundy);cursor:pointer;font-size:1.1rem;">🗑️</button></td>`;
-        html += `</tr>`;
-      });
+      var html = '';
+      for (var j = 0; j < items.length; j++) {
+        var item = items[j];
+        html += '<tr>';
+        html += '<td class="row-label" style="display:flex; align-items:center; gap:8px; justify-content:flex-end;">';
+        html += '<input type="text" value="' + item + '" onchange="updateCareItemName(\'' + careTab + '\',' + j + ',this.value)" style="flex:1; min-width:80px; padding:4px 10px; margin:0; border:2px dashed var(--pink-soft); background:#FFF9F7; border-radius:10px; font-size:0.9rem; text-align:right;">';
+        html += '</td>';
+        for (var k = 0; k < days.length; k++) {
+          var day = days[k];
+          var key = careTab + '_' + item + '_' + day;
+          var checked = data.careTracker && data.careTracker[careTab] && data.careTracker[careTab][item] && data.careTracker[careTab][item][day] ? true : false;
+          html += '<td><input type="checkbox" ' + (checked ? 'checked' : '') + ' onchange="toggleCareDay(\'' + careTab + '\',\'' + item + '\',\'' + day + '\')" style="width:20px;height:20px;accent-color:var(--burgundy);cursor:pointer;"></td>';
+        }
+        html += '<td><button onclick="deleteCareItem(' + j + ')" style="background:none;border:none;color:var(--burgundy);cursor:pointer;font-size:1.1rem;">🗑️</button></td>';
+        html += '</tr>';
+      }
       body.innerHTML = html;
     }
 
     function updateCareItemName(tab, idx, newName) {
-      const oldName = data.care[tab][idx];
+      var oldName = data.care[tab][idx];
       data.care[tab][idx] = newName;
       if (data.careTracker && data.careTracker[tab] && data.careTracker[tab][oldName]) {
         data.careTracker[tab][newName] = data.careTracker[tab][oldName];
@@ -1796,7 +1700,7 @@
     }
 
     function addCareItem() {
-      const name = document.getElementById('newCareItem').value.trim();
+      var name = document.getElementById('newCareItem').value.trim();
       if (!name) return alert('Enter a care item name');
       if (!data.care[careTab]) data.care[careTab] = [];
       data.care[careTab].push(name);
@@ -1810,7 +1714,7 @@
 
     function deleteCareItem(idx) {
       if (!confirm('Delete this care item?')) return;
-      const item = data.care[careTab][idx];
+      var item = data.care[careTab][idx];
       data.care[careTab].splice(idx, 1);
       if (data.careTracker && data.careTracker[careTab]) {
         delete data.careTracker[careTab][item];
@@ -1832,41 +1736,48 @@
     // TIMERS
     // ================================================
     function setTimerPreset() {
-      const val = parseInt(document.getElementById('timerPreset').value);
+      var val = parseInt(document.getElementById('timerPreset').value);
       fullSeconds = val * 60;
       document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
       document.getElementById('quickTimer').textContent = formatTime(fullSeconds);
     }
+
     function formatTime(sec) {
-      const m = Math.floor(sec/60);
-      const s = sec % 60;
-      return `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+      var m = Math.floor(sec/60);
+      var s = sec % 60;
+      return (m.toString().padStart(2,'0') + ':' + s.toString().padStart(2,'0'));
     }
+
     function startQuickTimer() {
       if (quickPaused) { quickPaused = false; return; }
       if (quickTimerInterval) return;
-      quickTimerInterval = setInterval(() => {
+      quickTimerInterval = setInterval(function() {
         if (quickSeconds <= 0) { clearInterval(quickTimerInterval); quickTimerInterval = null; return; }
         quickSeconds--;
         document.getElementById('quickTimer').textContent = formatTime(quickSeconds);
       }, 1000);
     }
+
     function pauseQuickTimer() {
       quickPaused = true;
       if (quickTimerInterval) { clearInterval(quickTimerInterval); quickTimerInterval = null; }
     }
+
     function resetQuickTimer() {
-      clearInterval(quickTimerInterval); quickTimerInterval = null;
+      clearInterval(quickTimerInterval);
+      quickTimerInterval = null;
       quickSeconds = parseInt(document.getElementById('timerPreset').value) * 60 || 1500;
       document.getElementById('quickTimer').textContent = formatTime(quickSeconds);
       quickPaused = false;
     }
+
     function startFullTimer() {
       if (fullPaused) { fullPaused = false; return; }
       if (fullTimerInterval) return;
-      fullTimerInterval = setInterval(() => {
+      fullTimerInterval = setInterval(function() {
         if (fullSeconds <= 0) {
-          clearInterval(fullTimerInterval); fullTimerInterval = null;
+          clearInterval(fullTimerInterval);
+          fullTimerInterval = null;
           data.timerSessions = (data.timerSessions || 0) + 1;
           document.getElementById('sessionCount').textContent = data.timerSessions;
           saveData(data);
@@ -1877,12 +1788,15 @@
         document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
       }, 1000);
     }
+
     function pauseFullTimer() {
       fullPaused = true;
       if (fullTimerInterval) { clearInterval(fullTimerInterval); fullTimerInterval = null; }
     }
+
     function resetFullTimer() {
-      clearInterval(fullTimerInterval); fullTimerInterval = null;
+      clearInterval(fullTimerInterval);
+      fullTimerInterval = null;
       fullSeconds = parseInt(document.getElementById('timerPreset').value) * 60 || 1500;
       document.getElementById('fullTimer').textContent = formatTime(fullSeconds);
       fullPaused = false;
@@ -1891,20 +1805,21 @@
     // ================================================
     // REVIEWS
     // ================================================
-    let reviewChart = null;
+    var reviewChart = null;
+
     function renderReview(period) {
-      const ctx = document.getElementById('reviewChart').getContext('2d');
+      var ctx = document.getElementById('reviewChart').getContext('2d');
       if (reviewChart) reviewChart.destroy();
       
-      const labels = period === 'weekly' ? ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'] :
-                      period === 'monthly' ? ['W1','W2','W3','W4'] :
-                      ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      const dataset = labels.map(() => Math.floor(Math.random() * 10) + 1);
+      var labels = period === 'weekly' ? ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'] :
+                    period === 'monthly' ? ['W1','W2','W3','W4'] :
+                    ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var dataset = labels.map(function() { return Math.floor(Math.random() * 10) + 1; });
       
       reviewChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels,
+          labels: labels,
           datasets: [{
             label: 'Achievement Rate',
             data: dataset,
@@ -1926,30 +1841,32 @@
           }
         }
       });
-      document.getElementById('reviewStats').textContent = `📊 ${period} view - Average: ${(dataset.reduce((a,b)=>a+b,0)/dataset.length).toFixed(1)}%`;
+      document.getElementById('reviewStats').textContent = '📊 ' + period + ' view - Average: ' + (dataset.reduce(function(a,b) { return a + b; }, 0) / dataset.length).toFixed(1) + '%';
     }
+
     function showReview(period) { renderReview(period); }
 
     // ================================================
     // SETTINGS
     // ================================================
     function exportData() {
-      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-      const a = document.createElement('a');
+      var blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      var a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `kimi_backup_${new Date().toISOString().slice(0,10)}.json`;
+      a.download = 'kimi_backup_' + new Date().toISOString().slice(0,10) + '.json';
       a.click();
     }
+
     function importData() {
-      const input = document.createElement('input');
+      var input = document.createElement('input');
       input.type = 'file';
       input.accept = 'application/json';
-      input.onchange = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onload = (ev) => {
+      input.onchange = function(e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function(ev) {
           try {
-            const imported = JSON.parse(ev.target.result);
+            var imported = JSON.parse(ev.target.result);
             data = imported;
             saveData(data);
             location.reload();
@@ -1961,29 +1878,56 @@
     }
 
     // ================================================
-    // GLOBAL FUNCTIONS
+    // MAKE FUNCTIONS GLOBAL
     // ================================================
-    window.addLifeRow = addLifeRow; window.addLifeColumn = addLifeColumn;
-    window.updateCell = updateCell; window.deleteLifeRow = deleteLifeRow;
-    window.addSubject = addSubject; window.deleteSubject = deleteSubject; window.updateSubjectName = updateSubjectName;
-    window.addLesson = addLesson; window.toggleLesson = toggleLesson; window.deleteLesson = deleteLesson;
+    window.addLifeRow = addLifeRow;
+    window.addLifeColumn = addLifeColumn;
+    window.updateCell = updateCell;
+    window.deleteLifeRow = deleteLifeRow;
+    window.addSubject = addSubject;
+    window.deleteSubject = deleteSubject;
+    window.updateSubjectName = updateSubjectName;
+    window.addLesson = addLesson;
+    window.toggleLesson = toggleLesson;
+    window.deleteLesson = deleteLesson;
     window.updateLessonName = updateLessonName;
-    window.addExam = addExam; window.editExam = editExam; window.deleteExam = deleteExam;
-    window.addTask = addTask; window.toggleTask = toggleTask; window.deleteTask = deleteTask; window.updateTaskName = updateTaskName;
-    window.toggleWorshipItem = toggleWorshipItem; window.updateWorshipName = updateWorshipName;
-    window.addWorshipItem = addWorshipItem; window.deleteWorshipItem = deleteWorshipItem;
-    window.loadWorshipForDate = loadWorshipForDate; window.saveWorshipForDate = saveWorshipForDate; window.saveQuranPages = saveQuranPages;
-    window.switchCareTab = switchCareTab; window.addCareItem = addCareItem; window.deleteCareItem = deleteCareItem;
-    window.toggleCareDay = toggleCareDay; window.updateCareItemName = updateCareItemName; window.saveCare = saveCare;
-    window.startQuickTimer = startQuickTimer; window.pauseQuickTimer = pauseQuickTimer; window.resetQuickTimer = resetQuickTimer;
-    window.startFullTimer = startFullTimer; window.pauseFullTimer = pauseFullTimer; window.resetFullTimer = resetFullTimer;
+    window.addExam = addExam;
+    window.editExam = editExam;
+    window.deleteExam = deleteExam;
+    window.addTask = addTask;
+    window.toggleTask = toggleTask;
+    window.deleteTask = deleteTask;
+    window.updateTaskName = updateTaskName;
+    window.toggleWorshipItem = toggleWorshipItem;
+    window.updateWorshipName = updateWorshipName;
+    window.addWorshipItem = addWorshipItem;
+    window.deleteWorshipItem = deleteWorshipItem;
+    window.loadWorshipForDate = loadWorshipForDate;
+    window.saveWorshipForDate = saveWorshipForDate;
+    window.saveQuranPages = saveQuranPages;
+    window.switchCareTab = switchCareTab;
+    window.addCareItem = addCareItem;
+    window.deleteCareItem = deleteCareItem;
+    window.toggleCareDay = toggleCareDay;
+    window.updateCareItemName = updateCareItemName;
+    window.saveCare = saveCare;
+    window.startQuickTimer = startQuickTimer;
+    window.pauseQuickTimer = pauseQuickTimer;
+    window.resetQuickTimer = resetQuickTimer;
+    window.startFullTimer = startFullTimer;
+    window.pauseFullTimer = pauseFullTimer;
+    window.resetFullTimer = resetFullTimer;
     window.setTimerPreset = setTimerPreset;
     window.showReview = showReview;
-    window.exportData = exportData; window.importData = importData;
+    window.exportData = exportData;
+    window.importData = importData;
     window.switchTab = switchTab;
-    window.changeWeek = changeWeek; window.goToCurrentWeek = goToCurrentWeek;
-    window.addTaskToDay = addTaskToDay; window.addWeekTask = addWeekTask;
-    window.changeTaskStatus = changeTaskStatus; window.deleteWeekTask = deleteWeekTask;
+    window.changeWeek = changeWeek;
+    window.goToCurrentWeek = goToCurrentWeek;
+    window.addTaskToDay = addTaskToDay;
+    window.addWeekTask = addWeekTask;
+    window.changeTaskStatus = changeTaskStatus;
+    window.deleteWeekTask = deleteWeekTask;
   </script>
 </body>
 </html>
